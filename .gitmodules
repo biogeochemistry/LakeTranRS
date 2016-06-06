@@ -1,0 +1,7 @@
+[submodule "MyLake"]
+	path = MyLake
+	url = https://github.com/biogeochemistry/MyLake
+[submodule "Sediments"]
+	path = Sediments
+	url = https://github.com/biogeochemistry/MATSEDLAB-IsM
+
