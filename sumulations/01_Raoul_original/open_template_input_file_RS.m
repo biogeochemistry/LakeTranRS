@@ -1,5 +1,5 @@
 %% Opening  baseline input file
-filename = 'IO\store_INCAP_input_baseline.txt';
+filename = '..\input\store_INCAP_input_baseline.txt';
 delimiter = '\t';
 startRow = 3;
 formatSpec = '%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%f%[^\n\r]';
@@ -10,7 +10,7 @@ storeINCAPinputbaseline_mat= [dataArray{1:end-1}];
 clearvars filename delimiter startRow formatSpec fileID dataArray ans;
 
 %% Opening header array, block created by matlab script maker
-filename = 'IO\store_INCAP_input_baseline.txt';
+filename = '..\input\store_INCAP_input_baseline.txt';
 delimiter = '\t';
 endRow = 2;
 formatSpec = '%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%[^\n\r]';
