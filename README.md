@@ -1,3 +1,3 @@
 # LakeTranRS
 
-initial commit
+Response surface simulations in [the simulations folder](simulations). 
