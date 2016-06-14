@@ -18,6 +18,7 @@ scripts and results based on Raoul's initial work early 2016
 
 Koji's exercise to get Raoul's script up and running; it has limitations in that it only uses pre-sediment version of MyLake
 
-![](02_June2016_5x5x5/output/figure1.png) ![](02_June2016_5x5x5/output/figure2_5x5x5.png) 
+![](02_June2016_5x5x5/output/figure1.png) 
+![](02_June2016_5x5x5/output/figure2_5x5x5.png) 
 
 
