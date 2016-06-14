@@ -1,4 +1,4 @@
-function [TP_obs,TP_mod,chl_obs,chl_mod] = fn_MyL_application_Koji_temporary(m_start,m_stop, K_sediments, K_lake, use_INCA, run_INCA)
+function [TP_obs,TP_mod,chl_obs,chl_mod] = fn_MyL_sediments(m_start,m_stop, K_sediments, K_lake, use_INCA, run_INCA)
 global sed_par_file lake_par_file Eevapor
 % This is the main MyLake application configuration file. INCA is a switch
 % It is made to run a after the parameter are set by Set_Prior
