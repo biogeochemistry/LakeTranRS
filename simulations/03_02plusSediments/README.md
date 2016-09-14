@@ -16,6 +16,11 @@ Level | Temperature | Total P | TP linear reduction | DOC
 2 | original  | original * 10  | Total P diminishing to 55 % at the end | original * 10
 3 | original + 5 | original * 100 | Total P diminishing to 10 % at the end | original * 100
 
+(By the way Total P cannot be reduced to zero; hence 10 % at the end.)
+
+Eventually increase resolution to 5x5x5x5 or 10x10x10x10?
+
+Better scales? 
 
 # Responses
 
@@ -23,3 +28,12 @@ Level | Temperature | Total P | TP linear reduction | DOC
 * Chl concentration
 * Total P concentration
 * O2 saturation (absolute)
+
+## Primary comparison
+
+* Maximum Chl concentration on surface in 2013 **R1**
+* Number of surface anoxia days (abs < 0.01) in 2013 **R2**
+
+# Tentative results
+
+See the [figures folder](figures)
