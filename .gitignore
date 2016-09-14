@@ -1,6 +1,6 @@
 *.DS_Store
-*/input.txt
-*/chl.csv
-*/t.csv
-*/totp.csv
-*/O2*.csv
+input.txt
+chl.csv
+t.csv
+totp.csv
+O2*.csv
