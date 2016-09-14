@@ -23,8 +23,8 @@ global sed_par_file
 sed_par_file = 'params.txt';
 
 % for r in 1:length(listing)
-for r = 10
-    
+for r = [3 12 21]
+
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'
         disp(['skipping ', listing(r).name])
@@ -32,7 +32,7 @@ for r = 10
     else
         disp([listing(r).name])
         p1 = ['intermediate/id/', listing(r).name];
-        p2 = ['simulation/id/', listing(r).name]; % this folder made earlier
+        p2 = ['simulations/id/', listing(r).name]; % this folder made earlier
    
         [In_Z,In_Az,tt,In_Tz,In_Cz,In_Sz,In_TPz,In_DOPz,In_Chlz,In_DICz,...
          In_DOCz,In_TPz_sed,In_Chlz_sed,In_O2z,In_NO3z,In_NH4z,In_SO4z,...
@@ -64,7 +64,14 @@ for r = 10
                           In_diatomz,In_TPz_sed,In_Chlz_sed,In_FIM, ...
                           Ice0,Wt,Inflw,...
                           Phys_par,Phys_par_range,Phys_par_names,...
-                          Bio_par,Bio_par_range,Bio_par_names, Deposition);
+                          Bio_par,Bio_par_range,Bio_par_names, ...
+                          Deposition);
+        
+        csvwrite([p2, '/t.csv'], Tzt')
+        csvwrite([p2, '/chl.csv'], Chlzt')  
+        csvwrite([p2, '/O2abs.csv'], O2_sat_abst')
+        csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
+        csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
         
     end % if else
 end % for
