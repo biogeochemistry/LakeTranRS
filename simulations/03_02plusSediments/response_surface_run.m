@@ -9,12 +9,12 @@ m_stop=[2013, 12, 31];
 
 run_INCA = 0; % 1- MyLake will run INCA, 0- No run
 
-dummyparfile = '../input/LAE_para_all.txt'
-dummyinitfile = '../input/LAE_init_basin3.txt'
+dummyparfile = '../input/LAE_para_all.txt';
+dummyinitfile = '../input/LAE_init_basin3.txt';
 
-listing = dir('intermediate/id')
+listing = dir('intermediate/id');
 
-dt = 1.0
+dt = 1.0;
 
 makeDeposition % creates Deposition
 
@@ -26,8 +26,8 @@ for r = 1:4
         disp(['skipping ', listing(r).name])
     
     else
-        p1 = ['intermediate/id/', listing(r).name]
-        p2 = ['simulation/id', listing(r).name] % this folder made earlier
+        p1 = ['intermediate/id/', listing(r).name];
+        p2 = ['simulation/id', listing(r).name]; % this folder made earlier
    
         [In_Z,In_Az,tt,In_Tz,In_Cz,In_Sz,In_TPz,In_DOPz,In_Chlz,In_DICz,...
          In_DOCz,In_TPz_sed,In_Chlz_sed,In_O2z,In_NO3z,In_NH4z,In_SO4z,...
