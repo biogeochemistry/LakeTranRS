@@ -21,4 +21,7 @@ Koji's exercise to get Raoul's script up and running; it has limitations in that
 ![](02_June2016_5x5x5/output/figure1.png) 
 ![](02_June2016_5x5x5/output/figure2_5x5x5.png) 
 
+## 03 02 + Sediments
+
+Porting 02 to the version with Sediments (solvemodel_v2.m)
 
