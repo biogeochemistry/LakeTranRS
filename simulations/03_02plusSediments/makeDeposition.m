@@ -8,7 +8,6 @@ fclose(fileID);
 deposition_dates=datenum([Deposition_all_dates{:,1} Deposition_all_dates{:,2} Deposition_all_dates{:,3}]);
 Deposition_all_dates(1:3)=[];
 Deposition_all_dates(23)=[];
-cd ..
 clearvars filename delimiter startRow formatSpec fileID  ans;
 % matching dates from deposition files with m_start and m_stop
 
