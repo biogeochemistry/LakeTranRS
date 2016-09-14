@@ -18,7 +18,7 @@ f2 <- function (d, level) {
 }
 
 f3 <- function (d, level) {
-  diminish <- seq(from=1, to=1-(level-1)*0.5, length=nrow(d))
+  diminish <- seq(from=1, to=1-(level-1)*0.45, length=nrow(d))
   d[['InflowTP']] <- d[['InflowTP']] * diminish
   return (d)
 }
@@ -39,11 +39,12 @@ for (s in 1:nrow(dict)) {
   dirname <- sprintf('intermediate/id/%02d', simid)
   dirname2 <- sprintf('simulations/id/%02d', simid)
   if (!dir.exists('intermediate')) { dir.create('intermediate') }
-  if (!dir.exists('simulations')) { dir.create('simulations') }
   if (!dir.exists('intermediate/id')) { dir.create('intermediate/id') }
-  if (!dir.exists('simulations/id')) { dir.create('simulations/id') }
   if (!dir.exists(dirname)) { dir.create(dirname) }
+  if (!dir.exists('simulations')) { dir.create('simulations') }
+  if (!dir.exists('simulations/id')) { dir.create('simulations/id') }
   if (!dir.exists(dirname2)) { dir.create(dirname2) }
+  else { unlink(dirname2, recursive = TRUE) ; dir.create(dirname2) }
   if (file.exists(pathname)) { file.remove(pathname) }
   ## delete existing, because we want to append later
   f <- file(pathname)
