@@ -1,5 +1,3 @@
-tic
-
 addpath('../../MyLake/v12/v12_1')
 addpath('../../MATSEDLAB-IsM')
 addpath('.')
@@ -22,8 +20,7 @@ makeDeposition % creates Deposition
 global sed_par_file
 sed_par_file = 'params.txt';
 
-% for r in 1:length(listing)
-for r = [3 12 21]
+for r = 1:length(listing)
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'
@@ -47,6 +44,8 @@ for r = [3 12 21]
         Bio_par(39) = 0.0001;
         Bio_par(40) = 4.4897;
         
+        try 
+            
         [zz,Az,Vz,tt,Qst,Kzt,Tzt,Czt,Szt,Pzt,Chlzt,PPzt,DOPzt,DOCzt,DICzt,...
          CO2zt,O2zt,NO3zt,NH4zt,SO4zt,HSzt,H2Szt,Fe2zt,Ca2zt,pHzt,CH4zt,...
          Fe3zt,Al3zt,SiO4zt,SiO2zt,diatomzt,O2_sat_relt,O2_sat_abst,BODzt,...
@@ -66,6 +65,11 @@ for r = [3 12 21]
                           Phys_par,Phys_par_range,Phys_par_names,...
                           Bio_par,Bio_par_range,Bio_par_names, ...
                           Deposition);
+        
+        catch me
+            disp('model crushing; skipping')
+            
+        end
         
         csvwrite([p2, '/t.csv'], Tzt')
         csvwrite([p2, '/chl.csv'], Chlzt')  
