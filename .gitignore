@@ -1,1 +1,5 @@
 *.DS_Store
+*/chl.csv
+*/t.csv
+*/totp.csv
+*/O2*.csv
