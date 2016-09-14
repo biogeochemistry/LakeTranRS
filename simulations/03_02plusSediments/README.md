@@ -36,4 +36,10 @@ Better scales?
 
 # Tentative results
 
-See the [figures folder](figures)
+Colours are standardized for **R1** and **R2**.
+
+**file name:** First+Second on Response.png
+
+First on x axis (left to right), Second on y axis (top to bottom). 
+
+See the 12 tentative files in [figures folder](figures).
