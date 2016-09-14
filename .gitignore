@@ -1,5 +1,5 @@
 *.DS_Store
-input.txt
+simulations/03_02plusSediments/intermediate/id/*/input.txt
 chl.csv
 t.csv
 totp.csv
