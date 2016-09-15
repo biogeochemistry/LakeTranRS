@@ -43,8 +43,8 @@ for (s in 1:nrow(dict)) {
   if (!dir.exists(dirname)) { dir.create(dirname) }
   if (!dir.exists('simulations')) { dir.create('simulations') }
   if (!dir.exists('simulations/id')) { dir.create('simulations/id') }
-  if (!dir.exists(dirname2)) { dir.create(dirname2) }
-  else { unlink(dirname2, recursive = TRUE) ; dir.create(dirname2) }
+  ## if (!dir.exists(dirname2)) { dir.create(dirname2) }
+  ## else { unlink(dirname2, recursive = TRUE) ; dir.create(dirname2) }
   if (file.exists(pathname)) { file.remove(pathname) }
   ## delete existing, because we want to append later
   f <- file(pathname)
