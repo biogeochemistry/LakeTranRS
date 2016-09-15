@@ -3,7 +3,7 @@
 1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
    them in that order.
 1. Run response.surface.run.m in Matlab
-1. Postprocessing files are in [postprocessing]{postprocessing}.
+1. Postprocessing files are in [postprocessing](postprocessing).
 
 #Parameters
 
