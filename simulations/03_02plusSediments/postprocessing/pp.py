@@ -16,11 +16,11 @@ a = np.ndarray((n1, n2, n3, n4, nt, nz, nr), dtype=np.float) * np.nan
 d = pd.read_csv('../intermediate//parameterdict.csv')
 
 for i, x1, x2, x3, x4, id in d.itertuples():
-    t = pd.read_csv('../simulations/id/%02d/t.csv' % id, header=None).as_matrix()
-    chl = pd.read_csv('../simulations/id/%02d/chl.csv' % id, header=None).as_matrix()
-    tp = pd.read_csv('../simulations/id/%02d/totp.csv' % id, header=None).as_matrix()
-    o2a = pd.read_csv('../simulations/id/%02d/O2abs.csv' % id, header=None).as_matrix()
-    o2r = pd.read_csv('../simulations/id/%02d/O2rel.csv' % id, header=None).as_matrix()
+    t = pd.read_csv('../simulations/id/{:02d}/t.csv.bz2'.format(id), header=None).as_matrix()
+    chl = pd.read_csv('../simulations/id/{:02d}/chl.csv.bz2'.format(id), header=None).as_matrix()
+    tp = pd.read_csv('../simulations/id/{:02d}/totp.csv.bz2'.format(id), header=None).as_matrix()
+    o2a = pd.read_csv('../simulations/id/{:02d}/O2abs.csv.bz2'.format(id), header=None).as_matrix()
+    o2r = pd.read_csv('../simulations/id/{:02d}/O2rel.csv.bz2'.format(id), header=None).as_matrix()
     a[x1-1, x2-1, x3-1, x4-1, :, :, 0] = t
     a[x1-1, x2-1, x3-1, x4-1, :, :, 1] = chl
     a[x1-1, x2-1, x3-1, x4-1, :, :, 2] = tp
