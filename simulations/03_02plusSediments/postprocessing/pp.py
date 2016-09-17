@@ -37,11 +37,11 @@ r2 = (a[:, :, :, :, (365*3):, 0, 3] < 0.01).sum(axis=4)
 r2max = r1.max() ; r2min = r2.min()
 
 
-cmr = plt.get_cmap('Reds')
-normr = matplotlib.colors.Normalize(r1.min(), r1.max(), True)
-
 cmg = plt.get_cmap('Greens')
-normg = matplotlib.colors.Normalize(r2.min(), r2.max(), True)
+normg = matplotlib.colors.Normalize(r1.min(), r1.max(), True)
+
+cmr = plt.get_cmap('Reds')
+normr = matplotlib.colors.Normalize(r2.min(), r2.max(), True)
 
 
 
