@@ -9,3 +9,4 @@ O2*.csv
 .ipynb_checkpoints
 
 simulations/04_5x5x5x5/.#makeparameterdict.R
+.#*
