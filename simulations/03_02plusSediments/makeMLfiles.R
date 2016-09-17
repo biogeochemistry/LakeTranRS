@@ -14,17 +14,21 @@ f1 <- function (d, level) {
 
 f2 <- function (d, level) {
   d[['InflowTP']] <- d[['InflowTP']] * (10 ^ (level - 1))
+  d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ (level - 1))
+  d[['InflowChla']] <- d[['InflowChla']] * (10 ^ (level - 1))
   return (d)
 }
 
 f3 <- function (d, level) {
   diminish <- seq(from=1, to=1-(level-1)*0.45, length=nrow(d))
   d[['InflowTP']] <- d[['InflowTP']] * diminish
+  d[['InflowDOP']] <- d[['InflowDOP']] * diminish
+  d[['InflowChla']] <- d[['InflowChla']] * diminish
   return (d)
 }
 
 f4 <- function (d, level) {
-  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ (level - 1))
+  d[['InflowDOC']] <- d[['InflowDOC']] * (5 ^ (level - 1))
   return (d)
 }
 
