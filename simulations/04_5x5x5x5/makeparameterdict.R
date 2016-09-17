@@ -20,19 +20,3 @@ d[['simid']] <- 1:nrow(d)
 write.csv(d, file='intermediate/parameterdict.csv',
           row.names=FALSE)
 
-
-## > d
-##    Var1 Var2 Var3 Var4 simid
-## 1     1    1    1    1     1
-## 2     2    1    1    1     2
-## 3     3    1    1    1     3
-## 4     1    2    1    1     4
-## 5     2    2    1    1     5
-## 6     3    2    1    1     6
-## 7     1    3    1    1     7
-##          **snipped**
-## 78    3    2    3    3    78
-## 79    1    3    3    3    79
-## 80    2    3    3    3    80
-## 81    3    3    3    3    81
-
