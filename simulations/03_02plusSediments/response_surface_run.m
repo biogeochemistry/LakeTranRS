@@ -20,7 +20,8 @@ makeDeposition % creates Deposition
 global sed_par_file
 sed_par_file = 'params.txt';
 
-for r = 1:length(listing)
+% for r = 1:length(listing)
+for r = 39
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'
@@ -65,17 +66,18 @@ for r = 1:length(listing)
                           Phys_par,Phys_par_range,Phys_par_names,...
                           Bio_par,Bio_par_range,Bio_par_names, ...
                           Deposition);
+
+        csvwrite([p2, '/t.csv'], Tzt')
+        csvwrite([p2, '/chl.csv'], Chlzt')  
+        csvwrite([p2, '/O2abs.csv'], O2_sat_abst')
+        % csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
+        csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
         
         catch me
             disp('model crushing; skipping')
             
         end
         
-        csvwrite([p2, '/t.csv'], Tzt')
-        csvwrite([p2, '/chl.csv'], Chlzt')  
-        csvwrite([p2, '/O2abs.csv'], O2_sat_abst')
-        csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
-        csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
         
     end % if else
 end % for

@@ -14,17 +14,21 @@ f1 <- function (d, level) {
 
 f2 <- function (d, level) {
   d[['InflowTP']] <- d[['InflowTP']] * (10 ^ (level - 1))
+  d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ (level - 1))
+  d[['InflowChla']] <- d[['InflowChla']] * (10 ^ (level - 1))
   return (d)
 }
 
 f3 <- function (d, level) {
   diminish <- seq(from=1, to=1-(level-1)*0.45, length=nrow(d))
   d[['InflowTP']] <- d[['InflowTP']] * diminish
+  d[['InflowDOP']] <- d[['InflowDOP']] * diminish
+  d[['InflowChla']] <- d[['InflowChla']] * diminish
   return (d)
 }
 
 f4 <- function (d, level) {
-  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ (level - 1))
+  d[['InflowDOC']] <- d[['InflowDOC']] * (5 ^ (level - 1))
   return (d)
 }
 
@@ -43,8 +47,8 @@ for (s in 1:nrow(dict)) {
   if (!dir.exists(dirname)) { dir.create(dirname) }
   if (!dir.exists('simulations')) { dir.create('simulations') }
   if (!dir.exists('simulations/id')) { dir.create('simulations/id') }
-  ## if (!dir.exists(dirname2)) { dir.create(dirname2) }
-  ## else { unlink(dirname2, recursive = TRUE) ; dir.create(dirname2) }
+  if (!dir.exists(dirname2)) { dir.create(dirname2) }
+  else { unlink(dirname2, recursive = TRUE) ; dir.create(dirname2) }
   if (file.exists(pathname)) { file.remove(pathname) }
   ## delete existing, because we want to append later
   f <- file(pathname)
