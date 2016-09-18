@@ -87,8 +87,8 @@ fixed. They are fixed at **original** state. See Parameters above.
 
 ## Suggested changes for next iteration
 
-* Total P x 100 is too, so reduce it.
-* TP linear reduction is not necessary, switch with something else
+* Total P x 100 is too much and causes model crush in some parameter combinations, so reduce it.
+* TP linear reduction is not necessary, substitute with something else
   * Perhaps P growth related parameters?
   * Use Vansjø parameters, as suggested by Raoul.
 * DOC responses at x100 is unrealistic? Why does it increase summer
