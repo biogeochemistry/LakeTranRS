@@ -24,5 +24,10 @@ Koji's exercise to get Raoul's script up and running; it has limitations in that
 ## 03 +Sediments
 
 Added sediments (porting to MyLake2). 4 parameters. See [the folder](03_02plusSediments).
-(Originally porting 02 to the version with Sediments (solvemodel_v2.m))
+(Originally porting 02 to the version with Sediments
+(solvemodel_v2.m))
+
+# 04 5x5x5x5
+Increased resolution. See [the folder](04_5x5x5x5). 
+
 
