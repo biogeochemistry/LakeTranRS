@@ -25,9 +25,11 @@ Level | Temperature | Total P | TP linear reduction | DOC
 4 | original + 5.0 | original * 31.6 | Total P diminishing to 32.5 % at the end | original * 31.6
 5 | original + 7.5 | original * 100 | Total P diminishing to 10 % at the end | original * 100
 
-(By the way Total P cannot be reduced to zero; hence 10 % at the end.)
+By the way Total P cannot be reduced to zero as that causes model
+crushes; hence 10 % at the end. There was still some crushes,
+unfortunately. See below. 
 
-## Failures
+## Model crushes
 Temperature | Total P | TP linear reduction | DOC | Simulation ID
 --- | --- | --- | --- | ---
 2 | 5 | 1 | 1 | 22
@@ -53,6 +55,9 @@ Temperature | Total P | TP linear reduction | DOC | Simulation ID
 4 | 5 | 2 | 2 | 174
 5 | 5 | 2 | 2 | 175
 5 | 5 | 3 | 2 | 200
+
+Likely reason is an error related to the solving P partitions in the
+old MyLake. 
 
 # Responses
 
