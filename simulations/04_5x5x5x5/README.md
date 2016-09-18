@@ -57,7 +57,14 @@ Temperature | Total P | TP linear reduction | DOC | Simulation ID
 5 | 5 | 3 | 2 | 200
 
 Likely reason is an error related to the solving P partitions in the
-old MyLake. 
+old MyLake (but I'm not sure).
+
+### Observation
+
+* Model crushes only when total P x 100 (requirement)
+* TP reduction seem to mitigate it a little bit
+* High DOC mitigates the problem
+* Low temperature also mitigates the problem
 
 # Responses
 
@@ -73,4 +80,15 @@ old MyLake.
 
 # Tentative results
 
+Note that only two dimensions are varied and the other two are
+fixed. They are fixed at **original** state. See Parameters above. 
 ![](figures/combined_reordered.png)
+
+## Suggested changes for next iteration
+
+* Total P x 100 is too, so reduce it.
+* TP linear reduction is not necessary, switch with something else
+  * Perhaps P growth related parameters?
+  * Use Vansjø parameters, as suggested by Raoul.
+* DOC responses at x100 is unrealistic? Why does it increase summer
+  Chl concentration? Reduce just as suggested for total P? 
