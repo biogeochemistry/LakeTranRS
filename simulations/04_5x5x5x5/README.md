@@ -81,7 +81,8 @@ old MyLake (but I'm not sure).
 # Tentative results
 
 Note that only two dimensions are varied and the other two are
-fixed. They are fixed at **original** state. See Parameters above. 
+fixed. They are fixed at **original** state. See Parameters above.
+
 ![](figures/combined_reordered.png)
 
 ## Suggested changes for next iteration
