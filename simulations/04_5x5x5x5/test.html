@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="github-pandoc.css" type="text/css" />
+</head>
+<body>
+<h1 id="how-to-run-this-simulation">How to run this simulation</h1>
+<ol style="list-style-type: decimal">
+<li>Preparation. Review makeparameterdict.R and makeMLfiles.R and run them in that order.</li>
+<li>Run response.surface.run.m in Matlab</li>
+<li>Postprocessing files are in <a href="postprocessing" class="uri">postprocessing</a>.</li>
+</ol>
+<h1 id="parameters">Parameters</h1>
+<ul>
+<li>Air temperature <strong>T</strong></li>
+<li>Total P concentration <strong>TP</strong></li>
+<li>TP linear reduction <strong>TPR</strong></li>
+<li>DOC concentration <strong>DOC</strong></li>
+</ul>
+<p>Last three are controlled using runoff input to MyLake. This time there's no change in MyLake parameters.</p>
+<h2 id="levels">Levels</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Temperature</th>
+<th align="left">Total P</th>
+<th align="left">TP linear reduction</th>
+<th align="left">DOC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">original - 2.5</td>
+<td align="left"><strong>original</strong></td>
+<td align="left"><strong>Total P remains</strong></td>
+<td align="left"><strong>original</strong></td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left"><strong>original</strong></td>
+<td align="left">original * 3.16</td>
+<td align="left">Total P diminishing to 77.5 % at the end</td>
+<td align="left">original * 3.16</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">original + 2.5</td>
+<td align="left">original * 10</td>
+<td align="left">Total P diminishing to 55 % at the end</td>
+<td align="left">original * 10</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">original + 5.0</td>
+<td align="left">original * 31.6</td>
+<td align="left">Total P diminishing to 32.5 % at the end</td>
+<td align="left">original * 31.6</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">original + 7.5</td>
+<td align="left">original * 100</td>
+<td align="left">Total P diminishing to 10 % at the end</td>
+<td align="left">original * 100</td>
+</tr>
+</tbody>
+</table>
+<p>By the way Total P cannot be reduced to zero as that causes model crushes; hence 10 % at the end. There was still some crushes, unfortunately. See below.</p>
+<h2 id="model-crushes">Model crushes</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Temperature</th>
+<th align="left">Total P</th>
+<th align="left">TP linear reduction</th>
+<th align="left">DOC</th>
+<th align="left">Simulation ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">22</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">23</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">24</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">25</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">47</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">48</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">49</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">50</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">5</td>
+<td align="left">3</td>
+<td align="left">1</td>
+<td align="left">73</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">3</td>
+<td align="left">1</td>
+<td align="left">74</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">3</td>
+<td align="left">1</td>
+<td align="left">75</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">98</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">99</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">100</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">124</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">125</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">147</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">148</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">149</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">150</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">174</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">2</td>
+<td align="left">175</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">3</td>
+<td align="left">2</td>
+<td align="left">200</td>
+</tr>
+</tbody>
+</table>
+<p>Likely reason is an error related to the solving P partitions in the old MyLake (but I'm not sure).</p>
+<h3 id="observation">Observation</h3>
+<ul>
+<li>Model crushes only when total P x 100 (requirement)</li>
+<li>TP reduction seem to mitigate it a little bit</li>
+<li>High DOC mitigates the problem</li>
+<li>Low temperature also mitigates the problem</li>
+</ul>
+<h1 id="responses">Responses</h1>
+<ul>
+<li>Water temperature</li>
+<li>Chl concentration</li>
+<li>Total P concentration</li>
+<li>O2 saturation (absolute)</li>
+</ul>
+<h2 id="primary-comparison">Primary comparison</h2>
+<ul>
+<li>Maximum Chl concentration on surface in 2013 <strong>R1</strong></li>
+<li>Number of surface anoxia days (abs &lt; 0.01) in 2013 <strong>R2</strong></li>
+</ul>
+<h1 id="tentative-results">Tentative results</h1>
+<p>Note that only two dimensions are varied and the other two are fixed. They are fixed at <strong>original</strong> state. See Parameters above.</p>
+<div class="figure">
+<img src="figures/combined_reordered.png" />
+</div>
+<h2 id="suggested-changes-for-next-iteration">Suggested changes for next iteration</h2>
+<ul>
+<li>Total P x 100 is too much and causes model crush in some parameter combinations, so reduce it.</li>
+<li>TP linear reduction is not necessary, substitute with something else</li>
+<li>Perhaps P growth related parameters?</li>
+<li>Use Vansjø parameters, as suggested by Raoul.</li>
+<li>DOC responses at x100 is unrealistic? Why does it increase summer Chl concentration? Reduce just as suggested for total P?</li>
+</ul>
+</body>
+</html>
