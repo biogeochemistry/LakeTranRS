@@ -47,5 +47,9 @@ Level | Temperature | Total P | Fe3+ | DOC
 Note that only two dimensions are varied and the other two are
 fixed. They are fixed at **original** state. See Parameters above.
 
-![](figures/combined_reordered.png)
+![](figures/combined_reordered.png) 
+
+With the bottom anoxia instead of surface anoxia:
+
+![](figures/combined_reordered_bottom.png) 
 

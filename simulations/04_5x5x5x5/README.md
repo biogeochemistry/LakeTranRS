@@ -83,7 +83,12 @@ old MyLake (but I'm not sure).
 Note that only two dimensions are varied and the other two are
 fixed. They are fixed at **original** state. See Parameters above.
 
-![](figures/combined_reordered.png)
+![](figures/combined_reordered.png) 
+
+Using near bottom for anoxia:
+
+![](figures/combined_reordered_bottom.png) 
+
 
 ## Suggested changes for next iteration
 
