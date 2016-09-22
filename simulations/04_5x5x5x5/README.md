@@ -26,10 +26,10 @@ Level | Temperature | Total P | TP linear reduction | DOC
 5 | original + 7.5 | original * 100 | Total P diminishing to 10 % at the end | original * 100
 
 By the way Total P cannot be reduced to zero as that causes model
-crushes; hence 10 % at the end. There was still some crushes,
+crashes; hence 10 % at the end. There was still some crashes,
 unfortunately. See below. 
 
-## Model crushes
+## Model crashes
 Temperature | Total P | TP linear reduction | DOC | Simulation ID
 --- | --- | --- | --- | ---
 2 | 5 | 1 | 1 | 22
@@ -61,7 +61,7 @@ old MyLake (but I'm not sure).
 
 ### Observation
 
-* Model crushes only when total P x 100 (requirement)
+* Model crashes only when total P x 100 (requirement)
 * TP reduction seem to mitigate it a little bit
 * High DOC mitigates the problem
 * Low temperature also mitigates the problem
@@ -87,7 +87,7 @@ fixed. They are fixed at **original** state. See Parameters above.
 
 ## Suggested changes for next iteration
 
-* Total P x 100 is too much and causes model crush in some parameter combinations, so reduce it.
+* Total P x 100 is too much and causes model crash in some parameter combinations, so reduce it.
 * TP linear reduction is not necessary, substitute with something else
   * Perhaps P growth related parameters?
   * Use Vansjø parameters, as suggested by Raoul.
