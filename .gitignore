@@ -8,3 +8,5 @@ totp.csv
 O2*.csv
 *.bz2
 .ipynb_checkpoints
+
+simulations/.#README.md
