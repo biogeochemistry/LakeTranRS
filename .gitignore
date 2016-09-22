@@ -1,9 +1,14 @@
 *.DS_Store
 simulations/04_5x5x5x5/intermediate/id/*/input.txt
 simulations/03_02plusSediments/intermediate/id/*/input.txt
+simulations/*/intermediate/id/*/input.txt
 chl.csv
 t.csv
 totp.csv
 O2*.csv
 *.bz2
 .ipynb_checkpoints
+
+simulations/.#README.md
+
+simulations/.#README.md
