@@ -74,7 +74,7 @@ for r = 1:5
         csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
         
         catch me
-            disp('model crushing; skipping')
+            disp('model crashing; skipping')
             
         end
         
