@@ -25,16 +25,16 @@ temperature levels in simulation number 06.
 
 Level | Temperature | Total P | Fe3+ | DOC
 --- | --- | --- | --- | ---
-1 | original - 3.0 | original * 0.25 | **zero** | original * 0.25
-2 | original - 2.5  | original * 0.5  | 0.5 | original * 0.5
-3 | original - 2.0 | **original** | 1.0 | **original**
-4 | original - 1.5 | original * 2.0 | 2.0 | original * 2.0
-5 | original - 1.0 | original * 4.0 | 4.0 | original * 4.0 
-6 | original - 0.5 | original * 8.0 | 8.0 | original * 8.0 
-7 | **original** | original * 16 | 16 | original * 16
-8 | original + 0.5 | original * 32 | 32 | original * 32
-9 | original + 1.0 | original * 64 | 64 | original * 64
-10 | original + 1.5 | original * 128 | 128 | original * 128
+1 | original - 3.0 | original * 0.25 | ~~zero~~ | original * 0.25
+2 | original - 2.5  | original * 0.5  | ~~0.5~~ | original * 0.5
+3 | original - 2.0 | **original** | ~~1.0~~ | **original**
+4 | original - 1.5 | original * 2.0 | ~~2.0~~ | original * 2.0
+5 | original - 1.0 | original * 4.0 | ~~4.0~~ | original * 4.0 
+6 | original - 0.5 | original * 8.0 | ~~8.0~~ | original * 8.0 
+7 | **original** | original * 16 | ~~16~~ | original * 16
+8 | original + 0.5 | original * 32 | ~~32~~ | original * 32
+9 | original + 1.0 | original * 64 | ~~64~~ | original * 64
+10 | original + 1.5 | original * 128 | ~~128~~ | original * 128
 
 
 ### Observation
@@ -48,6 +48,10 @@ Level | Temperature | Total P | Fe3+ | DOC
 * Chl concentration
 * Total P concentration
 * O2 saturation (absolute)
+
+
+## model crashes
+to be listed
 
 ## Primary comparison
 
