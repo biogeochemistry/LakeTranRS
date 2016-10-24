@@ -12,7 +12,7 @@
 
 * Air temperature **T**
 * Total P concentration **TP**
-* ~~ Fe3+ concentration **FE** ~~
+* ~~ Fe3+ concentration FE ~~
 * DOC concentration **DOC**
 
 Last three are controlled using runoff input to MyLake. This time
