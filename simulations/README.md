@@ -32,3 +32,12 @@ Increased resolution. See [the folder](04_5x5x5x5).
 
 ## 05 Fe
 [The folder](05_Fe)
+
+# 06 July version
+Changed to July verions of MyLake and Sediments. See
+[the folder](06_July_versions).
+
+# 06a Changed from 06
+One dimension less (Fe not examined), and increased the
+resolution. 10x10x10. See [the folder](06a_high_resolution)
+
