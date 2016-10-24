@@ -30,8 +30,7 @@ Level | Temperature | Total P | Fe3+ | DOC
 
 ### Observation
 
-* No more model crashes, probably because of reduced TP
-* Fe didn't seem to affect the results -- did I do something wrong?
+to be listed
 
 # Responses
 

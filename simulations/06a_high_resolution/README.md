@@ -12,7 +12,7 @@
 
 * Air temperature **T**
 * Total P concentration **TP**
-* Fe3+ concentration **FE**
+* ~~ Fe3+ concentration **FE** ~~
 * DOC concentration **DOC**
 
 Last three are controlled using runoff input to MyLake. This time
@@ -23,7 +23,7 @@ there's no change in MyLake parameters.
 Temperature variation is on the lower end because of failing at high
 temperature levels in simulation number 06. 
 
-Level | Temperature | Total P | Fe3+ | DOC
+Level | Temperature | Total P | ~~Fe3+~~ | DOC
 --- | --- | --- | --- | ---
 1 | original - 3.0 | original * 0.25 | ~~zero~~ | original * 0.25
 2 | original - 2.5  | original * 0.5  | ~~0.5~~ | original * 0.5
@@ -39,8 +39,7 @@ Level | Temperature | Total P | Fe3+ | DOC
 
 ### Observation
 
-* No more model crashes, probably because of reduced TP
-* Fe didn't seem to affect the results -- did I do something wrong?
+to be listed
 
 # Responses
 

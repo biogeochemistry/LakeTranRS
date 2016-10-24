@@ -12,7 +12,7 @@ nt = 1461
 nz = 90
 nr = 4 # responses
 
-a = np.ndarray((n1, n2, n4, nt, nz, nr), dtype=np.float) * np.nan
+aa = np.ndarray((n1, n2, n4, nt, nz, nr), dtype=np.float) * np.nan
 m = np.zeros((n1, n2, n4, nt, nz, nr), dtype=bool) 
 
 d = pd.read_csv('../intermediate//parameterdict.csv')
@@ -27,17 +27,17 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     chl = pd.read_csv('../simulations/id/{:05d}/chl.csv.bz2'.format(id), header=None).as_matrix()
     tp = pd.read_csv('../simulations/id/{:05d}/totp.csv.bz2'.format(id), header=None).as_matrix()
     o2a = pd.read_csv('../simulations/id/{:05d}/O2abs.csv.bz2'.format(id), header=None).as_matrix()
-    a[x1-1, x2-1, x4-1, :, :, 0] = t
-    a[x1-1, x2-1, x4-1, :, :, 1] = chl
-    a[x1-1, x2-1, x4-1, :, :, 2] = tp
-    a[x1-1, x2-1, x4-1, :, :, 3] = o2a
-    # a[x1-1, x2-1, x3-1, x4-1, :, :, 4] = o2r
+    aa[x1-1, x2-1, x4-1, :, :, 0] = t
+    aa[x1-1, x2-1, x4-1, :, :, 1] = chl
+    aa[x1-1, x2-1, x4-1, :, :, 2] = tp
+    aa[x1-1, x2-1, x4-1, :, :, 3] = o2a
+    # aa[x1-1, x2-1, x3-1, x4-1, :, :, 4] = o2r
 
 for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
         m[x1-1, x2-1, x4-1, :, :, :] = True
 
-a = ma.masked_array(a, mask=m)
+a = ma.masked_array(aa, mask=m)
 
 
 ## maximum chl in last year
