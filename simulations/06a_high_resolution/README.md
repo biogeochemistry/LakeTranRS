@@ -56,3 +56,19 @@ to be listed
 
 * Maximum Chl concentration on surface in 2013 **R1**
 * Number of surface anoxia days (abs < 0.01) in 2013 **R2**
+
+# Tentative results
+
+Note that only two dimensions are varied and the other two are
+fixed. They are fixed at **original** state. See Parameters above.
+
+**Also note that at T Level 9 the model crashes (I don't know
+  why). The sharp contours around there are artefacts. 
+
+![](figures/combined_reordered.png) 
+
+With the bottom anoxia instead of surface anoxia:
+
+![](figures/combined_reordered_bottom.png) 
+
+
