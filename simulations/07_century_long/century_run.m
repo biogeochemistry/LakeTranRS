@@ -82,7 +82,28 @@ try
     csvwrite(['results', '/chl.csv'], Chlzt')  
     csvwrite(['results', '/O2abs.csv'], O2_sat_abst')
     % csvwrite(['results', '/O2rel.csv'], O2_sat_relt')
-    csvwrite(['results', '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
+    csvwrite(['results', '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
+                                        DOPzt)')
+    
+    csvwrite(['results', '/sedO2.csv'], sediment_data_basin1{1, 1}')
+    csvwrite(['results', '/sedOM.csv'], sediment_data_basin1{9, 1}')
+    csvwrite(['results', '/sedOMb.csv'], sediment_data_basin1{10, 1}')
+    csvwrite(['results', '/sedOMS.csv'], sediment_data_basin1{11, 1}')
+    csvwrite(['results', '/sedpH.csv'], sediment_data_basin1{31, 1}')
+    
+    sf = sediment_data_basin1{41, 1};
+    sf10 = [sf{1, 1} ; 
+            sf{2, 1} ;
+            sf{3, 1} ;
+            sf{4, 1} ;
+            sf{5, 1} ;
+            sf{6, 1} ;
+            sf{7, 1} ;
+            sf{8, 1} ;
+            sf{9, 1} ;
+            sf{10, 1}]; 
+    csvwrite(['results', '/sedfluxes.csv'], sf10')
+    
     
 catch me
     disp('model crashing; skipping')
