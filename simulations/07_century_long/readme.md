@@ -1,7 +1,7 @@
 # Setup 
 
 - The original input for 2010-01-01 to 2013-12-31 (i.e., 4 years) was
-  repeated as if it covers the whole 21st century.
+  repeated 25 times -- set as if it covers the whole 21st century.
 - Hopefully, it gives enough stochasticity in meteorological inputs
   and yet a 'stable' weather condition.
 - Stream inputs need to be improved. Specifically I need to set a good
@@ -31,3 +31,9 @@
 ![](figures/chl.png) 
 ![](figures/chl_zoomed.png) 
 
+# Where to go from here
+
+- Running autocorrelation? Can be done already
+- Longer centuries (anyway do we agree that 100 years was not long
+  enough?)
+- Need to pour in Fe and other elements
