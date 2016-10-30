@@ -1,13 +1,13 @@
 
 # results
 
-![](figures/Al(figures/OH)3.png)
-![](figures/Fe2+.png)
-![](figures/NO3-.png)
-![](figures/OM2.png)
-![](figures/PO4.png)
-![](figures/Fe(figures/OH)3.png)
-![](figures/NH4+.png)
-![](figures/OM.png)
-![](figures/Oxygen.png)
-![](figures/PO4adsa.png)
+![](figures/sedAl(OH)3.png)
+![](figures/sedFe2+.png)
+![](figures/sedNO3-.png)
+![](figures/sedOM2.png)
+![](figures/sedPO4.png)
+![](figures/sedFe(OH)3.png)
+![](figures/sedNH4+.png)
+![](figures/sedOM.png)
+![](figures/sedOxygen.png)
+![](figures/sedPO4adsa.png)
