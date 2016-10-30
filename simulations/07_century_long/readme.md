@@ -9,7 +9,7 @@
 
 # Results (Calendar year means, i.e., 100 means)
 
-# Sediment fluxes (positive into sediments)
+## Sediment fluxes (positive into sediments)
 
 ![](figures/sedOxygen.png) 
 ![](figures/sedOM.png) 
