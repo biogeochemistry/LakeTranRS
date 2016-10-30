@@ -9,7 +9,7 @@ d = pd.read_csv('../results/sedfluxes.csv.bz2',
 d.index = pd.period_range('2001-01-01', '2100-12-31')
 
 
-sns.set_style('darkgrid')
+sns.set_style('whitegrid')
 
 for name, ser in d.resample('A').mean().iteritems():
     plt.clf()
@@ -23,5 +23,63 @@ for name, ser in d.resample('A').mean().iteritems():
 
 
 
+atdepths = [0, 15, 30, 45, 60, 75, 89]
 
+
+
+
+d = pd.read_csv('../results/O2abs.csv.bz2', header = None)
+d.index = pd.period_range('2001-01-01', '2100-12-31')
+
+plt.clf()
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for ad in atdepths:
+    d.iloc[:, ad].resample('A').mean().iloc[3:].plot(ax=ax)
+leg = ax.legend(loc='upper left', frameon=True)
+
+ax.set_ylabel('O2 absolute by depth')
+fig.savefig('../figures/O2abs.png', bbox_inches='tight')
+ax.set_ylim((0.015, 0.08))
+ax.set_ylabel('O2 absolute by depth (zoomed)')
+fig.savefig('../figures/O2abs_zoomed.png', bbox_inches='tight')
+
+
+
+
+d = pd.read_csv('../results/totp.csv.bz2', header = None)
+d.index = pd.period_range('2001-01-01', '2100-12-31')
+
+plt.clf()
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for ad in atdepths:
+    d.iloc[:, ad].resample('A').mean().iloc[3:].plot(ax=ax)
+leg = ax.legend(loc='upper left', frameon=True)
+
+ax.set_ylabel('Total P by depth')
+fig.savefig('../figures/TotP.png', bbox_inches='tight')
+
+ax.set_ylim((0.0175, 0.028))
+ax.set_ylabel('O2 absolute by depth (zoomed)')
+fig.savefig('../figures/TotP_zoomed.png', bbox_inches='tight')
+
+
+
+
+d = pd.read_csv('../results/chl.csv.bz2', header = None)
+d.index = pd.period_range('2001-01-01', '2100-12-31')
+
+plt.clf()
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for ad in atdepths:
+    d.iloc[:, ad].resample('A').mean().iloc[3:].plot(ax=ax)
+leg = ax.legend(loc='upper left', frameon=True)
+
+ax.set_ylabel('Chl by depth')
+fig.savefig('../figures/Chl.png', bbox_inches='tight')
+ax.set_ylim((0.0039, 0.0044))
+ax.set_ylabel('Chl by depth (zoomed)')
+fig.savefig('../figures/Chl_zoomed.png', bbox_inches='tight')
 
