@@ -72,7 +72,7 @@ for century = 0:9
      Qzt_sed,lambdazt,P3zt_sed,P3zt_sed_sc,His,DoF,DoM,MixStat,Wt,...
      surfaceflux,O2fluxt,CO2_eqt,K0t,O2_eqt,K0_O2t,...
      CO2_ppmt,dO2Chlt,dO2BODt,testi1t,testi2t,testi3t,...
-     MyLake_results_basin1, sediment_data_basin1] = ...
+     MyLake_results_basin1, sdb] = ...
         solvemodel_v2(m_start,m_stop,dummyinitfile, 'duh', ...
                        '../input/LAE_input.txt', 'duh', ...
                       dummyparfile, 'duh', ...
@@ -84,7 +84,7 @@ for century = 0:9
                       Ice0,Wt,Inflw,...
                       Phys_par,Phys_par_range,Phys_par_names,...
                       Bio_par,Bio_par_range,Bio_par_names, ...
-                      Deposition, 0, [0; 0]);
+                      Deposition, 1, [0; 0]);
     else
     [zz,Az,Vz,tt,Qst,Kzt,Tzt,Czt,Szt,Pzt,Chlzt,PPzt,DOPzt,DOCzt,DICzt,...
      CO2zt,O2zt,NO3zt,NH4zt,SO4zt,HSzt,H2Szt,Fe2zt,Ca2zt,pHzt,CH4zt,...
@@ -104,9 +104,10 @@ for century = 0:9
                       Ice0,Wt,Inflw,...
                       Phys_par,Phys_par_range,Phys_par_names,...
                       Bio_par,Bio_par_range,Bio_par_names, ...
-                      Deposition, 1, sediment_concs);
+                      Deposition, 0, sediment_concs);
     end
     
+    century = num2str(century)
     csvwrite(['results/', century, 't.csv'], Tzt')
     csvwrite(['results/', century, 'chl.csv'], Chlzt')  
     csvwrite(['results/', century, 'O2abs.csv'], O2_sat_abst')
@@ -116,7 +117,7 @@ for century = 0:9
     csvwrite(['results/', century, 'oldChldsed.csv'], P3zt_sed(:,:,3)')
     csvwrite(['results/', century, 'oldFIM.csv'], P3zt_sed(:,:,4)')
     csvwrite(['results/', century, 'sedPO4.csv'], sdb{16, 1}')
-    csvwrite(['results/', century, 'sedPO4adsa.cvs'], sdb{17, 1}')
+    csvwrite(['results/', century, 'sedPO4adsa.csv'], sdb{17, 1}')
     csvwrite(['results/', century, 'sedO2.csv'], sdb{1, 1}')
     csvwrite(['results/', century, 'sedOM.csv'], sdb{9, 1}')
     csvwrite(['results/', century, 'sedOMb.csv'], sdb{10, 1}')
@@ -125,9 +126,12 @@ for century = 0:9
     csvwrite(['results/', century, 'sedNH4.csv'], sdb{20, 1}')
 
     %% prepare for the next century
+    In_Z = zz;
+    In_Az = Az;
     In_Tz = Tzt(:, end);
     In_Cz = Czt(:, end);
     In_Sz = Szt(:, end);
+    TPzt = Czt + Pzt + Chlzt + PPzt + DOPzt;
     In_TPz = TPzt(:, end);
     In_DOPz = DOPzt(:, end);
     In_Chlz = Chlzt(:, end);
@@ -139,7 +143,7 @@ for century = 0:9
     In_SO4z = SO4zt(:, end);
     In_HSz = HSzt(:, end);
     In_H2Sz = H2Szt(:, end);
-    In_Fez = Fezt(:, end);
+    In_Fe2z = Fe2zt(:, end);
     In_Ca2z = Ca2zt(:, end);
     In_pHz = pHzt(:, end);
     In_CH4z = CH4zt(:, end);
@@ -197,35 +201,35 @@ for century = 0:9
 % 42 %      sediment_integrated_over_depth_fluxes_t, 'Flux integrated over depth';
 % 43 %     };    
     sediment_concs = { ...
-        sdb{1, 1},  'Oxygen';   
-        sdb{9, 1},  'OM1';      
-        sdb{10, 1}, 'OM2';      
-        sdb{19, 1}, 'NO3';      
-        sdb{2, 1},  'FeOH3';    
-        sdb{4, 1},  'SO4';      
-        sdb{20, 1}, 'NH4';      
-        sdb{5, 1},  'Fe2';      
-        sdb{3, 1},  'FeOOH';    
-        sdb{6, 1},  'H2S';      
-        sdb{7, 1},  'HS';       
-        sdb{8, 1},  'FeS';      
-        sdb{13, 1}, 'S0';       
-        sdb{16, 1}, 'PO4';      
-        sdb{14, 1}, 'S8';       
-        sdb{15, 1}, 'FeS2';     
-        sdb{12, 1}, 'AlOH3';    
-        sdb{17, 1}, 'PO4adsa';  
-        sdb{18, 1}, 'PO4adsb';  
-        sdb{22, 1}, 'Ca2';      
-        sdb{23, 1}, 'Ca3PO42';  
-        sdb{11, 1}, 'OMS';      
-        sdb{24, 1}, 'H';        
-        sdb{25, 1}, 'OH';       
-        sdb{26, 1}, 'CO2';      
-        sdb{27, 1}, 'CO3';      
-        sdb{28, 1}, 'HCO3';     
-        sdb{29, 1}, 'NH3';      
-        sdb{30, 1}, 'H2CO3'   
+        sdb{1, 1}(:, end),  'Oxygen';   
+        sdb{9, 1}(:, end),  'OM1';      
+        sdb{10, 1}(:, end), 'OM2';      
+        sdb{19, 1}(:, end), 'NO3';      
+        sdb{2, 1}(:, end),  'FeOH3';    
+        sdb{4, 1}(:, end),  'SO4';      
+        sdb{20, 1}(:, end), 'NH4';      
+        sdb{5, 1}(:, end),  'Fe2';      
+        sdb{3, 1}(:, end),  'FeOOH';    
+        sdb{6, 1}(:, end),  'H2S';      
+        sdb{7, 1}(:, end),  'HS';       
+        sdb{8, 1}(:, end),  'FeS';      
+        sdb{13, 1}(:, end), 'S0';       
+        sdb{16, 1}(:, end), 'PO4';      
+        sdb{14, 1}(:, end), 'S8';       
+        sdb{15, 1}(:, end), 'FeS2';     
+        sdb{12, 1}(:, end), 'AlOH3';    
+        sdb{17, 1}(:, end), 'PO4adsa';  
+        sdb{18, 1}(:, end), 'PO4adsb';  
+        sdb{22, 1}(:, end), 'Ca2';      
+        sdb{23, 1}(:, end), 'Ca3PO42';  
+        sdb{11, 1}(:, end), 'OMS';      
+        sdb{24, 1}(:, end), 'H';        
+        sdb{25, 1}(:, end), 'OH';       
+        sdb{26, 1}(:, end), 'CO2';      
+        sdb{27, 1}(:, end), 'CO3';      
+        sdb{28, 1}(:, end), 'HCO3';     
+        sdb{29, 1}(:, end), 'NH3';      
+        sdb{30, 1}(:, end), 'H2CO3'   
     };
     sediment_concs = containers.Map({sediment_concs{:,2}},{sediment_concs{:,1}});
     
