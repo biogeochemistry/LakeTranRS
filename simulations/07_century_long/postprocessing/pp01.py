@@ -2,36 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
-d = pd.read_csv('../results/sedfluxes.csv.bz2', 
-                names =  ['OM', 'OM2', 'Oxygen', 'PO4', 'Fe2+', 
-                          'NO3-', 'NH4+', 'Al(OH)3', 'PO4adsa', 'Fe(OH)3'])
-d.index = pd.period_range('2001-01-01', '2100-12-31')
-
-
-sns.set_style('whitegrid')
-
-for name, ser in d.resample('A').mean().iteritems():
-    plt.clf()
-    a = ser.iloc[3:].plot()
-    a.set_ylabel(name)
-    fig = plt.gcf()
-    fig.set_figheight(4)
-    fig.set_figwidth(6)
-    fig.set_dpi(600)
-    fig.savefig('../figures/sed{:s}.png'.format(name), bbox_inches='tight')
-
-
-
 atdepths = [0, 15, 30, 45, 60, 75, 89]
 
 
+dlist = [pd.read_csv('../results/{:d}O2abs.csv.bz2'.format(cent), header=None)
+         for cent in range(10)]
+d = pd.concat(dlist, ignore_index=True)
+d.index = pd.period_range('2001-01-01', '3000-12-29')
 
-
-d = pd.read_csv('../results/01 one-century only/O2abs.csv.bz2', header = None)
-d.index = pd.period_range('2001-01-01', '2100-12-31')
-
-plt.clf()
 fig = plt.figure()
 ax = fig.add_subplot(111)
 for ad in atdepths:
@@ -46,9 +24,10 @@ fig.savefig('../figures/O2abs_zoomed.png', bbox_inches='tight')
 
 
 
-
-d = pd.read_csv('../results/totp.csv.bz2', header = None)
-d.index = pd.period_range('2001-01-01', '2100-12-31')
+dlist = [pd.read_csv('../results/{:d}totp.csv.bz2'.format(cent), header=None)
+         for cent in range(10)]
+d = pd.concat(dlist, ignore_index=True)
+d.index = pd.period_range('2001-01-01', '3000-12-29')
 
 plt.clf()
 fig = plt.figure()
@@ -64,11 +43,28 @@ ax.set_ylim((0.0175, 0.028))
 ax.set_ylabel('Total P by depth (zoomed)')
 fig.savefig('../figures/TotP_zoomed.png', bbox_inches='tight')
 
+plt.clf()
+fig = plt.figure()
+ax = fig.add_subplot(111)
+for ad in atdepths:
+    d4 = d.groupby((d.index.year - 1) // 4, as_index=False, group_keys=False).mean()
+    d4.index = pd.PeriodIndex(pd.PeriodIndex(range(2001, 3000, 4), freq='4A'))
+    d4.plot(ax=ax)
+leg = ax.legend(loc='upper left', frameon=True)
+
+ax.set_ylabel('Total P by depth 4-y mean')
+fig.savefig('../figures/TotP4y.png', bbox_inches='tight')
+
+ax.set_ylim((0.0175, 0.028))
+ax.set_ylabel('Total P by depth 4-y mean (zoomed) ')
+fig.savefig('../figures/TotP4y_zoomed.png', bbox_inches='tight')
 
 
 
-d = pd.read_csv('../results/chl.csv.bz2', header = None)
-d.index = pd.period_range('2001-01-01', '2100-12-31')
+dlist = [pd.read_csv('../results/{:d}chl.csv.bz2'.format(cent), header=None)
+         for cent in range(10)]
+d = pd.concat(dlist, ignore_index=True)
+d.index = pd.period_range('2001-01-01', '3000-12-29')
 
 plt.clf()
 fig = plt.figure()
