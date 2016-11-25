@@ -122,7 +122,7 @@ def writemarkdown(v):
 ![](../figures/OMsedmidzoomed2.png)
 '''
     out = TEMPLATE.replace('OM', v)
-    fname = 'before_annotation/{:s}.md'.format(v)
+    fname = 'before_annotation/sed{:s}.md'.format(v)
     with open(fname, 'w') as f:
         f.write(out)
 
