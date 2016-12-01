@@ -14,6 +14,7 @@ dummyinitfile = '../input/LAE_init_basin3.txt';
 listing = dir('intermediate/id');
 
 dt = 1.0;
+dz = 0.1; 
 
 makeDeposition % creates Deposition -- actually not used
 
@@ -125,8 +126,10 @@ for century = 0:9
     csvwrite(['results/', century, 'sedNH4.csv'], sdb{20, 1}')
 
     %% prepare for the next century
-    In_Z = zz;
-    In_Az = Az;
+    %% 2016-12-01 Koji
+    In_Z = [zz; zz(end)+dz]; %% should fix issues with trimming the end
+    In_Az = Az;  %% volume should be okay without changing but
+                 %% double check
     In_Tz = Tzt(:, end);
     In_Cz = Czt(:, end);
     In_Sz = Szt(:, end);
