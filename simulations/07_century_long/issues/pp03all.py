@@ -2,11 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-vv = ['O2abs', 'chl', 'totp', 't']
+vv = ['Chldsed', 'FIM', 'TPdsed', 'TPssed']
 
 sns.set_style('whitegrid')
 
-atdepths = [0, 10, 20, 40, 60, 80]
+atdepths = [0, 10, 20, 40, 60, 89]
 
 def drawlake(v):
     '''draws and saves figures based on a variable in lake water'''
@@ -31,8 +31,8 @@ def drawlake(v):
                     label='century run {:d}'.format(centi), 
                     color=plt.cm.coolwarm(centi/10.0))
         leg = ax.legend(loc='bottom right', ncol=2, frameon=True)
-        ax.set_title('{:s} lake water (4y mean), depth {:d}'.format(v, depth))
-        ax.set_ylabel('{:s} t lake water'.format(v))
+        ax.set_title('{:s} old sed (4y mean), depth {:d}'.format(v, depth))
+        ax.set_ylabel('{:s} old sed'.format(v))
         ax.set_xlabel('start year for 4-y cycles')
         fig.savefig('figures/{:s}depth{:02d}.png'.format(v, depth))
 
@@ -46,8 +46,8 @@ def drawlake(v):
                     label='century run {:d}'.format(centi), 
                     color=plt.cm.coolwarm(centi/10.0))
         leg = ax.legend(loc='bottom right', ncol=2, frameon=True)
-        ax.set_title('{:s} lake water (4y mean), depth {:d}'.format(v, depth))
-        ax.set_ylabel('{:s} t lake water'.format(v))
+        ax.set_title('{:s} old sed (4y mean), depth {:d}'.format(v, depth))
+        ax.set_ylabel('{:s} old sed'.format(v))
         ax.set_xlabel('start year for 4-y cycles')
         fig.savefig('figures/{:s}depth{:02d}zoomed1.png'.format(v, depth))
 
@@ -63,13 +63,13 @@ def writemarkdown(v):
     out = '\n'.join([TEMPLATE.replace('DEPTH', '{:02d}'.format(depth))
                      for depth in atdepths])
 
-    fname = 'before_annotation/lake{:s}.md'.format(v)
+    fname = 'before_annotation/old{:s}.md'.format(v)
     with open(fname, 'w') as f:
         f.write(out)
 
 if __name__ == '__main__':
     for v in vv:
-        # drawlake(v)
+        drawlake(v)
         writemarkdown(v)
 
 
