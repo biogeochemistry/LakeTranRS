@@ -108,6 +108,9 @@ for century = 0:9
     end
     
     century = num2str(century)
+    csvwrite(['results/', century, 'zz.csv'], zz)
+    csvwrite(['results/', century, 'Az.csv'], Az)
+    csvwrite(['results/', century, 'Vz.csv'], Vz)
     csvwrite(['results/', century, 't.csv'], Tzt')
     csvwrite(['results/', century, 'chl.csv'], Chlzt')  
     csvwrite(['results/', century, 'O2abs.csv'], O2_sat_abst')
