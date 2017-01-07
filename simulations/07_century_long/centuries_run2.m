@@ -63,7 +63,7 @@ tt = datenum(m_start):datenum(m_stop);
 % tt = datenum(m_start):datenum(m_stop);
 
 
-for century = 0:9
+for century = 0:3
     %% repeat 20th century but starting with the last run of 20th century    
     if century == 0
     [zz,Az,Vz,tt,Qst,Kzt,Tzt,Czt,Szt,Pzt,Chlzt,PPzt,DOPzt,DOCzt,DICzt,...
@@ -108,25 +108,25 @@ for century = 0:9
     end
     
     century = num2str(century)
-    csvwrite(['results/', century, 'zz.csv'], zz)
-    csvwrite(['results/', century, 'Az.csv'], Az)
-    csvwrite(['results/', century, 'Vz.csv'], Vz)
-    csvwrite(['results/', century, 't.csv'], Tzt')
-    csvwrite(['results/', century, 'chl.csv'], Chlzt')  
-    csvwrite(['results/', century, 'O2abs.csv'], O2_sat_abst')
-    csvwrite(['results/', century, 'totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
-    csvwrite(['results/', century, 'oldTPdsed.csv'], P3zt_sed(:,:,1)')
-    csvwrite(['results/', century, 'oldTPssed.csv'], P3zt_sed(:,:,2)')
-    csvwrite(['results/', century, 'oldChldsed.csv'], P3zt_sed(:,:,3)')
-    csvwrite(['results/', century, 'oldFIM.csv'], P3zt_sed(:,:,4)')
-    csvwrite(['results/', century, 'sedPO4.csv'], sdb{16, 1}')
-    csvwrite(['results/', century, 'sedPO4adsa.csv'], sdb{17, 1}')
-    csvwrite(['results/', century, 'sedO2.csv'], sdb{1, 1}')
-    csvwrite(['results/', century, 'sedOM.csv'], sdb{9, 1}')
-    csvwrite(['results/', century, 'sedOMb.csv'], sdb{10, 1}')
-    csvwrite(['results/', century, 'sedOMS.csv'], sdb{11, 1}')
-    csvwrite(['results/', century, 'sedNO3.csv'], sdb{19, 1}')
-    csvwrite(['results/', century, 'sedNH4.csv'], sdb{20, 1}')
+    csvwrite(['results2/', century, 'zz.csv'], zz)
+    csvwrite(['results2/', century, 'Az.csv'], Az)
+    csvwrite(['results2/', century, 'Vz.csv'], Vz)
+    csvwrite(['results2/', century, 't.csv'], Tzt')
+    csvwrite(['results2/', century, 'chl.csv'], Chlzt')  
+    csvwrite(['results2/', century, 'O2abs.csv'], O2_sat_abst')
+    csvwrite(['results2/', century, 'totp.csv'], (Czt + Pzt + Chlzt + PPzt + DOPzt)')
+    csvwrite(['results2/', century, 'oldTPdsed.csv'], P3zt_sed(:,:,1)')
+    csvwrite(['results2/', century, 'oldTPssed.csv'], P3zt_sed(:,:,2)')
+    csvwrite(['results2/', century, 'oldChldsed.csv'], P3zt_sed(:,:,3)')
+    csvwrite(['results2/', century, 'oldFIM.csv'], P3zt_sed(:,:,4)')
+    csvwrite(['results2/', century, 'sedPO4.csv'], sdb{16, 1}')
+    csvwrite(['results2/', century, 'sedPO4adsa.csv'], sdb{17, 1}')
+    csvwrite(['results2/', century, 'sedO2.csv'], sdb{1, 1}')
+    csvwrite(['results2/', century, 'sedOM.csv'], sdb{9, 1}')
+    csvwrite(['results2/', century, 'sedOMb.csv'], sdb{10, 1}')
+    csvwrite(['results2/', century, 'sedOMS.csv'], sdb{11, 1}')
+    csvwrite(['results2/', century, 'sedNO3.csv'], sdb{19, 1}')
+    csvwrite(['results2/', century, 'sedNH4.csv'], sdb{20, 1}')
 
     %% prepare for the next century
     %% 2016-12-01 Koji
