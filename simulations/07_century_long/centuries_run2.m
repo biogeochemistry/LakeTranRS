@@ -131,7 +131,7 @@ for century = 0:3
     %% prepare for the next century
     %% 2016-12-01 Koji
     In_Z = [zz; zz(end)+dz]; %% should fix issues with trimming the end
-    In_Az = Az;  %% volume should be okay without changing but
+    %% In_Az = Az;  %% volume should be okay without changing but
                  %% double check
     In_Tz = Tzt(:, end);
     In_Cz = Czt(:, end);
