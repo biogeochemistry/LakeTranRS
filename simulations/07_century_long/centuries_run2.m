@@ -129,8 +129,9 @@ for century = 0:3
     csvwrite(['results2/', century, 'sedNH4.csv'], sdb{20, 1}')
 
     %% prepare for the next century
-    %% 2016-12-01 Koji
-    In_Z = [zz; zz(end)+dz]; %% should fix issues with trimming the end
+    %% 2016-12-01 Koji -- %% 2017-01-07 Koji (now keeping In_Z and
+    %% In_Az intact)
+    %% In_Z = [zz; zz(end)+dz]; %% should fix issues with trimming the end
     %% actually this line falty %% In_Az = Az;  %% volume should be okay without changing but
                  %% double check
     In_Tz = Tzt(:, end);
