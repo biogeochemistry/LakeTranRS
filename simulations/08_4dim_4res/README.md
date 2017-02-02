@@ -5,9 +5,6 @@
 1. Run response.surface.run.m in Matlab
 1. Postprocessing files are in [postprocessing](postprocessing).
 
-
-# Checking results using the July verions
-
 #Parameters
 
 * Air temperature **T**

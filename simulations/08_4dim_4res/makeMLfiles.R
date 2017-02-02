@@ -7,27 +7,27 @@ original <- read.table('../input/LAE_input.txt', sep='\t', skip=1, header=TRUE)
 
 dict <- read.csv('intermediate/parameterdict.csv')
 
-## f1 <- function (d, level) {
-##   d[['AirTemperature']] <- d[['AirTemperature']] - 3.0 + 0.5 * (level - 1)
-##   return (d)
-## }
+f1 <- function (d, level) {
+  d[['AirTemperature']] <- d[['AirTemperature']] - 3.0 + 1.5 * (level - 1)
+  return (d)
+}
 
-## f2 <- function (d, level) {
-##   d[['InflowTP']] <- d[['InflowTP']] * (2 ^ (level - 3))
-##   d[['InflowDOP']] <- d[['InflowDOP']] * (2 ^ (level - 3))
-##   d[['InflowChla']] <- d[['InflowChla']] * (2 ^ (level - 3))
-##   return (d)
-## }
+f2 <- function (d, level) {
+  d[['WindSpeed']] <- d[['WindSpeed']] * (10 ^ ((level - 3) / 2))
+  return(d)
+}
 
-## f3 <- function (d, level) {
-##   d[['InflowFe3']] <- 2 ^ (level - 3)
-##   return (d)
-## }
+f3 <- function (d, level) {
+  d[['InflowTP']] <- d[['InflowTP']] * (10 ^ ((level - 2) / 2))
+  d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ ((level - 2) / 2))
+  d[['InflowChla']] <- d[['InflowChla']] * (10 ^ ((level - 2) / 2))
+  return (d)
+}
 
-## f4 <- function (d, level) {
-##   d[['InflowDOC']] <- d[['InflowDOC']] * (2 ^ (level - 3))
-##   return (d)
-## }
+f4 <- function (d, level) {
+  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 2) / 2))
+  return (d)
+}
 
 for (s in 1:nrow(dict)) {
   L1 <- dict[s, 1]
@@ -49,7 +49,7 @@ for (s in 1:nrow(dict)) {
   if (file.exists(pathname)) { file.remove(pathname) }
   ## delete existing, because we want to append later
   f <- file(pathname)
-  writeLines(sprintf('Simulation_AT%02d_TP%02d_FE%02d_DOC%02d', L1, L2, L3, L4), f)
+  writeLines(sprintf('Simulation_AT%02d_WS%02d_TP%02d_DOC%02d', L1, L2, L3, L4), f)
   close(f)
   write.table(data, file=pathname, append=TRUE, sep='\t', eol='\r\n', na='NaN',
               quote=FALSE, row.names=FALSE)
