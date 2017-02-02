@@ -1,4 +1,5 @@
 *.DS_Store
+simulations/07*/results*/*.csv
 simulations/04_5x5x5x5/intermediate/id/*/input.txt
 simulations/03_02plusSediments/intermediate/id/*/input.txt
 simulations/*/intermediate/id/*/input.txt
