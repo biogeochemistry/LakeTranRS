@@ -3,8 +3,10 @@ addpath('../../MATSEDLAB-IsM')
 addpath('.')
 
 %% short input for testing
-m_start = [2010, 1, 1];
-m_stop = [2013, 12, 31];
+m_start0 = [2010, 1, 1];
+m_stop0 = [2013, 12, 31];
+m_start1 = [2010, 1, 1];
+m_stop1 = [2017, 12, 31];
 
 
 run_INCA = 0; % 1- MyLake will run INCA, 0- No run
@@ -16,6 +18,8 @@ listing = dir('intermediate/id');
 
 dt = 1.0;
 
+m_start = m_start0;
+m_stop = m_stop0;
 makeDeposition % creates Deposition -- actually not used
 
 global sed_par_file
@@ -23,7 +27,7 @@ sed_par_file = 'params.txt';
 
 
 % for r = 1:length(listing)
-for r = 200:201
+for r = 101:200
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'
@@ -35,28 +39,9 @@ for r = 200:201
         p2 = ['simulations/id/', listing(r).name]; % this folder made earlier
 
 
-        %% will fake the four-year inputs (weather and inflow) to a century
-        %% long input
-        
-        % original 2010-01-01 to 2013-12-31, 1461 days including ends
-        % 21st century 2001-01-01 to 2100-12-31, 36524 days
-        % this is 25 times original MINUS 1 day        
 
-        Wt0 = [Wt; Wt; Wt; Wt; Wt; ...
-               Wt; Wt; Wt; Wt; Wt; ...
-               Wt; Wt; Wt; Wt; Wt; ...
-               Wt; Wt; Wt; Wt; Wt; ...
-               Wt; Wt; Wt; Wt; Wt];
-        Wt = Wt0(1:(end-1), :);
-        Inflw0 = [Inflw; Inflw; Inflw; Inflw; Inflw; ...
-               Inflw; Inflw; Inflw; Inflw; Inflw; ...
-               Inflw; Inflw; Inflw; Inflw; Inflw; ...
-               Inflw; Inflw; Inflw; Inflw; Inflw; ...
-               Inflw; Inflw; Inflw; Inflw; Inflw];
-        Inflw = Inflw0(1:(end-1), :);
-        tt = datenum(m_start):datenum(m_stop);
-
-
+        m_start = m_start0;
+        m_stop = m_stop0;
 
         [In_Z,In_Az,tt,In_Tz,In_Cz,In_Sz,In_TPz,In_DOPz,In_Chlz,In_DICz,...
          In_DOCz,In_TPz_sed,In_Chlz_sed,In_O2z,In_NO3z,In_NH4z,In_SO4z,...
@@ -70,6 +55,38 @@ for r = 200:201
         Bio_par(38) = 1.7;
         Bio_par(39) = 0.0001;
         Bio_par(40) = 4.4897;
+        
+        
+        
+        
+        
+        %% will fake the four-year inputs (weather and inflow) to a century
+        %% long input
+        
+        % original 2010-01-01 to 2013-12-31, 1461 days including ends
+        % 21st century 2001-01-01 to 2100-12-31, 36524 days
+        % this is 25 times original MINUS 1 day
+        
+        Wt = [Wt; Wt; Wt];
+        Inflw = [Inflw; Inflw; Inflw];
+        % Wt0 = [Wt; Wt; Wt; Wt; Wt; ...
+        %        Wt; Wt; Wt; Wt; Wt; ...
+        %        Wt; Wt; Wt; Wt; Wt; ...
+        %        Wt; Wt; Wt; Wt; Wt; ...
+        %        Wt; Wt; Wt; Wt; Wt];
+        % Wt = Wt0(1:(end-1), :);
+        % Inflw0 = [Inflw; Inflw; Inflw; Inflw; Inflw; ...
+        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
+        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
+        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
+        %        Inflw; Inflw; Inflw; Inflw; Inflw];
+        % Inflw = Inflw0(1:(end-1), :);
+        m_start = m_start1;
+        m_stop = m_stop1;
+        tt = datenum(m_start):datenum(m_stop);
+   
+        
+        
         
         
         try 
@@ -94,20 +111,20 @@ for r = 200:201
                               Bio_par,Bio_par_range,Bio_par_names, ...
                               Deposition);
             
-            csvwrite(['results', '/t.csv'], Tzt')
-            csvwrite(['results', '/lambda.csv'], lambdazt')
-            csvwrite(['results', '/His.csv'], His')
-            csvwrite(['results', '/chl.csv'], Chlzt')  
-            csvwrite(['results', '/O2abs.csv'], O2_sat_abst')
-            % csvwrite(['results', '/O2rel.csv'], O2_sat_relt')
-            csvwrite(['results', '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
+            csvwrite([p2, '/t.csv'], Tzt')
+            csvwrite([p2, '/lambda.csv'], lambdazt')
+            csvwrite([p2, '/His.csv'], His')
+            csvwrite([p2, '/chl.csv'], Chlzt')  
+            csvwrite([p2, '/O2abs.csv'], O2_sat_abst')
+            % csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
+            csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
                                                 DOPzt)')
             
-            % csvwrite(['results', '/sedO2.csv'], sediment_data_basin1{1, 1}')
-            % csvwrite(['results', '/sedOM.csv'], sediment_data_basin1{9, 1}')
-            % csvwrite(['results', '/sedOMb.csv'], sediment_data_basin1{10, 1}')
-            % csvwrite(['results', '/sedOMS.csv'], sediment_data_basin1{11, 1}')
-            % csvwrite(['results', '/sedpH.csv'], sediment_data_basin1{31, 1}')
+            % csvwrite([p2, '/sedO2.csv'], sediment_data_basin1{1, 1}')
+            % csvwrite([p2, '/sedOM.csv'], sediment_data_basin1{9, 1}')
+            % csvwrite([p2, '/sedOMb.csv'], sediment_data_basin1{10, 1}')
+            % csvwrite([p2, '/sedOMS.csv'], sediment_data_basin1{11, 1}')
+            % csvwrite([p2, '/sedpH.csv'], sediment_data_basin1{31, 1}')
             
             % sf = sediment_data_basin1{41, 1};
             % sf10 = [sf{1, 1} ; 
@@ -120,7 +137,7 @@ for r = 200:201
             %         sf{8, 1} ;
             %         sf{9, 1} ;
             %         sf{10, 1}]; 
-            % csvwrite(['results', '/sedfluxes.csv'], sf10')
+            % csvwrite([p2, '/sedfluxes.csv'], sf10')
             
             
         catch me
