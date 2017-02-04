@@ -186,12 +186,16 @@ def plotsim(simids, fname):
 
 
     fig.savefig(fname)
+    return(fig)
 
 sns.set_palette('coolwarm', 4)
-plotsim([161, 162, 164, 165], 'Air Temperature.pdf')
+plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.pdf')
 
 sns.set_palette('Reds_r', 3)
-plotsim([153, 158, 168], 'Wind Speed.pdf')
+plotsim([153, 158, 168], 'results_raw/Wind Speed.pdf')
 
 sns.set_palette('Greens_r', 3)
-plotsim([138, 213, 238], 'Total P.pdf')
+plotsim([138, 213, 238], 'results_raw/Total P.pdf')
+
+sns.set_palette('Reds_r', 1)
+plotsim([38], 'results_raw/DOC.pdf')
