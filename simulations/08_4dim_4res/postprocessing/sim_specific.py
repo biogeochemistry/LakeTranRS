@@ -17,7 +17,7 @@ volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0
 volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, 90))
 
 
-def plotsim(simids, fname):
+def plotsim(simids, fname, stitle):
     '''plots various outputs against the original simulation'''
 
     if type(simids) is not list:
@@ -27,9 +27,13 @@ def plotsim(simids, fname):
     designlevels = [design.loc[design.simid == id]\
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
-                for v1, v2, v3, v4, i in designlevels]
+                for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T3W3P2C2 base'] + simnames
     
+    if len(simids) == 1:
+        lw = 1.0
+    else:
+        lw = 0.5
     
     plt.clf()
     fig = plt.figure(0)
@@ -73,31 +77,31 @@ def plotsim(simids, fname):
     t2['doy'] = t2.index.day_of_year
     t2s = t2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     t2 = t2.drop('doy', 1)
-    t0.iloc[:, 0].plot(color='lightgray', ax=a1, ylim=[0, 25])
-    t0.iloc[:, 1:].plot(ax=a1, linewidth=0.5)
-    a1.legend()
-    a1s.plot([0, 25], [0, 25], color='lightgray', linewidth=0.5)
+    t0.iloc[:, 0].plot(color='lightgray', ax=a1, ylim=[0, 25], legend=False)
+    t0.iloc[:, 1:].plot(ax=a1, linewidth=lw, legend=False)
+    a1s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
     for ci in range(1, t0s.shape[1]):
         a1s.plot(t0s.iloc[:, 0], t0s.iloc[:, ci])
     a1s.set_xlim([0, 25])
     a1s.set_ylim([0, 25])
-    t1.iloc[:, 0].plot(color='lightgray', ax=a2, ylim=[0, 25])
-    t1.iloc[:, 1:].plot(ax=a2, linewidth=0.5)
-    a2.legend()
-    a2s.plot([0, 25], [0, 25], color='lightgray', linewidth=0.5)
+    t1.iloc[:, 0].plot(color='lightgray', ax=a2, ylim=[0, 25], legend=False)
+    t1.iloc[:, 1:].plot(ax=a2, linewidth=lw, legend=False)
+    a2s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
     for ci in range(1, t1s.shape[1]):
         a2s.plot(t1s.iloc[:, 0], t1s.iloc[:, ci])
     a2s.set_xlim([0, 25])
     a2s.set_ylim([0, 25])
-    t2.iloc[:, 0].plot(color='lightgray', ax=a3, ylim=[0, 25])
-    t2.iloc[:, 1:].plot(ax=a3, linewidth=0.5)
-    a3.legend()
-    a3s.plot([0, 25], [0, 25], color='lightgray', linewidth=0.5)
+    t2.iloc[:, 0].plot(color='lightgray', ax=a3, ylim=[0, 25], legend=False)
+    t2.iloc[:, 1:].plot(ax=a3, linewidth=lw, legend=False)
+    a3s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
     for ci in range(1, t2s.shape[1]):
         a3s.plot(t2s.iloc[:, 0], t2s.iloc[:, ci])
     a3s.set_xlim([0, 25])
     a3s.set_ylim([0, 25])
-    
+    a1.set_ylabel('water temperature\nsurface')
+    a2.set_ylabel('water temperature\nmiddle')
+    a3.set_ylabel('water temperature\nbottom')
+
     ## ice
     his = [pd.read_csv(os.path.join(dir, 'His.csv.bz2'), header=None)
            for dir in dirs]
@@ -107,14 +111,14 @@ def plotsim(simids, fname):
     ice['doy'] = ice.index.day_of_year
     ices = ice.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     ice = ice.drop('doy', 1)
-    ice.iloc[:, 0].plot(color='lightgray', ax=a4, ylim=[0, 0.8])
-    ice.iloc[:, 1:].plot(ax=a4, linewidth=0.5)
-    a4.legend()
-    a4s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=0.5)
+    ice.iloc[:, 0].plot(color='lightgray', ax=a4, ylim=[0, 0.8], legend=False)
+    ice.iloc[:, 1:].plot(ax=a4, linewidth=lw, legend=False)
+    a4s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=lw)
     for ci in range(1, ices.shape[1]):
         a4s.plot(ices.iloc[:, 0], ices.iloc[:, ci])
     a4s.set_xlim([0, 0.8])
     a4s.set_ylim([0, 0.8])
+    a4.set_ylabel('ice thickness')
 
     ## oxygen
     o2 = [pd.read_csv(os.path.join(dir, 'O2abs.csv.bz2'), header=None)
@@ -131,22 +135,22 @@ def plotsim(simids, fname):
     o23['doy'] = o23.index.day_of_year
     o23s = o23.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     o23 = o23.drop('doy', 1)
-    o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[0, 0.8])
-    o22.iloc[:, 1:].plot(ax=a5, linewidth=0.5)
-    a5.legend()
-    a5s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=0.5)
+    o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[0, 0.8], legend=False)
+    o22.iloc[:, 1:].plot(ax=a5, linewidth=lw, legend=False)
+    a5s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=lw)
     for ci in range(1, o22s.shape[1]):
         a5s.plot(o22s.iloc[:, 0], o22s.iloc[:, ci])
     a5s.set_xlim([0, 0.8])
     a5s.set_ylim([0, 0.8])
-    o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[0, 0.8])
-    o23.iloc[:, 1:].plot(ax=a6, linewidth=0.5)
-    a6.legend()
-    a6s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=0.5)
+    o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[0, 0.8], legend=False)
+    o23.iloc[:, 1:].plot(ax=a6, linewidth=lw, legend=False)
+    a6s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=lw)
     for ci in range(1, o23s.shape[1]):
         a6s.plot(o23s.iloc[:, 0], o23s.iloc[:, ci])
     a6s.set_xlim([0, 0.8])
     a6s.set_ylim([0, 0.8])
+    a5.set_ylabel('O2 concentration\nmiddle')
+    a6.set_ylabel('O2 concentration\nbottom')
 
     ## chl (grams per whole lake)
     chl = [pd.read_csv(os.path.join(dir, 'chl.csv.bz2'), header=None)
@@ -157,14 +161,14 @@ def plotsim(simids, fname):
     chlp['doy'] = chlp.index.day_of_year
     chlps = chlp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     chlp = chlp.drop('doy', 1)    
-    chlp.iloc[:, 0].plot(color='lightgray', ax=a7, ylim=[0, 2e0])
-    chlp.iloc[:, 1:].plot(ax=a7, linewidth=0.5)
-    a7.legend()
-    a7s.plot([0, 2e0], [0, 2e0], color='lightgray', linewidth=0.5)
+    chlp.iloc[:, 0].plot(color='lightgray', ax=a7, ylim=[0, 2e0], legend=False)
+    chlp.iloc[:, 1:].plot(ax=a7, linewidth=lw, legend=False)
+    a7s.plot([0, 2e0], [0, 2e0], color='lightgray', linewidth=lw)
     for ci in range(1, chlps.shape[1]):
         a7s.plot(chlps.iloc[:, 0], chlps.iloc[:, ci])
     a7s.set_xlim([0, 2e0])
     a7s.set_ylim([0, 2e0])
+    a7.set_ylabel('chl pool\nentire lake')
 
     ## tp (grams per whole lake)
     tp = [pd.read_csv(os.path.join(dir, 'totp.csv.bz2'), header=None)
@@ -175,27 +179,63 @@ def plotsim(simids, fname):
     tpp['doy'] = tpp.index.day_of_year
     tpps = tpp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     tpp = tpp.drop('doy', 1)    
-    tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[2e0, 6e0])
-    tpp.iloc[:, 1:].plot(ax=a8, linewidth=0.5)
-    a8.legend()
-    a8s.plot([2e0, 6e0], [2e0, 6e0], color='lightgray', linewidth=0.5)
+    tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[2e0, 6e0], legend=False)
+    tpp.iloc[:, 1:].plot(ax=a8, linewidth=lw, legend=False)
+    a8s.plot([2e0, 6e0], [2e0, 6e0], color='lightgray', linewidth=lw)
     for ci in range(1, tpps.shape[1]):
         a8s.plot(tpps.iloc[:, 0], tpps.iloc[:, ci])
     a8s.set_xlim([2e0, 6e0])
     a8s.set_ylim([2e0, 6e0])
+    a8.set_ylabel('total P pool\nentire lake')
 
+    a1.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+              ncol=4, mode="expand", borderaxespad=0.)
 
-    fig.savefig(fname)
+    # for a in [a1, a2, a3, a4, a5, a6, a7, a8]:
+    #     a.set_xlim(yl)
+    a1s.set_title('2014-2017 DOY mean\ncompared against base')
+
+    st = fig.suptitle(stitle, fontsize='x-large')
+    st.set_y(0.95)
+
+    fig.savefig(fname, dpi=300)
     return(fig)
 
-sns.set_palette('coolwarm', 4)
-plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.pdf')
 
-sns.set_palette('Reds_r', 3)
-plotsim([153, 158, 168], 'results_raw/Wind Speed.pdf')
+# sns.set_palette('coolwarm', 4)
+# plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.png',
+#         'impact of air temperature')
 
-sns.set_palette('Greens_r', 3)
-plotsim([138, 213, 238], 'results_raw/Total P.pdf')
+# sns.set_palette('Reds_r', 3)
+# plotsim([153, 158, 168], 'results_raw/Wind Speed.png', 
+#         'impact of wind speed')
+# # sim 173 has failed
 
-sns.set_palette('Reds_r', 1)
-plotsim([38], 'results_raw/DOC.pdf')
+# sns.set_palette('Greens_r', 4)
+# plotsim([138, 188, 213, 238], 'results_raw/Total P.png',
+#         'impact of total P loading')
+
+sns.set_palette('Reds', 4)
+f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png',
+             'impact of DOC loading')
+# 538 not yet f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png')
+
+sns.set_palette('Oranges_d', 1)
+# plotsim(161, 'results_raw/AT colder.png', 
+#         '"colder air temperature" compared to "base"')
+# plotsim(165, 'results_raw/AT warmer.png',
+#         '"warmer air temperature" compared to "base"')
+# plotsim(153, 'results_raw/WS calmer.png',
+#         '"calmer wind compared" to "base"')
+# plotsim(168, 'results_raw/WS stronger.png',
+#         '"stronger wind compared" to "base"')
+# plotsim(138, 'results_raw/TP lower.png', 
+#         '"less TP loading compared" to "base"')
+# plotsim(213, 'results_raw/TP higher.png',
+#         '"greater TP loading compared" to "base"')
+# plotsim(38, 'results_raw/DOC lower.png',
+#         '"less DOC loading compared" to "base"')
+plotsim(538, 'results_raw/DOC higher.png',
+        '"greater DOC loading compared" to "base"')
+
+

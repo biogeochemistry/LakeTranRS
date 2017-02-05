@@ -1,4 +1,5 @@
-'''creates input time series'''
+'''creates input time series, 
+need to add black line over the base input'''
 
 import numpy as np
 import matplotlib.pyplot as plt
