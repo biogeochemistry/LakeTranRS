@@ -38,8 +38,8 @@ Hopefully none!
 
 Will check that all the following combinations do not crash:
 
-T | WS | TP | DOC | result
---- | ---| ---| --- | ---
+T | WS | TP | DOC | result  
+--- | ---| ---| --- | --- 
 1|1|1|1 | ok
 1|1|1|5 | ok
 1|1|5|1 | ok
@@ -57,6 +57,12 @@ T | WS | TP | DOC | result
 5|5|5|1 | crashed
 5|5|5|5 | crashed
 
+And by the way among the base "peripherals" (combinations of levels
+3335 or 3331), the following crashed.
+
+T | WS | TP | DOC | result 
+--- | ---| ---| --- | ---
+3|5|3|3| crashed
 
 # Raw outputs
 
