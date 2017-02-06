@@ -65,31 +65,31 @@ guesses' are possible
 
 ## impact of **T**
 
-![](inputs/postprocessing/Air Temperature.png) 
-![](results_raw/postprocessing/AT colder.png) 
-![](results_raw/postprocessing/AT warmer.png) 
-![](results_raw/postprocessing/Air Temperature.png) 
+![](postprocessing/inputs/Air Temperature.png) 
+![](postprocessing/results_raw/AT colder.png) 
+![](postprocessing/results_raw/AT warmer.png) 
+![](postprocessing/results_raw/Air Temperature.png) 
 
 ## impact of **WS**
 
-![](inputs/postprocessing/Wind Speed.png) 
-![](results_raw/postprocessing/WS calmer.png) 
-![](results_raw/postprocessing/WS stronger.png) 
-![](results_raw/postprocessing/Wind Speed.png) 
+![](postprocessing/inputs/Wind Speed.png) 
+![](postprocessing/results_raw/WS calmer.png) 
+![](postprocessing/results_raw/WS stronger.png) 
+![](postprocessing/results_raw/Wind Speed.png) 
 
 ## impact of **TP**
 
-![](inputs/postprocessing/Total P.png) 
-![](results_raw/postprocessing/TP lower.png) 
-![](results_raw/postprocessing/TP higher.png) 
-![](results_raw/postprocessing/Total P.png) 
+![](postprocessing/inputs/Total P.png) 
+![](postprocessing/results_raw/TP lower.png) 
+![](postprocessing/results_raw/TP higher.png) 
+![](postprocessing/results_raw/Total P.png) 
 
 ## impact of **DOC**
 
-![](inputs/postprocessing/DOC.png) 
-![](results_raw/postprocessing/DOC lower.png) 
-![](results_raw/postprocessing/DOC higher.png) 
-![](results_raw/postprocessing/DOC.png) 
+![](postprocessing/inputs/DOC.png) 
+![](postprocessing/results_raw/DOC lower.png) 
+![](postprocessing/results_raw/DOC higher.png) 
+![](postprocessing/results_raw/DOC.png) 
 
 
 
