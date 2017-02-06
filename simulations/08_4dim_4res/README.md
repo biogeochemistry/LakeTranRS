@@ -34,32 +34,7 @@ Level | Temperature | Wind speed | Total P | DOC
 
 ## model crashes
 
-Model crashes happened with certain combinations of **T** and **WS**.
-
-\ | **WS1** | **WS2** | **WS3 original** | **WS4** | **WS5** 
---- | --- | --- | --- | --- | ---
-**T1** | ok | ok | ok | ok | fails
-**T2** | ok | ok | ok | ok | fails (see note below) 
-**T3 original** | ok | ok | ok | ok | fails
-**T4** | fails | fails | ok | fails | fails
-**T5** | ok | ok | ok | fails | fails
-
-Out of the 25 cases (5 **TP** x 5 **DOC**) for **T2W5** combinations:
-- the model crashed before finishing 20 cases 
-- the model finished runs but created imaginary numbers somewhere
-  halfway into simulation in 5 cases
-  - T2W5P1C3 
-  - T2W5P1C5 
-  - T2W5P2C2 
-  - T2W5P3C4 
-  - T2W5P3C5
-
-I don't know
-- why **T4** failed more often than **T5**, or why **T4W3** is okay
-- why **T2W5** created imaginary numbers in some cases
-
-I have not looked into reasons why **W5** crashes, but 'educated
-guesses' are possible
+Hopefully none!
 
 # Raw outputs
 
