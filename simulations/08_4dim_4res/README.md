@@ -36,6 +36,28 @@ Level | Temperature | Wind speed | Total P | DOC
 
 Hopefully none!
 
+Will check that all the following combinations do not crash:
+
+T | WS | TP | DOC | result
+--- | ---| ---| --- | ---
+1|1|1|1 | ok
+1|1|1|5 | ok
+1|1|5|1 | ok
+1|1|5|5 | ok
+1|5|1|1 | ok
+1|5|1|5 | ok
+1|5|5|1 | ok
+1|5|5|5 | ok
+5|1|1|1 | ok
+5|1|1|5 | ok
+5|1|5|1 | ok
+5|1|5|5 | ok
+5|5|1|1 | crashed
+5|5|1|5 | crashed
+5|5|5|1 | crashed
+5|5|5|5 | crashed
+
+
 # Raw outputs
 
 ## impact of **T**
