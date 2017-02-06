@@ -2,7 +2,7 @@
 
 1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
    them in that order.
-1. Run run_eight_years.m in Matlab
+1. Run response.surface.run.m in Matlab
 1. Postprocessing files are in [postprocessing](postprocessing).
 
 #Parameters
@@ -19,11 +19,11 @@ temperature levels in simulation number 06.
 
 Level | Temperature | Wind speed | Total P | DOC
 --- | --- | --- | --- | ---
-1 | original - 3.0 | original * 0.100 | original * 0.316 | original * 0.316 
-2 | original - 1.5 | original * 0.316 | **original** | **original** 
-3 | **original** | **original** | original * 3.16 |  original * 3.16 
-4 | original + 1.5 | original * 3.16 | original * 10.0 | original * 10.0
-5 | original + 3.0 | original * 10.0 | original * 31.6 | original * 31.6
+1 | original - 3.0 | original * 0.25 | original * 0.33 | original * 0.0316 
+2 | original - 1.0 | original * 0.50 | original | original * 0.010
+3 | **original** | **original** | **original * 3.0** |  **original * 0.316** 
+4 | original + 1.0 | original * 2.0 | original * 9.0 | original * 1.00
+5 | original + 3.0 | original * 4.0 | original * 27 | original * 3.16
 
 # Responses
 

@@ -1,3 +1,4 @@
+f1
 ## this file creates the input files
 ## see README.md for details
 ## the key line is   data <- f4(f3(f2(f1(original, L1), L2), L3), L4)
@@ -8,12 +9,22 @@ original <- read.table('../input/LAE_input.txt', sep='\t', skip=1, header=TRUE)
 dict <- read.csv('intermediate/parameterdict.csv')
 
 f1 <- function (d, level) {
-  d[['AirTemperature']] <- d[['AirTemperature']] - 3.0 + 1.5 * (level - 1)
+  if (level == 1) {
+    d[['AirTemperature']] <- d[['AirTemperature']] - 3.0
+  } else if (level == 2) {
+    d[['AirTemperature']] <- d[['AirTemperature']] - 1.0
+  } else if (level == 3) {
+    d[['AirTemperature']] <- d[['AirTemperature']]
+  } else if (level == 4) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 1.0
+  } else if (level == 5) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 3.0
+  }
   return (d)
 }
 
 f2 <- function (d, level) {
-  d[['WindSpeed']] <- d[['WindSpeed']] * (10 ^ ((level - 3) / 2))
+  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ (level - 3))
   return(d)
 }
 
@@ -25,7 +36,7 @@ f3 <- function (d, level) {
 }
 
 f4 <- function (d, level) {
-  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 2) / 2))
+  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 4)/2))
   return (d)
 }
 
