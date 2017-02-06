@@ -98,6 +98,18 @@ guesses' are possible
 
 TBD
 
-# Tentative results
+# TODO
 
-to come
+- make wind speed milder
+- find good air temperature levels that work
+- calculate and report the following variables
+  - something about light
+  - something about temerature profile, phenology of stratification
+  - try other definitions of anoxia and algal bloom
+- increase the resolution (?)
+- set up the NIVA server workflow 
+- confirm the following
+  - time span seems fine (2010-2013 input repeated twice, use the
+    2014-2017 for reporting)
+  - we keep total P as a dimension. Total P seems to affect only the P scaling (?)
+    and that might mean it's not 

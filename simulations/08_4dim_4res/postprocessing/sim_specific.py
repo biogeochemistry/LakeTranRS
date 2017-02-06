@@ -198,43 +198,42 @@ def plotsim(simids, fname, stitle):
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
 
-    fig.savefig(fname, dpi=300)
+    fig.savefig(fname, dpi=150)
     return(fig)
 
 
-# sns.set_palette('coolwarm', 4)
-# plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.png',
-#         'impact of air temperature')
+sns.set_palette('coolwarm', 4)
+plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.png',
+        'impact of air temperature')
 
-# sns.set_palette('Reds_r', 3)
-# plotsim([153, 158, 168], 'results_raw/Wind Speed.png', 
-#         'impact of wind speed')
-# # sim 173 has failed
+sns.set_palette('Reds_r', 3)
+plotsim([153, 158, 168], 'results_raw/Wind Speed.png', 
+        'impact of wind speed')
+# sim 173 has failed
 
-# sns.set_palette('Greens_r', 4)
-# plotsim([138, 188, 213, 238], 'results_raw/Total P.png',
-#         'impact of total P loading')
+sns.set_palette('Greens_r', 4)
+plotsim([138, 188, 213, 238], 'results_raw/Total P.png',
+        'impact of total P loading')
 
 sns.set_palette('Reds', 4)
 f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png',
              'impact of DOC loading')
-# 538 not yet f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png')
 
 sns.set_palette('Oranges_d', 1)
-# plotsim(161, 'results_raw/AT colder.png', 
-#         '"colder air temperature" compared to "base"')
-# plotsim(165, 'results_raw/AT warmer.png',
-#         '"warmer air temperature" compared to "base"')
-# plotsim(153, 'results_raw/WS calmer.png',
-#         '"calmer wind compared" to "base"')
-# plotsim(168, 'results_raw/WS stronger.png',
-#         '"stronger wind compared" to "base"')
-# plotsim(138, 'results_raw/TP lower.png', 
-#         '"less TP loading compared" to "base"')
-# plotsim(213, 'results_raw/TP higher.png',
-#         '"greater TP loading compared" to "base"')
-# plotsim(38, 'results_raw/DOC lower.png',
-#         '"less DOC loading compared" to "base"')
+plotsim(161, 'results_raw/AT colder.png', 
+        '"colder air temperature" compared to "base"')
+plotsim(165, 'results_raw/AT warmer.png',
+        '"warmer air temperature" compared to "base"')
+plotsim(153, 'results_raw/WS calmer.png',
+        '"calmer wind compared" to "base"')
+plotsim(168, 'results_raw/WS stronger.png',
+        '"stronger wind compared" to "base"')
+plotsim(138, 'results_raw/TP lower.png', 
+        '"less TP loading compared" to "base"')
+plotsim(213, 'results_raw/TP higher.png',
+        '"greater TP loading compared" to "base"')
+plotsim(38, 'results_raw/DOC lower.png',
+        '"less DOC loading compared" to "base"')
 plotsim(538, 'results_raw/DOC higher.png',
         '"greater DOC loading compared" to "base"')
 

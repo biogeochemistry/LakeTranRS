@@ -72,5 +72,5 @@ for vi in range(nvars):
     a0 = fig.add_subplot(111)
     d.plot(ax=a0)
     a0.set_ylabel(yl)
-    fig.savefig('inputs/{:s}.png'.format(ln), dpi=300)
+    fig.savefig('inputs/{:s}.png'.format(ln), dpi=150)
 
