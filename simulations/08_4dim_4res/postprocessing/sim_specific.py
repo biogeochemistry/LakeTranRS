@@ -221,9 +221,9 @@ f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png',
 
 sns.set_palette('Oranges_d', 1)
 plotsim(161, 'results_raw/AT colder.png', 
-        '"colder air temperature" compared to "base"')
+        '"lower air temperature" compared to "base"')
 plotsim(165, 'results_raw/AT warmer.png',
-        '"warmer air temperature" compared to "base"')
+        '"higher air temperature" compared to "base"')
 plotsim(153, 'results_raw/WS calmer.png',
         '"calmer wind compared" to "base"')
 plotsim(168, 'results_raw/WS stronger.png',
