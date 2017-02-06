@@ -27,7 +27,7 @@ sed_par_file = 'params.txt';
 
 
 % for r = 1:length(listing)
-for r = 461:520
+for r = [275 450]
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'

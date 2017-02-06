@@ -16,6 +16,7 @@ nr = 3 # responses
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 
 a = np.ndarray((n1, n2, n3, n4, nr), dtype=np.float) * np.nan
+a0 = np.ndarray((n1, n2, n3, n4, nr), dtype=np.float) * np.nan
 m = np.zeros((n1, n2, n3, n4, nr), dtype=bool) 
 
 d = pd.read_csv('../intermediate/parameterdict.csv')
@@ -26,12 +27,23 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
         print(i, x1, x2, x3, x4, id)
         continue
-    t = pd.read_csv('../simulations/id/{:05d}/t.csv.bz2'.format(id), header=None)
-    t.index = ser
+    if id == 172:  # 2,5,2,2
+        continue
+    if id == 272:  # 2,5,1,3
+        continue
+    if id == 447:  # 2,5,3,4
+        continue
+    if id == 522:  # 2,5,1,5
+        continue
+    if id == 572:  # 2,5,3,5
+        continue
+
+    # t = pd.read_csv('../simulations/id/{:05d}/t.csv.bz2'.format(id), header=None)
+    # t.index = ser
     chl = pd.read_csv('../simulations/id/{:05d}/chl.csv.bz2'.format(id), header=None)
     chl.index = ser
-    tp = pd.read_csv('../simulations/id/{:05d}/totp.csv.bz2'.format(id), header=None)
-    tp.index = ser
+    # tp = pd.read_csv('../simulations/id/{:05d}/totp.csv.bz2'.format(id), header=None)
+    # tp.index = ser
     o2 = pd.read_csv('../simulations/id/{:05d}/O2abs.csv.bz2'.format(id), header=None)
     o2.index = ser
     his = pd.read_csv('../simulations/id/{:05d}/His.csv.bz2'.format(id), header=None)
@@ -48,16 +60,16 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     # number of ice covered days per year (last 4 years)
     ic = (his.loc[his.index.year >= 2014].iloc[:, 0] > 0).sum() / 4
 
-    a[x1-1, x2-1, x3-1, x4-1, 0] = anoxia
-    a[x1-1, x2-1, x3-1, x4-1, 1] = mamc
-    a[x1-1, x2-1, x3-1, x4-1, 2] = ic
+    a0[x1-1, x2-1, x3-1, x4-1, 0] = anoxia
+    a0[x1-1, x2-1, x3-1, x4-1, 1] = mamc
+    a0[x1-1, x2-1, x3-1, x4-1, 2] = ic
 
 
 for i, x1, x2, x3, x4, id in d.itertuples():
-    if not os.path.exists('../simulations/id/{:03d}/t.csv.bz2'.format(id)):
+    if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
-a = ma.masked_array(a, mask=m)
+a = ma.masked_array(a0, mask=m)
 
 
 

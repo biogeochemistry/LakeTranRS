@@ -13,10 +13,14 @@ nvars = 4
 nlevels = 5
 shortnames = ['Var{:d}'.format(ci) for ci in range(1, 5)]
 palettes = ['coolwarm', 'Reds', 'Greens', 'cubehelix_r']
-longnames = ['Air Temperature (degree C)', 
-             'Wind Speed (m s-1)',
-             'Total P (kg)',
-             'DOC (tonne)']
+longnames = ['Air Temperature', 
+             'Wind Speed',
+             'Total P',
+             'DOC']
+# longnames = ['Air Temperature (degree C)', 
+#              'Wind Speed (m s-1)',
+#              'Total P (kg)',
+#              'DOC (tonne)']
 ylabels = ['Air Temperature (degree C)', 
            'Wind Speed (m s-1)',
            'Total P (mg d-1)',
@@ -68,5 +72,5 @@ for vi in range(nvars):
     a0 = fig.add_subplot(111)
     d.plot(ax=a0)
     a0.set_ylabel(yl)
-    fig.savefig('inputs/{:s}.pdf'.format(ln))
+    fig.savefig('inputs/{:s}.png'.format(ln), dpi=300)
 

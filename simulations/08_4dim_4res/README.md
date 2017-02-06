@@ -25,10 +25,6 @@ Level | Temperature | Wind speed | Total P | DOC
 4 | original + 1.5 | original * 3.16 | original * 10.0 | original * 10.0
 5 | original + 3.0 | original * 10.0 | original * 31.6 | original * 31.6
 
-### Observation
-
-to be listed
-
 # Responses
 
 * something about water temperature / ice
@@ -37,7 +33,66 @@ to be listed
 * something about algae bloom
 
 ## model crashes
-to be listed
+
+Model crashes happened with certain combinations of **T** and **WS**.
+
+\ | **WS1** | **WS2** | **WS3 original** | **WS4** | **WS5** 
+--- | --- | --- | --- | --- | ---
+**T1** | ok | ok | ok | ok | fails
+**T2** | ok | ok | ok | ok | fails (see note below) 
+**T3 original** | ok | ok | ok | ok | fails
+**T4** | fails | fails | ok | fails | fails
+**T5** | ok | ok | ok | fails | fails
+
+Out of the 25 cases (5 **TP** x 5 **DOC**) for **T2W5** combinations:
+- the model crashed before finishing 20 cases 
+- the model finished runs but created imaginary numbers somewhere
+  halfway into simulation in 5 cases
+  - T2W5P1C3 
+  - T2W5P1C5 
+  - T2W5P2C2 
+  - T2W5P3C4 
+  - T2W5P3C5
+
+I don't know
+- why **T4** failed more often than **T5**, or why **T4W3** is okay
+- why **T2W5** created imaginary numbers in some cases
+
+I have not looked into reasons why **W5** crashes, but 'educated
+guesses' are possible
+
+# Raw outputs
+
+## impact of **T**
+
+![](inputs/Air Temperature.png) 
+![](results_raw/AT colder.png) 
+![](results_raw/AT warmer.png) 
+![](results_raw/Air Temperature.png) 
+
+## impact of **WS**
+
+![](inputs/Wind Speed.png) 
+![](results_raw/WS calmer.png) 
+![](results_raw/WS stronger.png) 
+![](results_raw/Wind Speed.png) 
+
+## impact of **TP**
+
+![](inputs/Total P.png) 
+![](results_raw/TP lower.png) 
+![](results_raw/TP higher.png) 
+![](results_raw/Total P.png) 
+
+## impact of **DOC**
+
+![](inputs/DOC.png) 
+![](results_raw/DOC lower.png) 
+![](results_raw/DOC higher.png) 
+![](results_raw/DOC.png) 
+
+
+
 
 ## Primary comparison
 
