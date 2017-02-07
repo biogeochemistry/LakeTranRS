@@ -14,7 +14,7 @@ run_INCA = 0; % 1- MyLake will run INCA, 0- No run
 dummyparfile = '../input/LAE_para_all.txt';
 dummyinitfile = '../input/LAE_init_basin3.txt';
 
-listing = dir('intermediate/id');
+listing = dir('intermediate/id/0*');
 
 dt = 1.0;
 
@@ -27,7 +27,8 @@ sed_par_file = 'params.txt';
 
 
 % for r = 1:length(listing)
-for r = 575:575
+for r = [313 311 315 303 323] 
+
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'

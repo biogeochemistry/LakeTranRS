@@ -5,6 +5,9 @@ import matplotlib
 import os
 import numpy.ma as ma
 
+lambdai = 5   # m-1
+lambdas = 15  # m-1
+
 n1 = 5
 n2 = 5
 n3 = 5
@@ -27,16 +30,10 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
         print(i, x1, x2, x3, x4, id)
         continue
-    if id == 172:  # 2,5,2,2
+
+    if id == 573:
         continue
-    if id == 272:  # 2,5,1,3
-        continue
-    if id == 447:  # 2,5,3,4
-        continue
-    if id == 522:  # 2,5,1,5
-        continue
-    if id == 572:  # 2,5,3,5
-        continue
+
 
     # t = pd.read_csv('../simulations/id/{:05d}/t.csv.bz2'.format(id), header=None)
     # t.index = ser
@@ -122,23 +119,23 @@ a25 = plt.subplot2grid((6, 3), (5, 2))
 
 n = ['air temperature', 'wind speed', 'total P', 'DOC']
 
-rs(a00, a[:, :, 1, 1, 0], 'Greens', min0, max0, '%.f', n[0], n[1])
-rs(a01, a[:, 2, :, 1, 0], 'Greens', min0, max0, '%.f', n[0], n[2])
-rs(a02, a[:, 2, 1, :, 0], 'Greens', min0, max0, '%.f', n[0], n[3]) 
-rs(a03, a[2, :, :, 1, 0], 'Greens', min0, max0, '%.f', n[1], n[2])
-rs(a04, a[2, :, 1, :, 0], 'Greens', min0, max0, '%.f', n[1], n[3])
+rs(a00, a[:, :, 2, 2, 0], 'Greens', min0, max0, '%.f', n[0], n[1])
+rs(a01, a[:, 2, :, 2, 0], 'Greens', min0, max0, '%.f', n[0], n[2])
+rs(a02, a[:, 2, 2, :, 0], 'Greens', min0, max0, '%.f', n[0], n[3]) 
+rs(a03, a[2, :, :, 2, 0], 'Greens', min0, max0, '%.f', n[1], n[2])
+rs(a04, a[2, :, 2, :, 0], 'Greens', min0, max0, '%.f', n[1], n[3])
 rs(a05, a[2, 2, :, :, 0], 'Greens', min0, max0, '%.f', n[2], n[3])
-rs(a10, a[:, :, 1, 1, 1], 'Reds', min1, max1, '%.f', n[0], n[1])
-rs(a11, a[:, 2, :, 1, 1], 'Reds', min1, max1, '%.f', n[0], n[2])
-rs(a12, a[:, 2, 1, :, 1], 'Reds', min1, max1, '%.f', n[0], n[3]) 
-rs(a13, a[2, :, :, 1, 1], 'Reds', min1, max1, '%.f', n[1], n[2])
-rs(a14, a[2, :, 1, :, 1], 'Reds', min1, max1, '%.f', n[1], n[3])
+rs(a10, a[:, :, 2, 2, 1], 'Reds', min1, max1, '%.f', n[0], n[1])
+rs(a11, a[:, 2, :, 2, 1], 'Reds', min1, max1, '%.f', n[0], n[2])
+rs(a12, a[:, 2, 2, :, 1], 'Reds', min1, max1, '%.f', n[0], n[3]) 
+rs(a13, a[2, :, :, 2, 1], 'Reds', min1, max1, '%.f', n[1], n[2])
+rs(a14, a[2, :, 2, :, 1], 'Reds', min1, max1, '%.f', n[1], n[3])
 rs(a15, a[2, 2, :, :, 1], 'Reds', min1, max1, '%.f', n[2], n[3])
-rs(a20, a[:, :, 1, 1, 2], 'Blues', min2, max2, '%.f', n[0], n[1])
-rs(a21, a[:, 2, :, 1, 2], 'Blues', min2, max2, '%.f', n[0], n[2])
-rs(a22, a[:, 2, 1, :, 2], 'Blues', min2, max2, '%.f', n[0], n[3]) 
-rs(a23, a[2, :, :, 1, 2], 'Blues', min2, max2, '%.f', n[1], n[2])
-rs(a24, a[2, :, 1, :, 2], 'Blues', min2, max2, '%.f', n[1], n[3])
+rs(a20, a[:, :, 2, 2, 2], 'Blues', min2, max2, '%.f', n[0], n[1])
+rs(a21, a[:, 2, :, 2, 2], 'Blues', min2, max2, '%.f', n[0], n[2])
+rs(a22, a[:, 2, 2, :, 2], 'Blues', min2, max2, '%.f', n[0], n[3]) 
+rs(a23, a[2, :, :, 2, 2], 'Blues', min2, max2, '%.f', n[1], n[2])
+rs(a24, a[2, :, 2, :, 2], 'Blues', min2, max2, '%.f', n[1], n[3])
 rs(a25, a[2, 2, :, :, 2], 'Blues', min2, max2, '%.f', n[2], n[3])
 
 a00.set_title('anoxia days y-1\nbottom')

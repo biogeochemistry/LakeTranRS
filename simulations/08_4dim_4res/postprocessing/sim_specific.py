@@ -7,7 +7,7 @@ import os.path
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 sns.set_style('whitegrid')
 
-basedir = '../simulations/id/00163/'
+basedir = '../simulations/id/00313/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry.csv', header=None)
@@ -28,7 +28,7 @@ def plotsim(simids, fname, stitle):
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
-    colnames = ['T3W3P2C2 base'] + simnames
+    colnames = ['T3W3P3C3 base'] + simnames
     
     if len(simids) == 1:
         lw = 1.0
@@ -161,13 +161,13 @@ def plotsim(simids, fname, stitle):
     chlp['doy'] = chlp.index.day_of_year
     chlps = chlp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     chlp = chlp.drop('doy', 1)    
-    chlp.iloc[:, 0].plot(color='lightgray', ax=a7, ylim=[0, 2e0], legend=False)
+    chlp.iloc[:, 0].plot(color='lightgray', ax=a7, ylim=[0, 5e0], legend=False)
     chlp.iloc[:, 1:].plot(ax=a7, linewidth=lw, legend=False)
-    a7s.plot([0, 2e0], [0, 2e0], color='lightgray', linewidth=lw)
+    a7s.plot([0, 5e0], [0, 5e0], color='lightgray', linewidth=lw)
     for ci in range(1, chlps.shape[1]):
         a7s.plot(chlps.iloc[:, 0], chlps.iloc[:, ci])
-    a7s.set_xlim([0, 2e0])
-    a7s.set_ylim([0, 2e0])
+    a7s.set_xlim([0, 5e0])
+    a7s.set_ylim([0, 5e0])
     a7.set_ylabel('chl pool\nentire lake')
 
     ## tp (grams per whole lake)
@@ -179,13 +179,13 @@ def plotsim(simids, fname, stitle):
     tpp['doy'] = tpp.index.day_of_year
     tpps = tpp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     tpp = tpp.drop('doy', 1)    
-    tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[2e0, 6e0], legend=False)
+    tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[0, 20e0], legend=False)
     tpp.iloc[:, 1:].plot(ax=a8, linewidth=lw, legend=False)
-    a8s.plot([2e0, 6e0], [2e0, 6e0], color='lightgray', linewidth=lw)
+    a8s.plot([0e0, 20e0], [0e0, 20e0], color='lightgray', linewidth=lw)
     for ci in range(1, tpps.shape[1]):
         a8s.plot(tpps.iloc[:, 0], tpps.iloc[:, ci])
-    a8s.set_xlim([2e0, 6e0])
-    a8s.set_ylim([2e0, 6e0])
+    a8s.set_xlim([0, 20e0])
+    a8s.set_ylim([0, 20e0])
     a8.set_ylabel('total P pool\nentire lake')
 
     a1.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
@@ -202,39 +202,51 @@ def plotsim(simids, fname, stitle):
     return(fig)
 
 
-sns.set_palette('coolwarm', 4)
-plotsim([161, 162, 164, 165], 'results_raw/Air Temperature.png',
-        'impact of air temperature')
+# sns.set_palette('coolwarm', 2)
+# plotsim([311, 315], 'results_raw/Air Temperature.png',
+#         'impact of air temperature')
 
-sns.set_palette('Reds_r', 3)
-plotsim([153, 158, 168], 'results_raw/Wind Speed.png', 
-        'impact of wind speed')
-# sim 173 has failed
+# sns.set_palette('Reds_r', 2)
+# plotsim([303, 323], 'results_raw/Wind Speed.png', 
+#         'impact of wind speed')
 
-sns.set_palette('Greens_r', 4)
-plotsim([138, 188, 213, 238], 'results_raw/Total P.png',
-        'impact of total P loading')
+# sns.set_palette('Greens_r', 2)
+# plotsim([263, 363], 'results_raw/Total P.png',
+#         'impact of total P loading')
 
-sns.set_palette('Reds', 4)
-f1 = plotsim([38, 288, 413, 538], 'results_raw/DOC.png',
+sns.set_palette('Reds', 2)
+plotsim([63, 563], 'results_raw/DOC.png',
              'impact of DOC loading')
 
 sns.set_palette('Oranges_d', 1)
-plotsim(161, 'results_raw/AT colder.png', 
-        '"lower air temperature" compared to "base"')
-plotsim(165, 'results_raw/AT warmer.png',
-        '"higher air temperature" compared to "base"')
-plotsim(153, 'results_raw/WS calmer.png',
+# plotsim(311, 'results_raw/AT colder.png', 
+#         '"lower air temperature" compared to "base"')
+# plotsim(315, 'results_raw/AT warmer.png',
+#         '"higher air temperature" compared to "base"')
+plotsim(303, 'results_raw/WS calmer.png',
         '"calmer wind compared" to "base"')
-plotsim(168, 'results_raw/WS stronger.png',
-        '"stronger wind compared" to "base"')
-plotsim(138, 'results_raw/TP lower.png', 
-        '"less TP loading compared" to "base"')
-plotsim(213, 'results_raw/TP higher.png',
-        '"greater TP loading compared" to "base"')
-plotsim(38, 'results_raw/DOC lower.png',
-        '"less DOC loading compared" to "base"')
-plotsim(538, 'results_raw/DOC higher.png',
+# plotsim(323, 'results_raw/WS stronger.png',
+#         '"stronger wind compared" to "base"')
+# plotsim(263, 'results_raw/TP lower.png', 
+#         '"less TP loading compared" to "base"')
+# plotsim(363, 'results_raw/TP higher.png',
+#         '"greater TP loading compared" to "base"')
+# plotsim(63, 'results_raw/DOC lower.png',
+#         '"less DOC loading compared" to "base"')
+plotsim(563, 'results_raw/DOC higher.png',
         '"greater DOC loading compared" to "base"')
+
+# plotsim(1, 'test001.png', '"low in everything" compared to "base"')
+# plotsim(505, 'test505.png', '"id505" compared to "base"')
+# plotsim(5, 'test005.png', '"id005" compared to "base"')
+# plotsim(105, 'test105.png', '"id105" compared to "base"')
+# plotsim(605, 'test605.png', '"id605" compared to "base"')
+# plotsim(101, 'test101.png', '"id101" compared to "base"')
+# plotsim(601, 'test601.png', '"id601" compared to "base"')
+# plotsim(501, 'test501.png', '"id501" compared to "base"')
+# plotsim(21, 'test021.png', '"id021" compared to "base"')
+# plotsim(121, 'test121.png', '"id121" compared to "base"')
+# plotsim(521, 'test521.png', '"id521" compared to "base"')
+# plotsim(621, 'test621.png', '"id621" compared to "base"')
 
 

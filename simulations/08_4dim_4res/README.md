@@ -19,11 +19,11 @@ temperature levels in simulation number 06.
 
 Level | Temperature | Wind speed | Total P | DOC
 --- | --- | --- | --- | ---
-1 | original - 3.0 | original * 0.100 | original * 0.316 | original * 0.316 
-2 | original - 1.5 | original * 0.316 | **original** | **original** 
-3 | **original** | **original** | original * 3.16 |  original * 3.16 
-4 | original + 1.5 | original * 3.16 | original * 10.0 | original * 10.0
-5 | original + 3.0 | original * 10.0 | original * 31.6 | original * 31.6
+1 | original - 3.0 | original * 0.25 | original * 0.33 | original * 0.0316 
+2 | original - 1.0 | original * 0.50 | original | original * 0.010
+3 | **original** | **original** | **original * 3.0** |  **original * 0.316** 
+4 | original + 1.0 | original * 2.0 | original * 9.0 | original * 1.00
+5 | original + 3.0 | original * 4.0 | original * 27 | original * 3.16
 
 # Responses
 
@@ -34,32 +34,35 @@ Level | Temperature | Wind speed | Total P | DOC
 
 ## model crashes
 
-Model crashes happened with certain combinations of **T** and **WS**.
+Hopefully none!
 
-\ | **WS1** | **WS2** | **WS3 original** | **WS4** | **WS5** 
---- | --- | --- | --- | --- | ---
-**T1** | ok | ok | ok | ok | fails
-**T2** | ok | ok | ok | ok | fails (see note below) 
-**T3 original** | ok | ok | ok | ok | fails
-**T4** | fails | fails | ok | fails | fails
-**T5** | ok | ok | ok | fails | fails
+Will check that all the following combinations do not crash:
 
-Out of the 25 cases (5 **TP** x 5 **DOC**) for **T2W5** combinations:
-- the model crashed before finishing 20 cases 
-- the model finished runs but created imaginary numbers somewhere
-  halfway into simulation in 5 cases
-  - T2W5P1C3 
-  - T2W5P1C5 
-  - T2W5P2C2 
-  - T2W5P3C4 
-  - T2W5P3C5
+T | WS | TP | DOC | result  
+--- | ---| ---| --- | --- 
+1|1|1|1 | ok
+1|1|1|5 | ok
+1|1|5|1 | ok
+1|1|5|5 | ok
+1|5|1|1 | ok
+1|5|1|5 | ok
+1|5|5|1 | ok
+1|5|5|5 | ok
+5|1|1|1 | ok
+5|1|1|5 | ok
+5|1|5|1 | ok
+5|1|5|5 | ok
+5|5|1|1 | crashed
+5|5|1|5 | crashed
+5|5|5|1 | crashed
+5|5|5|5 | crashed
 
-I don't know
-- why **T4** failed more often than **T5**, or why **T4W3** is okay
-- why **T2W5** created imaginary numbers in some cases
+And by the way among the base "peripherals" (combinations of levels
+3335 or 3331), the following crashed.
 
-I have not looked into reasons why **W5** crashes, but 'educated
-guesses' are possible
+T | WS | TP | DOC | result 
+--- | ---| ---| --- | ---
+3|5|3|3| crashed
 
 # Raw outputs
 
