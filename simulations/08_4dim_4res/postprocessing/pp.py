@@ -5,6 +5,9 @@ import matplotlib
 import os
 import numpy.ma as ma
 
+lambdai = 5   # m-1
+lambdas = 15  # m-1
+
 n1 = 5
 n2 = 5
 n3 = 5
@@ -27,6 +30,10 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
         print(i, x1, x2, x3, x4, id)
         continue
+
+    if id == 573:
+        continue
+
 
     # t = pd.read_csv('../simulations/id/{:05d}/t.csv.bz2'.format(id), header=None)
     # t.index = ser
