@@ -26,8 +26,8 @@ global sed_par_file
 sed_par_file = 'params.txt';
 
 
-% parfor r = 1:length(listing)
-parfor r = 1:3
+parfor r = 1:length(listing)
+% parfor r = 1:3
 
 
     % skip folders or files starting with a dot '.'
