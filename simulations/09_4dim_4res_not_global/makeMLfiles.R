@@ -1,4 +1,4 @@
-f1
+
 ## this file creates the input files
 ## see README.md for details
 ## the key line is   data <- f4(f3(f2(f1(original, L1), L2), L3), L4)
