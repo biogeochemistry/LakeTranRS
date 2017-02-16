@@ -12,6 +12,8 @@ basedir = '../simulations/id/00313/'
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry.csv', header=None)
 bath.columns = ['zz', 'Az']
+nb = bath.shape[0] # number of rows, depth gradient slices
+dres = bath.zz[1] - bath.zz[0]
 volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0 
 # m3 for the 10cm slices
 volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, 90))
@@ -187,6 +189,64 @@ def plotsim(simids, fname, stitle):
     a8s.set_xlim([0, 20e0])
     a8s.set_ylim([0, 20e0])
     a8.set_ylabel('total P pool\nentire lake')
+
+    ## mixing depth, as in MyLake, 
+    ## same as the salinity version of doi:10.1016/j.envsoft.2011.05.006 
+    pycnothresholdunit = 0.1 ## as per MyLake, kg m-3 m-1
+    pycnothreshold = pycnothresholdunit * dres
+    tm = [d.as_matrix() for d in t]
+    rho = [999.842594 + d * (6.793952e-2 + d * (-9.09529e-3 + 
+        d * (1.001685e-4 + d * (-1.120083e-6 + 6.536332e-9 * d)))) for d in tm]
+    drho = [d[:, 1:] - d[:, :(nb-1)] for d in rho]
+
+    ## version 1 depth "from top"
+    # np.dot(dr0 * (dr0 > pycnothreshold), (bath.zz[:(nb-1)].as_matr
+    #     ...: ix()+(dres * 0.5)).reshape((nb-1, 1)))
+    # mdep = [np.dot(d * (d > pycnothreshold), 
+    #                (bath.zz[:(nb-1)].as_matrix()+(dres/2)).reshape((nb-1, 1)))
+    #         for d in drho]
+
+
+    drhosig = [d * (d > pycnothreshold) for d in drho]
+    mdepbottom = np.zeros((drhosig[0].shape[0], len(drhosig))) * np.nan
+    zzbottom = (np.flipud(bath.zz[:(nb-1)].as_matrix()+(dres/2)).reshape((nb-1, 1))).flatten()
+    for i, d in enumerate(drhosig):
+        for ri in range(d.shape[0]):
+            dsum = d[ri, :].sum()
+            if dsum == 0:
+                mdepbottom[ri, i] = 0
+            else:
+                mdepbottom[ri, i] = (d[ri, :] * zzbottom).sum() / dsum
+    mdep = bath.zz.max() + dres - mdepbottom
+    mdep = pd.DataFrame(mdep, index=ser)
+
+                
+
+
+    mdep = [0 if d.sum(axis=1) == 0 else 
+            np.dot(d, 
+                   np.flipud(bath.zz[:(nb-1)].as_matrix()+(dres/2)).
+                   reshape((nb-1, 1)) / d.sum(axis=1))
+            for d in drhosig]
+
+
+
+    
+
+
+    % Calculate pycnocline depth
+    pycno_thres=0.1;  %treshold density gradient value (kg m-3 m-1)
+    rho = polyval(ies80,max(0,Tz(:))) + min(Tz(:),0);
+    dRdz = [NaN; abs(diff(rho))];
+    di=find((dRdz<(pycno_thres*dz)) | isnan(dRdz));
+    %dRdz(di)=NaN;
+    %TCz = nansum(zz .* dRdz) ./ nansum(dRdz);
+    dRdz(di)=0; %modified for MATLAB version 7
+    TCz = sum(zz .* dRdz) ./ sum(dRdz);
+
+
+
+
 
     a1.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
               ncol=4, mode="expand", borderaxespad=0.)
