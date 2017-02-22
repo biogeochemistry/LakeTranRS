@@ -1,7 +1,7 @@
 # How to run this simulation
 
 1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
-   them in that order.
+   them in that order. Optionally run the batch files.
 1. Run response.surface.run.m in Matlab
 1. Postprocessing files are in [postprocessing](postprocessing).
 
@@ -34,35 +34,7 @@ Level | Temperature | Wind speed | Total P | DOC
 
 ## model crashes
 
-Hopefully none!
-
-Will check that all the following combinations do not crash:
-
-T | WS | TP | DOC | result  
---- | ---| ---| --- | --- 
-1|1|1|1 | ok
-1|1|1|5 | ok
-1|1|5|1 | ok
-1|1|5|5 | ok
-1|5|1|1 | ok
-1|5|1|5 | ok
-1|5|5|1 | ok
-1|5|5|5 | ok
-5|1|1|1 | ok
-5|1|1|5 | ok
-5|1|5|1 | ok
-5|1|5|5 | ok
-5|5|1|1 | crashed
-5|5|1|5 | crashed
-5|5|5|1 | crashed
-5|5|5|5 | crashed
-
-And by the way among the base "peripherals" (combinations of levels
-3335 or 3331), the following crashed.
-
-T | WS | TP | DOC | result 
---- | ---| ---| --- | ---
-3|5|3|3| crashed
+None this time
 
 # Raw outputs
 
@@ -101,7 +73,7 @@ T | WS | TP | DOC | result
 
 ![](postprocessing/RSver1.png)
 
-# TODO
+# old TODO
 
 - make wind speed milder
 - find good air temperature levels that work
@@ -116,3 +88,7 @@ T | WS | TP | DOC | result
     2014-2017 for reporting)
   - we keep total P as a dimension. Total P seems to affect only the P scaling (?)
     and that might mean it's not 
+
+# new TODO
+
+- more response surfaces (more columns)

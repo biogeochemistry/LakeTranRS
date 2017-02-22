@@ -11,7 +11,7 @@ m_stop1 = [2017, 12, 31];
 
 run_INCA = 0; % 1- MyLake will run INCA, 0- No run
 
-dummyparfile = '../input/LAE_para_all.txt';
+dummyparfile = '../input/LAE_para_dz05.txt';
 dummyinitfile = '../input/LAE_init_basin3.txt';
 
 listing = dir('intermediate/id/0*');
@@ -28,7 +28,6 @@ sed_par_file = 'params.txt';
 
 % for r = 1:length(listing)
 for r = 1:26
-
 
     % skip folders or files starting with a dot '.'
     if listing(r).name(1) == '.'
@@ -120,6 +119,7 @@ for r = 1:26
             % csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
             csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
                                                 DOPzt)')
+            csvwrite([p2, '/Qst.csv'], Qst')  
             
             % csvwrite([p2, '/sedO2.csv'], sediment_data_basin1{1, 1}')
             % csvwrite([p2, '/sedOM.csv'], sediment_data_basin1{9, 1}')
