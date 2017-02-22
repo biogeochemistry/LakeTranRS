@@ -28,7 +28,7 @@ atdepths = [0, 15, 30, 45, 60, 75, 89]
 
 
 
-d = pd.read_csv('../results/O2abs.csv.bz2', header = None)
+d = pd.read_csv('../results/01 one-century only/O2abs.csv.bz2', header = None)
 d.index = pd.period_range('2001-01-01', '2100-12-31')
 
 plt.clf()
@@ -61,7 +61,7 @@ ax.set_ylabel('Total P by depth')
 fig.savefig('../figures/TotP.png', bbox_inches='tight')
 
 ax.set_ylim((0.0175, 0.028))
-ax.set_ylabel('O2 absolute by depth (zoomed)')
+ax.set_ylabel('Total P by depth (zoomed)')
 fig.savefig('../figures/TotP_zoomed.png', bbox_inches='tight')
 
 
