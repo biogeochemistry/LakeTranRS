@@ -11,7 +11,7 @@ m_stop1 = [2017, 12, 31];
 
 run_INCA = 0; % 1- MyLake will run INCA, 0- No run
 
-dummyparfile = '../input/LAE_para_all.txt';
+dummyparfile = '../input/LAE_para_dz05.txt';
 dummyinitfile = '../input/LAE_init_basin3.txt';
 
 listing = dir('intermediate/id/0*');
