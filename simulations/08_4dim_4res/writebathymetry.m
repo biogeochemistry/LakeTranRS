@@ -1,0 +1,1 @@
+csvwrite('bathymetry05.csv', [zz, Az])

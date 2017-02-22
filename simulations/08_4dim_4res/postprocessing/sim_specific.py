@@ -11,13 +11,27 @@ basedir = '../simulations/id/00313/'
 inbasedir = '../intermediate/id/00313/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
-bath = pd.read_csv('../bathymetry.csv', header=None)
+bath = pd.read_csv('../bathymetry05.csv', header=None)
 bath.columns = ['zz', 'Az']
+
+dz = bath.zz[1] - bath.zz[0]
+if dz == 0.1:
+    z1i = 20
+    z1 = 2.0
+    z2i = 89
+    z2 = 8.9
+elif dz == 0.5:
+    z1i = 4
+    z1 = 2.0
+    z2i = 17
+    z2 = 8.5
+
+
 nb = bath.shape[0] # number of rows, depth gradient slices
 dres = bath.zz[1] - bath.zz[0]
 volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0 
 # m3 for the 10cm slices
-volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, 90))
+volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, bath.shape[0]))
 
 
 def plotsim(simids, fname, stitle):
@@ -42,33 +56,75 @@ def plotsim(simids, fname, stitle):
     
     plt.clf()
     fig = plt.figure(0)
-    fig.set_figheight(17)
+    fig.set_figheight(20)
     fig.set_figwidth(9)
-    a9 = plt.subplot2grid((9, 4), (0, 0), colspan = 3)
-    a9s = plt.subplot2grid((9, 4), (0, 3)) 
-    a1 = plt.subplot2grid((9, 4), (1, 0), colspan = 3)
-    a1s = plt.subplot2grid((9, 4), (1, 3))
-    a2 = plt.subplot2grid((9, 4), (2, 0), colspan = 3)
-    a2s = plt.subplot2grid((9, 4), (2, 3))
-    a3 = plt.subplot2grid((9, 4), (3, 0), colspan = 3)
-    a3s = plt.subplot2grid((9, 4), (3, 3)) 
-    a4 = plt.subplot2grid((9, 4), (4, 0), colspan = 3)
-    a4s = plt.subplot2grid((9, 4), (4, 3)) 
-    a5 = plt.subplot2grid((9, 4), (5, 0), colspan = 3)
-    a5s = plt.subplot2grid((9, 4), (5, 3)) 
-    a6 = plt.subplot2grid((9, 4), (6, 0), colspan = 3)
-    a6s = plt.subplot2grid((9, 4), (6, 3)) 
-    a7 = plt.subplot2grid((9, 4), (7, 0), colspan = 3)
-    a7s = plt.subplot2grid((9, 4), (7, 3)) 
-    a8 = plt.subplot2grid((9, 4), (8, 0), colspan = 3)
-    a8s = plt.subplot2grid((9, 4), (8, 3)) 
+    a9 = plt.subplot2grid((11, 4), (0, 0), colspan = 3)
+    a9s = plt.subplot2grid((11, 4), (0, 3)) 
+    a1 = plt.subplot2grid((11, 4), (1, 0), colspan = 3)
+    a1s = plt.subplot2grid((11, 4), (1, 3))
+    a2 = plt.subplot2grid((11, 4), (2, 0), colspan = 3)
+    a2s = plt.subplot2grid((11, 4), (2, 3))
+    a3 = plt.subplot2grid((11, 4), (3, 0), colspan = 3)
+    a3s = plt.subplot2grid((11, 4), (3, 3)) 
+    a4 = plt.subplot2grid((11, 4), (4, 0), colspan = 3)
+    a4s = plt.subplot2grid((11, 4), (4, 3)) 
+    a5 = plt.subplot2grid((11, 4), (5, 0), colspan = 3)
+    a5s = plt.subplot2grid((11, 4), (5, 3)) 
+    a6 = plt.subplot2grid((11, 4), (6, 0), colspan = 3)
+    a6s = plt.subplot2grid((11, 4), (6, 3)) 
+    a7 = plt.subplot2grid((11, 4), (7, 0), colspan = 3)
+    a7s = plt.subplot2grid((11, 4), (7, 3)) 
+    a8 = plt.subplot2grid((11, 4), (8, 0), colspan = 3)
+    a8s = plt.subplot2grid((11, 4), (8, 3)) 
+    a10 = plt.subplot2grid((11, 4), (9, 0), colspan = 3)
+    a10s = plt.subplot2grid((11, 4), (9, 3)) 
+    a11 = plt.subplot2grid((11, 4), (10, 0), colspan = 3)
+    a11s = plt.subplot2grid((11, 4), (10, 3)) 
 
     
     ## light related matters
-    w = [pd.read_table(os.path.join(dir, 'input.txt'), 
-                       sep='\t', header=0, names=None, skiprows=1)
-         for dir in indirs]
-    # solvemodel_v2 --> heat_flux_v12 --> 
+    qst = [pd.read_csv(os.path.join(dir, 'Qst.csv.bz2'), header=None)
+           for dir in dirs] # ('sw', 'lw', 'sl')
+    sw = pd.concat([d.iloc[:, 0] for d in qst], axis=1)
+    sw.columns = colnames
+    sw.index = ser
+    lam = [pd.read_csv(os.path.join(dir, 'lambda.csv.bz2'), header=None)
+           for dir in dirs]
+
+    # lambda to irradiance at depth1
+    lam1 = pd.concat([d.iloc[:, z1i] for d in lam], axis=1)
+    lam1.columns = colnames
+    lam1.index = ser
+    ir1 = sw * np.exp(-z1 * lam1)
+    ir1['doy'] = ir1.index.day_of_year
+    ir1s = ir1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+    ir1 = ir1.drop('doy', 1)
+    ir1.iloc[:, 0].plot(color='lightgray', ax=a10, ylim=[0, 40], legend=False)
+    ir1.iloc[:, 1:].plot(ax=a10, linewidth=lw, legend=False)
+    a10s.plot([0, 40], [0, 40], color='lightgray', linewidth=lw)
+    for ci in range(1, ir1s.shape[1]):
+        a10s.plot(ir1s.iloc[:, 0], ir1s.iloc[:, ci])
+    a10s.set_xlim([0, 40])
+    a10s.set_ylim([0, 40])    
+
+    # lambda to irradiance at depth2
+    lam2 = pd.concat([d.iloc[:, z2i] for d in lam], axis=1)
+    lam2.columns = colnames
+    lam2.index = ser
+    ir2 = sw * np.exp(-z2 * lam2)
+    ir2['doy'] = ir1.index.day_of_year
+    ir2s = ir2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+    ir2 = ir2.drop('doy', 1)
+    ir2.iloc[:, 0].plot(color='lightgray', ax=a11, ylim=[0, 0.08], legend=False)
+    ir2.iloc[:, 1:].plot(ax=a11, linewidth=lw, legend=False)
+    a11s.plot([0, 0.08], [0, 0.08], color='lightgray', linewidth=lw)
+    for ci in range(1, ir2s.shape[1]):
+        a11s.plot(ir2s.iloc[:, 0], ir2s.iloc[:, ci])
+    a11s.set_xlim([0, 0.08])
+    a11s.set_ylim([0, 0.08])    
+
+    a10.set_ylabel('irradiance\nmiddle')
+    a11.set_ylabel('irradiance\nbottom')
 
 
 
@@ -81,13 +137,13 @@ def plotsim(simids, fname, stitle):
     t0['doy'] = t0.index.day_of_year
     t0s = t0.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     t0 = t0.drop('doy', 1)
-    t1 = pd.concat([d.iloc[:, 20] for d in t], axis=1)
+    t1 = pd.concat([d.iloc[:, z1i] for d in t], axis=1)
     t1.columns = colnames
     t1.index = ser
     t1['doy'] = t1.index.day_of_year
     t1s = t1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     t1 = t1.drop('doy', 1)
-    t2 = pd.concat([d.iloc[:, 89] for d in t], axis=1)
+    t2 = pd.concat([d.iloc[:, z2i] for d in t], axis=1)
     t2.columns = colnames
     t2.index = ser
     t2['doy'] = t2.index.day_of_year
@@ -139,13 +195,13 @@ def plotsim(simids, fname, stitle):
     ## oxygen
     o2 = [pd.read_csv(os.path.join(dir, 'O2abs.csv.bz2'), header=None)
           for dir in dirs]
-    o22 = pd.concat([d.iloc[:, 20] for d in o2], axis=1)
+    o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
     o22.columns = colnames
     o22.index = ser
     o22['doy'] = o22.index.day_of_year
     o22s = o22.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     o22 = o22.drop('doy', 1)
-    o23 = pd.concat([d.iloc[:, 89] for d in o2], axis=1)
+    o23 = pd.concat([d.iloc[:, z2i] for d in o2], axis=1)
     o23.columns = colnames
     o23.index = ser
     o23['doy'] = o23.index.day_of_year
@@ -269,22 +325,25 @@ def plotsim(simids, fname, stitle):
     return(fig)
 
 
-sns.set_palette('coolwarm', 2)
-plotsim([311, 315], 'results_raw/Air Temperature.pdf',
-        'impact of air temperature')
+# sns.set_palette('coolwarm', 2)
+# plotsim([311, 315], 'results_raw/Air Temperature.pdf',
+#         'impact of air temperature')
 
-sns.set_palette('Reds_r', 2)
-plotsim([303], 'results_raw/Wind Speed.pdf', 
-        'impact of wind speed')
+# sns.set_palette('Reds_r', 2)
+# plotsim([303], 'results_raw/Wind Speed.pdf', 
+#         'impact of wind speed')
 
-sns.set_palette('Greens_r', 2)
-plotsim([263, 363], 'results_raw/Total P.pdf',
-        'impact of total P loading')
+# sns.set_palette('Greens_r', 2)
+# plotsim([263, 363], 'results_raw/Total P.pdf',
+#         'impact of total P loading')
 
-sns.set_palette('Reds', 2)
-plotsim([63, 563], 'results_raw/DOC.pdf',
-             'impact of DOC loading')
+# sns.set_palette('Reds', 2)
+# plotsim([63, 563], 'results_raw/DOC.pdf',
+#              'impact of DOC loading')
 
+plotsim(313, 'results_raw/test.png', 
+        '"base"')
+ 
 # sns.set_palette('Oranges_d', 1)
 # # plotsim(311, 'results_raw/AT colder.png', 
 # #         '"lower air temperature" compared to "base"')
