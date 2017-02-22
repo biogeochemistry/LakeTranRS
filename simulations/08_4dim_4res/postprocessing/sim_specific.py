@@ -325,54 +325,54 @@ def plotsim(simids, fname, stitle):
     return(fig)
 
 
-# sns.set_palette('coolwarm', 2)
-# plotsim([311, 315], 'results_raw/Air Temperature.pdf',
-#         'impact of air temperature')
+sns.set_palette('coolwarm', 2)
+plotsim([311, 315], 'results_raw/Air Temperature.png',
+        'impact of air temperature')
 
-# sns.set_palette('Reds_r', 2)
-# plotsim([303], 'results_raw/Wind Speed.pdf', 
-#         'impact of wind speed')
+sns.set_palette('Reds_r', 2)
+plotsim([303, 323], 'results_raw/Wind Speed.png', 
+        'impact of wind speed')
 
-# sns.set_palette('Greens_r', 2)
-# plotsim([263, 363], 'results_raw/Total P.pdf',
-#         'impact of total P loading')
+sns.set_palette('Greens_r', 2)
+plotsim([263, 363], 'results_raw/Total P.png',
+        'impact of total P loading')
 
-# sns.set_palette('Reds', 2)
-# plotsim([63, 563], 'results_raw/DOC.pdf',
-#              'impact of DOC loading')
+sns.set_palette('Reds', 2)
+plotsim([63, 563], 'results_raw/DOC.png',
+             'impact of DOC loading')
 
 plotsim([503, 511], 'results_raw/test.pdf', 
         '"base"')
  
-# sns.set_palette('Oranges_d', 1)
-# # plotsim(311, 'results_raw/AT colder.png', 
-# #         '"lower air temperature" compared to "base"')
-# # plotsim(315, 'results_raw/AT warmer.png',
-# #         '"higher air temperature" compared to "base"')
-# plotsim(303, 'results_raw/WS calmer.png',
-#         '"calmer wind compared" to "base"')
-# # plotsim(323, 'results_raw/WS stronger.png',
-# #         '"stronger wind compared" to "base"')
-# # plotsim(263, 'results_raw/TP lower.png', 
-# #         '"less TP loading compared" to "base"')
-# # plotsim(363, 'results_raw/TP higher.png',
-# #         '"greater TP loading compared" to "base"')
-# # plotsim(63, 'results_raw/DOC lower.png',
-# #         '"less DOC loading compared" to "base"')
-# plotsim(563, 'results_raw/DOC higher.png',
-#         '"greater DOC loading compared" to "base"')
+sns.set_palette('Oranges_d', 1)
+plotsim(311, 'results_raw/AT colder.png', 
+        '"lower air temperature" compared to "base"')
+plotsim(315, 'results_raw/AT warmer.png',
+        '"higher air temperature" compared to "base"')
+plotsim(303, 'results_raw/WS calmer.png',
+        '"calmer wind compared" to "base"')
+plotsim(323, 'results_raw/WS stronger.png',
+        '"stronger wind compared" to "base"')
+plotsim(263, 'results_raw/TP lower.png', 
+        '"less TP loading compared" to "base"')
+plotsim(363, 'results_raw/TP higher.png',
+        '"greater TP loading compared" to "base"')
+plotsim(63, 'results_raw/DOC lower.png',
+        '"less DOC loading compared" to "base"')
+plotsim(563, 'results_raw/DOC higher.png',
+        '"greater DOC loading compared" to "base"')
 
-# plotsim(1, 'test001.png', '"low in everything" compared to "base"')
-# plotsim(505, 'test505.png', '"id505" compared to "base"')
-# plotsim(5, 'test005.png', '"id005" compared to "base"')
-# plotsim(105, 'test105.png', '"id105" compared to "base"')
-# plotsim(605, 'test605.png', '"id605" compared to "base"')
-# plotsim(101, 'test101.png', '"id101" compared to "base"')
-# plotsim(601, 'test601.png', '"id601" compared to "base"')
-# plotsim(501, 'test501.png', '"id501" compared to "base"')
-# plotsim(21, 'test021.png', '"id021" compared to "base"')
-# plotsim(121, 'test121.png', '"id121" compared to "base"')
-# plotsim(521, 'test521.png', '"id521" compared to "base"')
-# plotsim(621, 'test621.png', '"id621" compared to "base"')
+plotsim(1, 'test001.png', '"low in everything" compared to "base"')
+plotsim(505, 'test505.png', '"id505" compared to "base"')
+plotsim(5, 'test005.png', '"id005" compared to "base"')
+plotsim(105, 'test105.png', '"id105" compared to "base"')
+plotsim(605, 'test605.png', '"id605" compared to "base"')
+plotsim(101, 'test101.png', '"id101" compared to "base"')
+plotsim(601, 'test601.png', '"id601" compared to "base"')
+plotsim(501, 'test501.png', '"id501" compared to "base"')
+plotsim(21, 'test021.png', '"id021" compared to "base"')
+plotsim(121, 'test121.png', '"id121" compared to "base"')
+plotsim(521, 'test521.png', '"id521" compared to "base"')
+plotsim(621, 'test621.png', '"id621" compared to "base"')
 
 
