@@ -341,7 +341,7 @@ def plotsim(simids, fname, stitle):
 # plotsim([63, 563], 'results_raw/DOC.pdf',
 #              'impact of DOC loading')
 
-plotsim(313, 'results_raw/test.png', 
+plotsim([503, 511], 'results_raw/test.pdf', 
         '"base"')
  
 # sns.set_palette('Oranges_d', 1)
