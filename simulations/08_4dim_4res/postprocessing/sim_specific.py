@@ -8,6 +8,7 @@ ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 sns.set_style('whitegrid')
 
 basedir = '../simulations/id/00313/'
+inbasedir = '../intermediate/id/00313/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry.csv', header=None)
@@ -25,7 +26,9 @@ def plotsim(simids, fname, stitle):
     if type(simids) is not list:
         simids = [simids]
     simdir = ['../simulations/id/{:05d}/'.format(simid) for simid in simids]
+    indir = ['../intermediate/id/{:05d}/'.format(simid) for simid in simids]
     dirs = [basedir] + simdir
+    indirs = [inbasedir] + indir
     designlevels = [design.loc[design.simid == id]\
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
@@ -59,6 +62,14 @@ def plotsim(simids, fname, stitle):
     a7s = plt.subplot2grid((9, 4), (7, 3)) 
     a8 = plt.subplot2grid((9, 4), (8, 0), colspan = 3)
     a8s = plt.subplot2grid((9, 4), (8, 3)) 
+
+    
+    ## light related matters
+    w = [pd.read_table(os.path.join(dir, 'input.txt'), 
+                       sep='\t', header=0, names=None, skiprows=1)
+         for dir in indirs]
+
+
 
     ## water temperature
     t = [pd.read_csv(os.path.join(dir, 't.csv.bz2'), header=None)

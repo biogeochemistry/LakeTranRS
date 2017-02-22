@@ -120,6 +120,7 @@ for r = template
             % csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
             csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
                                                 DOPzt)')
+            csvwrite([p2, '/Qst.csv'], Qst')  
             
             % csvwrite([p2, '/sedO2.csv'], sediment_data_basin1{1, 1}')
             % csvwrite([p2, '/sedOM.csv'], sediment_data_basin1{9, 1}')
