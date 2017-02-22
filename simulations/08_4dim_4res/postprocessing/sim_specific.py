@@ -8,10 +8,13 @@ ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 sns.set_style('whitegrid')
 
 basedir = '../simulations/id/00313/'
+inbasedir = '../intermediate/id/00313/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry.csv', header=None)
 bath.columns = ['zz', 'Az']
+nb = bath.shape[0] # number of rows, depth gradient slices
+dres = bath.zz[1] - bath.zz[0]
 volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0 
 # m3 for the 10cm slices
 volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, 90))
@@ -23,7 +26,9 @@ def plotsim(simids, fname, stitle):
     if type(simids) is not list:
         simids = [simids]
     simdir = ['../simulations/id/{:05d}/'.format(simid) for simid in simids]
+    indir = ['../intermediate/id/{:05d}/'.format(simid) for simid in simids]
     dirs = [basedir] + simdir
+    indirs = [inbasedir] + indir
     designlevels = [design.loc[design.simid == id]\
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
@@ -37,24 +42,34 @@ def plotsim(simids, fname, stitle):
     
     plt.clf()
     fig = plt.figure(0)
-    fig.set_figheight(14)
-    fig.set_figwidth(10)
-    a1 = plt.subplot2grid((8, 4), (0, 0), colspan = 3)
-    a1s = plt.subplot2grid((8, 4), (0, 3))
-    a2 = plt.subplot2grid((8, 4), (1, 0), colspan = 3)
-    a2s = plt.subplot2grid((8, 4), (1, 3))
-    a3 = plt.subplot2grid((8, 4), (2, 0), colspan = 3)
-    a3s = plt.subplot2grid((8, 4), (2, 3)) 
-    a4 = plt.subplot2grid((8, 4), (3, 0), colspan = 3)
-    a4s = plt.subplot2grid((8, 4), (3, 3)) 
-    a5 = plt.subplot2grid((8, 4), (4, 0), colspan = 3)
-    a5s = plt.subplot2grid((8, 4), (4, 3)) 
-    a6 = plt.subplot2grid((8, 4), (5, 0), colspan = 3)
-    a6s = plt.subplot2grid((8, 4), (5, 3)) 
-    a7 = plt.subplot2grid((8, 4), (6, 0), colspan = 3)
-    a7s = plt.subplot2grid((8, 4), (6, 3)) 
-    a8 = plt.subplot2grid((8, 4), (7, 0), colspan = 3)
-    a8s = plt.subplot2grid((8, 4), (7, 3)) 
+    fig.set_figheight(17)
+    fig.set_figwidth(9)
+    a9 = plt.subplot2grid((9, 4), (0, 0), colspan = 3)
+    a9s = plt.subplot2grid((9, 4), (0, 3)) 
+    a1 = plt.subplot2grid((9, 4), (1, 0), colspan = 3)
+    a1s = plt.subplot2grid((9, 4), (1, 3))
+    a2 = plt.subplot2grid((9, 4), (2, 0), colspan = 3)
+    a2s = plt.subplot2grid((9, 4), (2, 3))
+    a3 = plt.subplot2grid((9, 4), (3, 0), colspan = 3)
+    a3s = plt.subplot2grid((9, 4), (3, 3)) 
+    a4 = plt.subplot2grid((9, 4), (4, 0), colspan = 3)
+    a4s = plt.subplot2grid((9, 4), (4, 3)) 
+    a5 = plt.subplot2grid((9, 4), (5, 0), colspan = 3)
+    a5s = plt.subplot2grid((9, 4), (5, 3)) 
+    a6 = plt.subplot2grid((9, 4), (6, 0), colspan = 3)
+    a6s = plt.subplot2grid((9, 4), (6, 3)) 
+    a7 = plt.subplot2grid((9, 4), (7, 0), colspan = 3)
+    a7s = plt.subplot2grid((9, 4), (7, 3)) 
+    a8 = plt.subplot2grid((9, 4), (8, 0), colspan = 3)
+    a8s = plt.subplot2grid((9, 4), (8, 3)) 
+
+    
+    ## light related matters
+    w = [pd.read_table(os.path.join(dir, 'input.txt'), 
+                       sep='\t', header=0, names=None, skiprows=1)
+         for dir in indirs]
+
+
 
     ## water temperature
     t = [pd.read_csv(os.path.join(dir, 't.csv.bz2'), header=None)
@@ -188,12 +203,63 @@ def plotsim(simids, fname, stitle):
     a8s.set_ylim([0, 20e0])
     a8.set_ylabel('total P pool\nentire lake')
 
-    a1.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+
+    ## mixing depth, as in MyLake, 
+    ## same as the salinity version of doi:10.1016/j.envsoft.2011.05.006 
+    ## otherwise from MyLake
+    # % Calculate pycnocline depth
+    # pycno_thres=0.1;  %treshold density gradient value (kg m-3 m-1)
+    # rho = polyval(ies80,max(0,Tz(:))) + min(Tz(:),0);
+    # dRdz = [NaN; abs(diff(rho))];
+    # di=find((dRdz<(pycno_thres*dz)) | isnan(dRdz));
+    # %dRdz(di)=NaN;
+    # %TCz = nansum(zz .* dRdz) ./ nansum(dRdz);
+    # dRdz(di)=0; %modified for MATLAB version 7
+    # TCz = sum(zz .* dRdz) ./ sum(dRdz);
+    # pycnothresholdunit = 0.1 ## as per MyLake, kg m-3 m-1
+    pycnothresholdunit = 0.5 ## kg m-3 m-1 
+    # 0.5 allows rigidness of the finer resolution? 
+    pycnothreshold = pycnothresholdunit * dres
+    tm = [d.as_matrix() for d in t]
+    rho = [999.842594 + d * (6.793952e-2 + d * (-9.09529e-3 + 
+        d * (1.001685e-4 + d * (-1.120083e-6 + 6.536332e-9 * d)))) for d in tm]
+    drho = [d[:, 1:] - d[:, :(nb-1)] for d in rho]
+    drhosig = [d * (d > pycnothreshold) for d in drho]
+    mdepbottom = np.zeros((drhosig[0].shape[0], len(drhosig))) * np.nan
+    zzbottom = (np.flipud(bath.zz[:(nb-1)].as_matrix()+(dres/2)).\
+                reshape((nb-1, 1))).flatten()
+    for i, d in enumerate(drhosig):
+        for ri in range(d.shape[0]):
+            dsum = d[ri, :].sum()
+            if dsum == 0:
+                mdepbottom[ri, i] = 0
+            else:
+                mdepbottom[ri, i] = (d[ri, :] * zzbottom).sum() / dsum
+    mdep = bath.zz.max() + dres - mdepbottom
+    mdep = pd.DataFrame(mdep, index=ser)
+    mdep.columns = colnames
+    mdep['doy'] = mdep.index.day_of_year
+    mdepJJ = mdep[(mdep.index.month > 5) & (mdep.index.month < 8)]
+    mdeps = mdepJJ.iloc[((30+31)*4):, :].groupby('doy').mean()
+    mdep = mdep.drop('doy', 1)    
+
+    mdep.iloc[:, 0].plot(color='lightgray', ax=a9, ylim=[3, 0], legend=False)
+    mdep.iloc[:, 1:].plot(ax=a9, linewidth=lw, legend=False)
+    a9s.plot([0, 3], [0, 3], color='lightgray', linewidth=lw)
+    for ci in range(1, mdeps.shape[1]):
+        a9s.plot(mdeps.iloc[:, 0], mdeps.iloc[:, ci])
+    a9s.set_xlim([3, 0])
+    a9s.set_ylim([3, 0])
+    a9s.text(3, 3, 'only JJ months')
+    a9.set_ylabel('mixing depth, m\ntentative def')
+
+
+    a9.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
               ncol=4, mode="expand", borderaxespad=0.)
 
     # for a in [a1, a2, a3, a4, a5, a6, a7, a8]:
     #     a.set_xlim(yl)
-    a1s.set_title('2014-2017 DOY mean\ncompared against base')
+    a9s.set_title('2014-2017 DOY mean\ncompared against base')
 
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
@@ -202,39 +268,39 @@ def plotsim(simids, fname, stitle):
     return(fig)
 
 
-# sns.set_palette('coolwarm', 2)
-# plotsim([311, 315], 'results_raw/Air Temperature.png',
-#         'impact of air temperature')
+sns.set_palette('coolwarm', 2)
+plotsim([311, 315], 'results_raw/Air Temperature.pdf',
+        'impact of air temperature')
 
-# sns.set_palette('Reds_r', 2)
-# plotsim([303, 323], 'results_raw/Wind Speed.png', 
-#         'impact of wind speed')
+sns.set_palette('Reds_r', 2)
+plotsim([303], 'results_raw/Wind Speed.pdf', 
+        'impact of wind speed')
 
-# sns.set_palette('Greens_r', 2)
-# plotsim([263, 363], 'results_raw/Total P.png',
-#         'impact of total P loading')
+sns.set_palette('Greens_r', 2)
+plotsim([263, 363], 'results_raw/Total P.pdf',
+        'impact of total P loading')
 
 sns.set_palette('Reds', 2)
-plotsim([63, 563], 'results_raw/DOC.png',
+plotsim([63, 563], 'results_raw/DOC.pdf',
              'impact of DOC loading')
 
-sns.set_palette('Oranges_d', 1)
-# plotsim(311, 'results_raw/AT colder.png', 
-#         '"lower air temperature" compared to "base"')
-# plotsim(315, 'results_raw/AT warmer.png',
-#         '"higher air temperature" compared to "base"')
-plotsim(303, 'results_raw/WS calmer.png',
-        '"calmer wind compared" to "base"')
-# plotsim(323, 'results_raw/WS stronger.png',
-#         '"stronger wind compared" to "base"')
-# plotsim(263, 'results_raw/TP lower.png', 
-#         '"less TP loading compared" to "base"')
-# plotsim(363, 'results_raw/TP higher.png',
-#         '"greater TP loading compared" to "base"')
-# plotsim(63, 'results_raw/DOC lower.png',
-#         '"less DOC loading compared" to "base"')
-plotsim(563, 'results_raw/DOC higher.png',
-        '"greater DOC loading compared" to "base"')
+# sns.set_palette('Oranges_d', 1)
+# # plotsim(311, 'results_raw/AT colder.png', 
+# #         '"lower air temperature" compared to "base"')
+# # plotsim(315, 'results_raw/AT warmer.png',
+# #         '"higher air temperature" compared to "base"')
+# plotsim(303, 'results_raw/WS calmer.png',
+#         '"calmer wind compared" to "base"')
+# # plotsim(323, 'results_raw/WS stronger.png',
+# #         '"stronger wind compared" to "base"')
+# # plotsim(263, 'results_raw/TP lower.png', 
+# #         '"less TP loading compared" to "base"')
+# # plotsim(363, 'results_raw/TP higher.png',
+# #         '"greater TP loading compared" to "base"')
+# # plotsim(63, 'results_raw/DOC lower.png',
+# #         '"less DOC loading compared" to "base"')
+# plotsim(563, 'results_raw/DOC higher.png',
+#         '"greater DOC loading compared" to "base"')
 
 # plotsim(1, 'test001.png', '"low in everything" compared to "base"')
 # plotsim(505, 'test505.png', '"id505" compared to "base"')
