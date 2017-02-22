@@ -68,6 +68,7 @@ def plotsim(simids, fname, stitle):
     w = [pd.read_table(os.path.join(dir, 'input.txt'), 
                        sep='\t', header=0, names=None, skiprows=1)
          for dir in indirs]
+    # solvemodel_v2 --> heat_flux_v12 --> 
 
 
 
