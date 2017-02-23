@@ -41,21 +41,29 @@ None this time
 ## impact of **T**
 
 ![](postprocessing/inputs/Air Temperature.png) 
+![](postprocessing/results_raw/AT colder.png) 
+![](postprocessing/results_raw/AT warmer.png) 
 ![](postprocessing/results_raw/Air Temperature.png) 
 
 ## impact of **WS**
 
 ![](postprocessing/inputs/Wind Speed.png) 
+![](postprocessing/results_raw/WS calmer.png) 
+![](postprocessing/results_raw/WS stronger.png) 
 ![](postprocessing/results_raw/Wind Speed.png) 
 
 ## impact of **TP**
 
 ![](postprocessing/inputs/Total P.png) 
+![](postprocessing/results_raw/TP lower.png) 
+![](postprocessing/results_raw/TP higher.png) 
 ![](postprocessing/results_raw/Total P.png) 
 
 ## impact of **DOC**
 
 ![](postprocessing/inputs/DOC.png) 
+![](postprocessing/results_raw/DOC lower.png) 
+![](postprocessing/results_raw/DOC higher.png) 
 ![](postprocessing/results_raw/DOC.png) 
 
 
