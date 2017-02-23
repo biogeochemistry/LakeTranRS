@@ -15,11 +15,11 @@ n4 = 5
 nt = 2922
 nz = 18
 if nz == 18:
-    zi = 17
-    zim = 4
+    zi = 17 ; z = 8.5
+    zim = 4 ; zm = 2.0
 else:
     error 
-nr = 7 # responses
+nr = 10 # responses
 
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 
@@ -38,19 +38,23 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
     # if id == 573:
     #     continue
+    di = '../simulations/id/{:05d}'.format(id)
 
-
-    # t = pd.read_csv('../simulations/id/{:05d}/t.csv.bz2'.format(id), header=None)
+    # t = pd.read_csv(os.path.join(di, 't.csv.bz2'), header=None)
     # t.index = ser
-    chl = pd.read_csv('../simulations/id/{:05d}/chl.csv.bz2'.format(id), header=None)
+    chl = pd.read_csv(os.path.join(di, 'chl.csv.bz2'), header=None)
     chl.index = ser
-    # tp = pd.read_csv('../simulations/id/{:05d}/totp.csv.bz2'.format(id), header=None)
+    # tp = pd.read_csv(os.path.join(di, 'totp.csv.bz2'), header=None)
     # tp.index = ser
-    o2 = pd.read_csv('../simulations/id/{:05d}/O2abs.csv.bz2'.format(id), header=None)
+    o2 = pd.read_csv(os.path.join(di, 'O2abs.csv.bz2'), header=None)
     o2.index = ser
-    his = pd.read_csv('../simulations/id/{:05d}/His.csv.bz2'.format(id), header=None)
+    his = pd.read_csv(os.path.join(di, 'His.csv.bz2'), header=None)
     his.index = ser
-
+    lam = pd.read_csv(os.path.join(di, 'lambda.csv.bz2'), header=None)
+    lam.index = ser
+    qst = pd.read_csv(os.path.join(di, 'Qst.csv.bz2'), header=None)
+    qst.index = ser ; qst.columns = ('sw', 'lw', 'sl')
+                      
 
     # number of anoxia (O2 < 0.05 at bottom) per year (last 4 years) def I
     anoxia1 = (o2.loc[o2.index.year >= 2014].iloc[:, zi] < 0.05).sum() / 4 
@@ -66,14 +70,26 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
     # mean O2 concentration at 2m (last 4 years)
     mo22 = o2.iloc[:, zim].mean()
-
     
     # mean annual maximum chl at surface (last 4 years)
-    amc = chl.iloc[:, zi].groupby(chl.index.year).max()
+    amc = chl.iloc[:, 0].groupby(chl.index.year).max()
     mamc = amc[amc.index >= 2014].mean()
+
+    # mean JJA chl at surface (last 4 yers)
+    chlJJA = chl[(chl.index.month > 5) & (chl.index.month < 9) & 
+                 (chl.index.year >= 2014)].iloc[:, 0].mean()
 
     # number of ice covered days per year (last 4 years)
     ic = (his.loc[his.index.year >= 2014].iloc[:, 0] > 0).sum() / 4
+    
+    # mean MAM irradiance at middle (last 4 years)
+    # mean JJA irradiance at middle (last 4 years)
+    ir00 = qst.sw * np.exp(-zm * lam.iloc[:, zim])
+    ir00.index = ser
+    ir1 = ir00[(ir00.index.month > 2) & (ir00.index.month < 6) &
+               (ir00.index.year >= 2014)].mean()
+    ir2 = ir00[(ir00.index.month > 5) & (ir00.index.month < 9) &
+               (ir00.index.year >= 2014)].mean()
 
     a0[x1-1, x2-1, x3-1, x4-1, 0] = anoxia1
     a0[x1-1, x2-1, x3-1, x4-1, 1] = anoxia2
@@ -81,11 +97,15 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     a0[x1-1, x2-1, x3-1, x4-1, 3] = mo21
     a0[x1-1, x2-1, x3-1, x4-1, 4] = mo22
     a0[x1-1, x2-1, x3-1, x4-1, 5] = mamc * 1e3
-    a0[x1-1, x2-1, x3-1, x4-1, 6] = ic
+    a0[x1-1, x2-1, x3-1, x4-1, 6] = chlJJA * 1e3
+    a0[x1-1, x2-1, x3-1, x4-1, 7] = ic
+    a0[x1-1, x2-1, x3-1, x4-1, 8] = ir1
+    a0[x1-1, x2-1, x3-1, x4-1, 9] = ir2
+    
 
 
 for i, x1, x2, x3, x4, id in d.itertuples():
-    if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
+    if not os.path.exists(os.path.join(di, 't.csv.bz2')):
         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
 a = ma.masked_array(a0, mask=m)
@@ -132,7 +152,10 @@ aa2 = plotrs6(2, nr, a[:, :, :, :, 2], 'Blues', '%.f', n)
 aa3 = plotrs6(3, nr, a[:, :, :, :, 3], 'Purples', '%.f', n)
 aa4 = plotrs6(4, nr, a[:, :, :, :, 4], 'Purples', '%.f', n)
 aa5 = plotrs6(5, nr, a[:, :, :, :, 5], 'Greens', '%.f', n)
-aa6 = plotrs6(6, nr, a[:, :, :, :, 6], 'Reds', '%.f', n)
+aa6 = plotrs6(6, nr, a[:, :, :, :, 6], 'Greens', '%.f', n)
+aa7 = plotrs6(7, nr, a[:, :, :, :, 7], 'Reds', '%.f', n)
+aa8 = plotrs6(8, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', n)
+aa9 = plotrs6(9, nr, a[:, :, :, :, 9], 'Greys_r', '%.f', n)
 
 aa0[0].set_title('anoxia d y-1\nbottom')
 aa1[0].set_title('anoxia d y-1\nbottom alt')
@@ -140,7 +163,10 @@ aa2[0].set_title('anoxia d y-1\nmiddle')
 aa3[0].set_title('mean [O2]\nbottom')
 aa4[0].set_title('mean [O2]\nmiddle')
 aa5[0].set_title('mean annual\nmax chl\nsurface')
-aa6[0].set_title('ice cover\ndays y-1')
+aa6[0].set_title('mean JJA chl\nsurface')
+aa7[0].set_title('ice cover\ndays y-1')
+aa8[0].set_title('mean MAM\nirradiance\nmiddle')
+aa9[0].set_title('mean JJA\nirradiance\nmiddle')
 
 for ax in fig.get_axes():
     ax.get_xaxis().set_visible(False)
@@ -148,5 +174,5 @@ for ax in fig.get_axes():
     ax.set_axis_bgcolor('black')
 
 fig.set_figheight(11)
-fig.set_figwidth(12)
-fig.savefig('RSver2.png', dpi=150)
+fig.set_figwidth(17)
+fig.savefig('RSver2.png', dpi=150, bbox_inches='tight')
