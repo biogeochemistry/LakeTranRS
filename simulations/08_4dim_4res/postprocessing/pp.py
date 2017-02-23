@@ -5,6 +5,10 @@ import matplotlib
 import os
 import numpy.ma as ma
 
+
+bath = pd.read_csv('../bathymetry05.csv', header=None)
+bath.columns = ['zz', 'Az']
+
 lambdai = 5   # m-1
 lambdas = 15  # m-1
 
@@ -17,9 +21,10 @@ nz = 18
 if nz == 18:
     zi = 17 ; z = 8.5
     zim = 4 ; zm = 2.0
+    dz = 0.5
 else:
     error 
-nr = 10 # responses
+nr = 11 # responses
 
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 
@@ -40,8 +45,8 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     #     continue
     di = '../simulations/id/{:05d}'.format(id)
 
-    # t = pd.read_csv(os.path.join(di, 't.csv.bz2'), header=None)
-    # t.index = ser
+    t = pd.read_csv(os.path.join(di, 't.csv.bz2'), header=None)
+    t.index = ser
     chl = pd.read_csv(os.path.join(di, 'chl.csv.bz2'), header=None)
     chl.index = ser
     # tp = pd.read_csv(os.path.join(di, 'totp.csv.bz2'), header=None)
@@ -91,6 +96,29 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     ir2 = ir00[(ir00.index.month > 5) & (ir00.index.month < 9) &
                (ir00.index.year >= 2014)].mean()
 
+    # mixing depth -- mean JJ (last 4 years)
+    pycnothresholdunit = 0.1 ## as per MyLake, kg m-3 m-1
+    # pycnothresholdunit = 0.5 ## kg m-3 m-1 
+    # 0.5 allows rigidness of the finer resolution? 
+    pycnothreshold = pycnothresholdunit * dz
+    tm = t.as_matrix()
+    rho = 999.842594 + tm * (6.793952e-2 + tm * (-9.09529e-3 +                                                   tm * (1.001685e-4 + tm * (-1.120083e-6 + 6.536332e-9 * tm))))
+    drho = rho[:, 1:] - rho[:, :(nz-1)]
+    drhosig = drho * (drho > pycnothreshold)
+    mdepbottom = np.zeros((drhosig.shape[0], )) * np.nan
+    zzbottom = (np.flipud(bath.zz[:(nz-1)].as_matrix()+(dz/2)).\
+                reshape((nz-1, 1))).flatten()
+    for ri in range(drhosig.shape[0]):
+        dsum = drhosig[ri, :].sum()
+        if dsum == 0:
+            mdepbottom[ri] = 0
+        else:
+            mdepbottom[ri] = (drhosig[ri, :] * zzbottom).sum() / dsum
+    mdep = bath.zz.max() + dz - mdepbottom
+    mdep = pd.DataFrame(mdep, index=ser)
+    mdepJJ = mdep[(mdep.index.month > 5) & (mdep.index.month < 8)].mean()
+
+
     a0[x1-1, x2-1, x3-1, x4-1, 0] = anoxia1
     a0[x1-1, x2-1, x3-1, x4-1, 1] = anoxia2
     a0[x1-1, x2-1, x3-1, x4-1, 2] = anoxia3
@@ -101,6 +129,8 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     a0[x1-1, x2-1, x3-1, x4-1, 7] = ic
     a0[x1-1, x2-1, x3-1, x4-1, 8] = ir1
     a0[x1-1, x2-1, x3-1, x4-1, 9] = ir2
+    a0[x1-1, x2-1, x3-1, x4-1, 10] = mdepJJ
+    
     
 
 
@@ -139,12 +169,15 @@ def plotrs6(rsi, nr, aa, colorcode, fmt, n) :
     rs(axes[3], aa[2, :, :, 2], colorcode, mi, ma, fmt, n[1], n[2])
     rs(axes[4], aa[2, :, 2, :], colorcode, mi, ma, fmt, n[1], n[3])
     rs(axes[5], aa[2, 2, :, :], colorcode, mi, ma, fmt, n[2], n[3])
+    axes[5].text(-0.5, -1.8, mi, fontsize=10, ha='left', va='center')
+    axes[5].text(-0.5, -2.4, ma, fontsize=10, ha='left', va='center')
     return axes
+
 
 plt.clf()
 fig = plt.figure()
 
-n = ['air temperature', 'wind speed', 'total P', 'DOC']
+n = ['air temp', 'wind speed', 'total P', 'DOC']
 
 aa0 = plotrs6(0, nr, a[:, :, :, :, 0], 'Blues', '%.f', n)
 aa1 = plotrs6(1, nr, a[:, :, :, :, 1], 'Blues', '%.f', n)
@@ -156,6 +189,7 @@ aa6 = plotrs6(6, nr, a[:, :, :, :, 6], 'Greens', '%.f', n)
 aa7 = plotrs6(7, nr, a[:, :, :, :, 7], 'Reds', '%.f', n)
 aa8 = plotrs6(8, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', n)
 aa9 = plotrs6(9, nr, a[:, :, :, :, 9], 'Greys_r', '%.f', n)
+aa10 = plotrs6(10, nr, a[:, :, :, :, 10], 'Oranges', '%.f', n)
 
 aa0[0].set_title('anoxia d y-1\nbottom')
 aa1[0].set_title('anoxia d y-1\nbottom alt')
@@ -167,12 +201,14 @@ aa6[0].set_title('mean JJA chl\nsurface')
 aa7[0].set_title('ice cover\ndays y-1')
 aa8[0].set_title('mean MAM\nirradiance\nmiddle')
 aa9[0].set_title('mean JJA\nirradiance\nmiddle')
+aa10[0].set_title('mean JJ\nmixing depth')
 
 for ax in fig.get_axes():
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     ax.set_axis_bgcolor('black')
 
-fig.set_figheight(11)
-fig.set_figwidth(17)
+fig.set_figheight(10)
+fig.set_figwidth(18)
 fig.savefig('RSver2.png', dpi=150, bbox_inches='tight')
+fig.savefig('RSver2lowres.png', dpi=75, bbox_inches='tight')
