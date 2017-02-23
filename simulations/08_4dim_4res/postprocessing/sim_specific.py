@@ -273,8 +273,8 @@ def plotsim(simids, fname, stitle):
     # %TCz = nansum(zz .* dRdz) ./ nansum(dRdz);
     # dRdz(di)=0; %modified for MATLAB version 7
     # TCz = sum(zz .* dRdz) ./ sum(dRdz);
-    # pycnothresholdunit = 0.1 ## as per MyLake, kg m-3 m-1
-    pycnothresholdunit = 0.5 ## kg m-3 m-1 
+    pycnothresholdunit = 0.1 ## as per MyLake, kg m-3 m-1
+    # pycnothresholdunit = 0.5 ## kg m-3 m-1 
     # 0.5 allows rigidness of the finer resolution? 
     pycnothreshold = pycnothresholdunit * dres
     tm = [d.as_matrix() for d in t]
@@ -300,14 +300,14 @@ def plotsim(simids, fname, stitle):
     mdeps = mdepJJ.iloc[((30+31)*4):, :].groupby('doy').mean()
     mdep = mdep.drop('doy', 1)    
 
-    mdep.iloc[:, 0].plot(color='lightgray', ax=a9, ylim=[3, 0], legend=False)
+    mdep.iloc[:, 0].plot(color='lightgray', ax=a9, ylim=[9, 0], legend=False)
     mdep.iloc[:, 1:].plot(ax=a9, linewidth=lw, legend=False)
-    a9s.plot([0, 3], [0, 3], color='lightgray', linewidth=lw)
+    a9s.plot([0, 9], [0, 9], color='lightgray', linewidth=lw)
     for ci in range(1, mdeps.shape[1]):
         a9s.plot(mdeps.iloc[:, 0], mdeps.iloc[:, ci])
-    a9s.set_xlim([3, 0])
-    a9s.set_ylim([3, 0])
-    a9s.text(3, 3, 'only JJ months')
+    a9s.set_xlim([9, 0])
+    a9s.set_ylim([9, 0])
+    a9s.text(8, 8, 'only JJ months')
     a9.set_ylabel('mixing depth, m\ntentative def')
 
 
@@ -321,7 +321,7 @@ def plotsim(simids, fname, stitle):
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
 
-    fig.savefig(fname, dpi=150)
+    fig.savefig(fname, dpi=150, bbox_inches='tight')
     return(fig)
 
 
