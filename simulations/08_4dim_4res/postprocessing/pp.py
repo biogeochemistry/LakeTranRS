@@ -14,6 +14,10 @@ n3 = 5
 n4 = 5
 nt = 2922
 nz = 18
+if nz == 18:
+    zi = 17
+else:
+    error 
 nr = 3 # responses
 
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
@@ -48,10 +52,10 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
 
     # number of anoxia (O2 < 0.05 at bottom) per year (last 4 years)
-    anoxia = (o2.loc[o2.index.year >= 2014].iloc[:, 17] < 0.05).sum() / 4 
+    anoxia = (o2.loc[o2.index.year >= 2014].iloc[:, zi] < 0.05).sum() / 4 
     
     # mean annual maximum chl at surface (last 4 years)
-    amc = chl.iloc[:, 17].groupby(chl.index.year).max()
+    amc = chl.iloc[:, zi].groupby(chl.index.year).max()
     mamc = amc[amc.index >= 2014].mean()
 
     # number of ice covered days per year (last 4 years)
