@@ -1,4 +1,8 @@
 *.DS_Store
+launch_24_batch.m
+simulations/08*/simulations/
+simulations/09*/
+
 simulations/03*/postprocessing/timeseries.ipynb
 simulations/08*/simulations/niva/*/*.csv
 simulations/07*/results*/*.csv
