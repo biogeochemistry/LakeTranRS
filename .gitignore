@@ -1,4 +1,7 @@
 *.DS_Store
+launch_24_batch.m
+simulations/08_4dim_4res/simulations/
+simulations/09_4dim_4res_not_global/
 simulations/08*/postprocessing/test*
 simulations/03*/postprocessing/timeseries.ipynb
 simulations/08*/simulations/niva/*/*.csv
