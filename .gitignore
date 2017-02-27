@@ -1,6 +1,9 @@
 *.DS_Store
 simulations/08*/simulations/id/*/*.csv*
 simulations/08*/postprocessing/test*
+simulations/08*/simulations/
+simulations/09*/
+
 simulations/03*/postprocessing/timeseries.ipynb
 simulations/08*/simulations/niva/*/*.csv
 simulations/07*/results*/*.csv
