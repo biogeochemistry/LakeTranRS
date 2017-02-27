@@ -49,7 +49,7 @@ def plotsim(simids, fname, stitle):
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
-    colnames = ['T3W3P3C3 base'] + simnames
+    colnames = ['T5W5P5C5 all high'] + simnames
     
     if len(simids) == 1:
         lw = 1.0
