@@ -318,7 +318,7 @@ def plotsim(simids, fname, stitle):
 
     # for a in [a1, a2, a3, a4, a5, a6, a7, a8]:
     #     a.set_xlim(yl)
-    a9s.set_title('2014-2017 DOY mean\ncompared against base')
+    a9s.set_title('2014-2017 DOY mean\ncompared against allH')
 
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
@@ -375,6 +375,6 @@ def plotsim(simids, fname, stitle):
 # plotsim(21, 'test021.png', '"id021" compared to "base"')
 # plotsim(121, 'test121.png', '"id121" compared to "base"')
 # plotsim(521, 'test521.png', '"id521" compared to "base"')
-plotsim(621, 'test621.png', '"id621" compared to "base"')
+plotsim(621, 'test621.png', '"id621" compared to "all high"')
 
 
