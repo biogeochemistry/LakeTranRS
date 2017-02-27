@@ -7,11 +7,10 @@ import os.path
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*2)
 sns.set_style('whitegrid')
 
-# bz2 = '.bz2'  
-bz2 = ''
-
-basedir = '../simulations/id/00313/'
-inbasedir = '../intermediate/id/00313/'
+# basedir = '../simulations/id/00313/'
+# inbasedir = '../intermediate/id/00313/'
+basedir = '../simulations/id/00625/'
+inbasedir = '../intermediate/id/00625a/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry05.csv', header=None)
@@ -50,7 +49,7 @@ def plotsim(simids, fname, stitle):
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
-    colnames = ['T3W3P3C3 base'] + simnames
+    colnames = ['T5W5P5C5 all high'] + simnames
     
     if len(simids) == 1:
         lw = 1.0
@@ -86,12 +85,12 @@ def plotsim(simids, fname, stitle):
 
     
     ## light related matters
-    qst = [pd.read_csv(os.path.join(dir, 'Qst.csv{:s}'.format(bz2)), header=None)
+    qst = [pd.read_csv(os.path.join(dir, 'Qst.csv'), header=None)
            for dir in dirs] # ('sw', 'lw', 'sl')
     sw = pd.concat([d.iloc[:, 0] for d in qst], axis=1)
     sw.columns = colnames
     sw.index = ser
-    lam = [pd.read_csv(os.path.join(dir, 'lambda.csv{:s}'.format(bz2)), header=None)
+    lam = [pd.read_csv(os.path.join(dir, 'lambda.csv'), header=None)
            for dir in dirs]
 
     # lambda to irradiance at depth1
@@ -132,7 +131,7 @@ def plotsim(simids, fname, stitle):
 
 
     ## water temperature
-    t = [pd.read_csv(os.path.join(dir, 't.csv{:s}'.format(bz2)), header=None)
+    t = [pd.read_csv(os.path.join(dir, 't.csv'), header=None)
          for dir in dirs]
     t0 = pd.concat([d.iloc[:, 0] for d in t], axis=1)
     t0.columns = colnames
@@ -178,7 +177,7 @@ def plotsim(simids, fname, stitle):
     a3.set_ylabel('water temperature\nbottom')
 
     ## ice
-    his = [pd.read_csv(os.path.join(dir, 'His.csv{:s}'.format(bz2)), header=None)
+    his = [pd.read_csv(os.path.join(dir, 'His.csv'), header=None)
            for dir in dirs]
     ice = pd.concat([d.iloc[:, 0] for d in his], axis=1)
     ice.columns = colnames
@@ -196,7 +195,7 @@ def plotsim(simids, fname, stitle):
     a4.set_ylabel('ice thickness')
 
     ## oxygen
-    o2 = [pd.read_csv(os.path.join(dir, 'O2abs.csv{:s}'.format(bz2)), header=None)
+    o2 = [pd.read_csv(os.path.join(dir, 'O2abs.csv'), header=None)
           for dir in dirs]
     o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
     o22.columns = colnames
@@ -228,7 +227,7 @@ def plotsim(simids, fname, stitle):
     a6.set_ylabel('O2 concentration\nbottom')
 
     ## chl (grams per whole lake)
-    chl = [pd.read_csv(os.path.join(dir, 'chl.csv{:s}'.format(bz2)), header=None)
+    chl = [pd.read_csv(os.path.join(dir, 'chl.csv'), header=None)
           for dir in dirs]
     chlp = pd.concat([np.sum(d * volume2d, axis=1) / 1e3 for d in chl], axis=1)
     chlp.columns = colnames
@@ -246,7 +245,7 @@ def plotsim(simids, fname, stitle):
     a7.set_ylabel('chl pool\nentire lake')
 
     ## tp (grams per whole lake)
-    tp = [pd.read_csv(os.path.join(dir, 'totp.csv{:s}'.format(bz2)), header=None)
+    tp = [pd.read_csv(os.path.join(dir, 'totp.csv'), header=None)
           for dir in dirs]
     tpp = pd.concat([np.sum(d * volume2d, axis=1) / 1e3 for d in tp], axis=1)
     tpp.columns = colnames
@@ -319,7 +318,7 @@ def plotsim(simids, fname, stitle):
 
     # for a in [a1, a2, a3, a4, a5, a6, a7, a8]:
     #     a.set_xlim(yl)
-    a9s.set_title('2014-2017 DOY mean\ncompared against base')
+    a9s.set_title('2014-2017 DOY mean\ncompared against allH')
 
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
@@ -328,60 +327,54 @@ def plotsim(simids, fname, stitle):
     return(fig)
 
 
+# sns.set_palette('coolwarm', 2)
+# plotsim([311, 315], 'results_raw/Air Temperature.png',
+#         'impact of air temperature')
 
-if not os.path.exists('results_raw'):
-    os.makedirs('results_raw')
-if not os.path.exists('sim_specific'):
-    os.makedirs('sim_specific')
+# sns.set_palette('Reds_r', 2)
+# plotsim([303, 323], 'results_raw/Wind Speed.png', 
+#         'impact of wind speed')
 
-    
+# sns.set_palette('Greens_r', 2)
+# plotsim([263, 363], 'results_raw/Total P.png',
+#         'impact of total P loading')
 
-sns.set_palette('coolwarm', 2)
-plotsim([311, 315], 'results_raw/Air Temperature.png',
-        'impact of air temperature')
+# sns.set_palette('Reds', 2)
+# plotsim([63, 563], 'results_raw/DOC.png',
+#              'impact of DOC loading')
 
-sns.set_palette('Reds_r', 2)
-plotsim([303, 323], 'results_raw/Wind Speed.png', 
-        'impact of wind speed')
+# plotsim([503, 511], 'results_raw/test.pdf', 
+#         '"base"')
+ 
+# sns.set_palette('Oranges_d', 1)
+# plotsim(311, 'results_raw/AT colder.png', 
+#         '"lower air temperature" compared to "base"')
+# plotsim(315, 'results_raw/AT warmer.png',
+#         '"higher air temperature" compared to "base"')
+# plotsim(303, 'results_raw/WS calmer.png',
+#         '"calmer wind compared" to "base"')
+# plotsim(323, 'results_raw/WS stronger.png',
+#         '"stronger wind compared" to "base"')
+# plotsim(263, 'results_raw/TP lower.png', 
+#         '"less TP loading compared" to "base"')
+# plotsim(363, 'results_raw/TP higher.png',
+#         '"greater TP loading compared" to "base"')
+# plotsim(63, 'results_raw/DOC lower.png',
+#         '"less DOC loading compared" to "base"')
+# plotsim(563, 'results_raw/DOC higher.png',
+#         '"greater DOC loading compared" to "base"')
 
-sns.set_palette('Greens_r', 2)
-plotsim([263, 363], 'results_raw/Total P.png',
-        'impact of total P loading')
-
-sns.set_palette('Reds', 2)
-plotsim([63, 563], 'results_raw/DOC.png',
-             'impact of DOC loading')
-
-
-sns.set_palette('Oranges_d', 1)
-plotsim(311, 'results_raw/AT colder.png', 
-        '"lower air temperature" compared to "base"')
-plotsim(315, 'results_raw/AT warmer.png',
-        '"higher air temperature" compared to "base"')
-plotsim(303, 'results_raw/WS calmer.png',
-        '"calmer wind compared" to "base"')
-plotsim(323, 'results_raw/WS stronger.png',
-        '"stronger wind compared" to "base"')
-plotsim(263, 'results_raw/TP lower.png', 
-        '"less TP loading compared" to "base"')
-plotsim(363, 'results_raw/TP higher.png',
-        '"greater TP loading compared" to "base"')
-plotsim(63, 'results_raw/DOC lower.png',
-        '"less DOC loading compared" to "base"')
-plotsim(563, 'results_raw/DOC higher.png',
-        '"greater DOC loading compared" to "base"')
-
-plotsim(1, 'sim_specific/test001.png', '"low in everything" compared to "base"')
-plotsim(505, 'sim_specific/test505.png', '"id505" compared to "base"')
-plotsim(5, 'sim_specific/test005.png', '"id005" compared to "base"')
-plotsim(105, 'sim_specific/test105.png', '"id105" compared to "base"')
-plotsim(605, 'sim_specific/test605.png', '"id605" compared to "base"')
-plotsim(101, 'sim_specific/test101.png', '"id101" compared to "base"')
-plotsim(601, 'sim_specific/test601.png', '"id601" compared to "base"')
-plotsim(501, 'sim_specific/test501.png', '"id501" compared to "base"')
-plotsim(21, 'sim_specific/test021.png', '"id021" compared to "base"')
-plotsim(121, 'sim_specific/test121.png', '"id121" compared to "base"')
-plotsim(521, 'sim_specific/test521.png', '"id521" compared to "base"')
-plotsim(621, 'sim_specific/test621.png', '"id621" compared to "base"')
+# plotsim(1, 'test001.png', '"low in everything" compared to "base"')
+# plotsim(505, 'test505.png', '"id505" compared to "base"')
+# plotsim(5, 'test005.png', '"id005" compared to "base"')
+# plotsim(105, 'test105.png', '"id105" compared to "base"')
+# plotsim(605, 'test605.png', '"id605" compared to "base"')
+# plotsim(101, 'test101.png', '"id101" compared to "base"')
+# plotsim(601, 'test601.png', '"id601" compared to "base"')
+# plotsim(501, 'test501.png', '"id501" compared to "base"')
+# plotsim(21, 'test021.png', '"id021" compared to "base"')
+# plotsim(121, 'test121.png', '"id121" compared to "base"')
+# plotsim(521, 'test521.png', '"id521" compared to "base"')
+plotsim(621, 'test621.png', '"id621" compared to "all high"')
 
 
