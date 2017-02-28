@@ -5,6 +5,8 @@ import matplotlib
 import os
 import numpy.ma as ma
 
+# bz2 = '.bz2'  
+bz2 = ''
 
 bath = pd.read_csv('../bathymetry05.csv', header=None)
 bath.columns = ['zz', 'Az']
