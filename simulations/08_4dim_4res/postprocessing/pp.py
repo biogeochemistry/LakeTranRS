@@ -39,7 +39,7 @@ d = pd.read_csv('../intermediate/parameterdict.csv')
 for i, x1, x2, x3, x4, id in d.itertuples():
     if i % 100 == 0:
         print(i)
-    if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2)):
         # print(i, x1, x2, x3, x4, id)
         continue
 
@@ -47,19 +47,19 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     #     continue
     di = '../simulations/id/{:05d}'.format(id)
 
-    t = pd.read_csv(os.path.join(di, 't.csv.bz2'), header=None)
+    t = pd.read_csv(os.path.join(di, 't.csv{:s}'.format(bz2)), header=None)
     t.index = ser
-    chl = pd.read_csv(os.path.join(di, 'chl.csv.bz2'), header=None)
+    chl = pd.read_csv(os.path.join(di, 'chl.csv{:s}'.format(bz2)), header=None)
     chl.index = ser
-    # tp = pd.read_csv(os.path.join(di, 'totp.csv.bz2'), header=None)
+    # tp = pd.read_csv(os.path.join(di, 'totp.csv{:s}'.format(bz2)), header=None)
     # tp.index = ser
-    o2 = pd.read_csv(os.path.join(di, 'O2abs.csv.bz2'), header=None)
+    o2 = pd.read_csv(os.path.join(di, 'O2abs.csv{:s}'.format(bz2)), header=None)
     o2.index = ser
-    his = pd.read_csv(os.path.join(di, 'His.csv.bz2'), header=None)
+    his = pd.read_csv(os.path.join(di, 'His.csv{:s}'.format(bz2)), header=None)
     his.index = ser
-    lam = pd.read_csv(os.path.join(di, 'lambda.csv.bz2'), header=None)
+    lam = pd.read_csv(os.path.join(di, 'lambda.csv{:s}'.format(bz2)), header=None)
     lam.index = ser
-    qst = pd.read_csv(os.path.join(di, 'Qst.csv.bz2'), header=None)
+    qst = pd.read_csv(os.path.join(di, 'Qst.csv{:s}'.format(bz2)), header=None)
     qst.index = ser ; qst.columns = ('sw', 'lw', 'sl')
                       
 
