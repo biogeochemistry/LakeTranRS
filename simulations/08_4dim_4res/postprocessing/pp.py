@@ -39,13 +39,13 @@ d = pd.read_csv('../intermediate/parameterdict.csv')
 for i, x1, x2, x3, x4, id in d.itertuples():
     if i % 100 == 0:
         print(i)
+    di = '../simulations/id/{:05d}'.format(id)
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         # print(i, x1, x2, x3, x4, id)
         continue
 
     # if id == 573:
     #     continue
-    di = '../simulations/id/{:05d}'.format(id)
 
     t = pd.read_csv(os.path.join(di, 't.csv{:s}'.format(bz2)), header=None)
     t.index = ser
