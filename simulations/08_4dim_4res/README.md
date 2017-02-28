@@ -1,9 +1,13 @@
 # How to run this simulation
 
 1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
-   them in that order. Optionally run the batch files.
-1. Run response.surface.run.m in Matlab
-1. Postprocessing files are in [postprocessing](postprocessing).
+   them in that order. This will populate the input files and create
+   directories for the outputs. 
+1. Run makebatch.py. This will create batch .m files.
+1. Run the batch files made in the previous steps. Use Raoul's
+   launch__24__batch.m if appropriate. 
+1. Postprocessing files are in [postprocessing](postprocessing). Run
+   pp.py and sim_specific in the directory. 
 
 #Parameters
 
