@@ -41,7 +41,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
         print(i)
     di = '../simulations/id/{:05d}'.format(id)
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
-        # print(i, x1, x2, x3, x4, id)
+        print(i, x1, x2, x3, x4, id)
         continue
 
     # if id == 573:
