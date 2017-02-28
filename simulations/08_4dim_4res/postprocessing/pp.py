@@ -136,7 +136,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
 for i, x1, x2, x3, x4, id in d.itertuples():
     di = '../simulations/id/{:05d}'.format(id)
-    if not os.path.exists(os.path.join(di, 't.csv.bz2')):
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
 a = ma.masked_array(a0, mask=m)
