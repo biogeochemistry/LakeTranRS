@@ -5,6 +5,8 @@ import matplotlib
 import os
 import numpy.ma as ma
 
+# bz2 = '.bz2'  
+bz2 = ''
 
 bath = pd.read_csv('../bathymetry05.csv', header=None)
 bath.columns = ['zz', 'Az']
@@ -37,27 +39,27 @@ d = pd.read_csv('../intermediate/parameterdict.csv')
 for i, x1, x2, x3, x4, id in d.itertuples():
     if i % 100 == 0:
         print(i)
-    if not os.path.exists('../simulations/id/{:05d}/t.csv.bz2'.format(id)):
-        # print(i, x1, x2, x3, x4, id)
+    di = '../simulations/id/{:05d}'.format(id)
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
+        print(i, x1, x2, x3, x4, id)
         continue
 
-    # if id == 573:
+    # if id == 599:
     #     continue
-    di = '../simulations/id/{:05d}'.format(id)
 
-    t = pd.read_csv(os.path.join(di, 't.csv.bz2'), header=None)
+    t = pd.read_csv(os.path.join(di, 't.csv{:s}'.format(bz2)), header=None)
     t.index = ser
-    chl = pd.read_csv(os.path.join(di, 'chl.csv.bz2'), header=None)
+    chl = pd.read_csv(os.path.join(di, 'chl.csv{:s}'.format(bz2)), header=None)
     chl.index = ser
-    # tp = pd.read_csv(os.path.join(di, 'totp.csv.bz2'), header=None)
+    # tp = pd.read_csv(os.path.join(di, 'totp.csv{:s}'.format(bz2)), header=None)
     # tp.index = ser
-    o2 = pd.read_csv(os.path.join(di, 'O2abs.csv.bz2'), header=None)
+    o2 = pd.read_csv(os.path.join(di, 'O2abs.csv{:s}'.format(bz2)), header=None)
     o2.index = ser
-    his = pd.read_csv(os.path.join(di, 'His.csv.bz2'), header=None)
+    his = pd.read_csv(os.path.join(di, 'His.csv{:s}'.format(bz2)), header=None)
     his.index = ser
-    lam = pd.read_csv(os.path.join(di, 'lambda.csv.bz2'), header=None)
+    lam = pd.read_csv(os.path.join(di, 'lambda.csv{:s}'.format(bz2)), header=None)
     lam.index = ser
-    qst = pd.read_csv(os.path.join(di, 'Qst.csv.bz2'), header=None)
+    qst = pd.read_csv(os.path.join(di, 'Qst.csv{:s}'.format(bz2)), header=None)
     qst.index = ser ; qst.columns = ('sw', 'lw', 'sl')
                       
 
@@ -135,7 +137,8 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
 
 for i, x1, x2, x3, x4, id in d.itertuples():
-    if not os.path.exists(os.path.join(di, 't.csv.bz2')):
+    di = '../simulations/id/{:05d}'.format(id)
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
 a = ma.masked_array(a0, mask=m)
@@ -151,8 +154,9 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
     img = ax.imshow(thisa, cmap=plt.get_cmap(cmapname), 
                     norm=matplotlib.colors.Normalize(thismin, thismax, True), 
                     origin='lower', interpolation='none')
-    cont = ax.contour(X, Y, thisa, colors='black')
-    ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
+    if not (thisa.min() == thisa.max()):
+        cont = ax.contour(X, Y, thisa, colors='black')
+        ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
     ax.text(2.0, -0.9, label2nd, ha='center', va='center') ; 
@@ -182,14 +186,14 @@ n = ['air temp', 'wind speed', 'total P', 'DOC']
 aa0 = plotrs6(0, nr, a[:, :, :, :, 0], 'Blues', '%.f', n)
 aa1 = plotrs6(1, nr, a[:, :, :, :, 1], 'Blues', '%.f', n)
 aa2 = plotrs6(2, nr, a[:, :, :, :, 2], 'Blues', '%.f', n)
-aa3 = plotrs6(3, nr, a[:, :, :, :, 3], 'Purples', '%.f', n)
-aa4 = plotrs6(4, nr, a[:, :, :, :, 4], 'Purples', '%.f', n)
+aa3 = plotrs6(3, nr, a[:, :, :, :, 3], 'Purples', '%.2f', n)
+aa4 = plotrs6(4, nr, a[:, :, :, :, 4], 'Purples', '%.2f', n)
 aa5 = plotrs6(5, nr, a[:, :, :, :, 5], 'Greens', '%.f', n)
 aa6 = plotrs6(6, nr, a[:, :, :, :, 6], 'Greens', '%.f', n)
 aa7 = plotrs6(7, nr, a[:, :, :, :, 7], 'Reds', '%.f', n)
 aa8 = plotrs6(8, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', n)
-aa9 = plotrs6(9, nr, a[:, :, :, :, 9], 'Greys_r', '%.f', n)
-aa10 = plotrs6(10, nr, a[:, :, :, :, 10], 'Oranges', '%.f', n)
+aa9 = plotrs6(9, nr, a[:, :, :, :, 9], 'Greys_r', '%.2f', n)
+aa10 = plotrs6(10, nr, a[:, :, :, :, 10], 'Oranges', '%.1f', n)
 
 aa0[0].set_title('anoxia d y-1\nbottom')
 aa1[0].set_title('anoxia d y-1\nbottom alt')
