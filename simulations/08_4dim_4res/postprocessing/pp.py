@@ -44,8 +44,8 @@ for i, x1, x2, x3, x4, id in d.itertuples():
         print(i, x1, x2, x3, x4, id)
         continue
 
-    # if id == 573:
-    #     continue
+    if id == 599:
+        continue
 
     t = pd.read_csv(os.path.join(di, 't.csv{:s}'.format(bz2)), header=None)
     t.index = ser
