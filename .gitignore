@@ -1,10 +1,10 @@
 *.DS_Store
 
-simulations/08_4dim_4res/simulations/
 simulations/09_4dim_4res_not_global/
 
-simulations/08*/simulations/id/*/*.csv*
 
+simulations/08*/simulations/id/*/*.csv*
+simulations/08*/simulations/idtest/*/*.csv*
 simulations/08*/postprocessing/test*
 
 simulations/09*/

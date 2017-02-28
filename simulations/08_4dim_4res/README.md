@@ -1,4 +1,15 @@
-# How to run this simulation
+# How to run this simulation TESTING
+
+1. Preparation. Review makeparameterdict.R and makeMLfiles_testing.R and run
+   them in that order. This will populate the input files and create
+   directories for the outputs. 
+1. Run makebatch_testing.py. This will create batch .m files.
+1. Run the batch files made in the previous steps. Use Raoul's
+   launch__24__batch_testing.m if appropriate. 
+1. Postprocessing files are in [postprocessing_testing](postprocessing_testing). Run
+   pp_testing.py and sim__specific__testing.py in the directory. 
+
+# How to run this simulation ORIGINAL
 
 1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
    them in that order. This will populate the input files and create
