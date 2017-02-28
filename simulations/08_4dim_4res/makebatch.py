@@ -20,10 +20,10 @@ for i in range(ncore):
     if i == 0:
         pass
     elif i < n1:
-        start += each1
+        start = end + 1
         end += each1
     else:
-        start += each2
+        start = end + 1
         end += each2
     print(start, end)
     
