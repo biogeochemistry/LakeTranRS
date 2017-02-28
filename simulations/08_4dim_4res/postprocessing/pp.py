@@ -39,7 +39,7 @@ d = pd.read_csv('../intermediate/parameterdict.csv')
 for i, x1, x2, x3, x4, id in d.itertuples():
     if i % 100 == 0:
         print(i)
-    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2)):
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         # print(i, x1, x2, x3, x4, id)
         continue
 
