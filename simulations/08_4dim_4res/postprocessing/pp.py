@@ -154,8 +154,9 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
     img = ax.imshow(thisa, cmap=plt.get_cmap(cmapname), 
                     norm=matplotlib.colors.Normalize(thismin, thismax, True), 
                     origin='lower', interpolation='none')
-    cont = ax.contour(X, Y, thisa, colors='black')
-    ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
+    if not (ax.min() == ax.max()):
+        cont = ax.contour(X, Y, thisa, colors='black')
+        ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
     ax.text(2.0, -0.9, label2nd, ha='center', va='center') ; 
