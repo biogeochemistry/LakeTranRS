@@ -2,7 +2,7 @@ import os
 import math
 
 ncore = 24
-n = 625
+n = 10000
 
 with open('run_eight_years_template.m', 'rU') as f:
     template = f.read()

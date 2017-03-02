@@ -11,31 +11,41 @@ f1 <- function (d, level) {
   if (level == 1) {
     d[['AirTemperature']] <- d[['AirTemperature']] - 3.0
   } else if (level == 2) {
-    d[['AirTemperature']] <- d[['AirTemperature']] - 1.0
+    d[['AirTemperature']] <- d[['AirTemperature']] - 2.0
   } else if (level == 3) {
-    d[['AirTemperature']] <- d[['AirTemperature']]
+    d[['AirTemperature']] <- d[['AirTemperature']] - 1.0
   } else if (level == 4) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 1.0
+    d[['AirTemperature']] <- d[['AirTemperature']] - 0.5
   } else if (level == 5) {
+    d[['AirTemperature']] <- d[['AirTemperature']]
+  } else if (level == 6) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 0.5
+  } else if (level == 7) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 1.0
+  } else if (level == 8) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 2.0
+  } else if (level == 9) {
     d[['AirTemperature']] <- d[['AirTemperature']] + 3.0
+  } else if (level == 10) {
+    d[['AirTemperature']] <- d[['AirTemperature']] + 4.0
   }
   return (d)
 }
 
 f2 <- function (d, level) {
-  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ (level - 3))
+  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ ((level - 5) / 2)
   return(d)
 }
 
 f3 <- function (d, level) {
-  d[['InflowTP']] <- d[['InflowTP']] * (10 ^ ((level - 2) / 2))
-  d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ ((level - 2) / 2))
-  d[['InflowChla']] <- d[['InflowChla']] * (10 ^ ((level - 2) / 2))
+  d[['InflowTP']] <- d[['InflowTP']] * (10 ^ ((level - 3) / 4))
+  d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ ((level - 3) / 4))
+  d[['InflowChla']] <- d[['InflowChla']] * (10 ^ ((level - 3) / 4))
   return (d)
 }
 
 f4 <- function (d, level) {
-  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 4)/2))
+  d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 7)/4))
   return (d)
 }
 
@@ -46,9 +56,9 @@ for (s in 1:nrow(dict)) {
   L4 <- dict[s, 4]
   simid <- dict[s, 5] ## should be same as s anyway
   data <- f4(f3(f2(f1(original, L1), L2), L3), L4)
-  pathname <- sprintf('intermediate/id/%05d/input.txt', simid)
-  dirname <- sprintf('intermediate/id/%05d', simid)
-  dirname2 <- sprintf('simulations/id/%05d', simid)
+  pathname <- sprintf('intermediate/id/%06d/input.txt', simid)
+  dirname <- sprintf('intermediate/id/%06d', simid)
+  dirname2 <- sprintf('simulations/id/%06d', simid)
   if (!dir.exists('intermediate')) { dir.create('intermediate') }
   if (!dir.exists('intermediate/id')) { dir.create('intermediate/id') }
   if (!dir.exists(dirname)) { dir.create(dirname) }
