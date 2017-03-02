@@ -4,10 +4,10 @@
 ##    instead of telling parameter settings, just give Matlab the folders and run it
 
 
-n1 <- 5
-n2 <- 5
-n3 <- 5
-n4 <- 5
+n1 <- 10
+n2 <- 10
+n3 <- 10
+n4 <- 10
 
 x1 <- 1:n1
 x2 <- 1:n2

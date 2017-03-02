@@ -33,7 +33,7 @@ f1 <- function (d, level) {
 }
 
 f2 <- function (d, level) {
-  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ ((level - 5) / 2)
+  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ ((level - 5) / 2))
   return(d)
 }
 

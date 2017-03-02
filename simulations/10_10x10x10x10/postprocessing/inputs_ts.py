@@ -10,7 +10,7 @@ import seaborn as sns
 ser = pd.period_range('2010-01-01', periods=(365*4+1)*1)
 sns.set_style('whitegrid')
 nvars = 4
-nlevels = 5
+nlevels = 10
 shortnames = ['Var{:d}'.format(ci) for ci in range(1, 5)]
 palettes = ['coolwarm', 'Reds', 'Greens', 'cubehelix_r']
 longnames = ['Air Temperature', 
@@ -54,9 +54,9 @@ for vi in range(nvars):
     yl = ylabels[vi]
     pl = palettes[vi]
 
-    ## get the 5 time series for the 5 levels 
+    ## get the 10 time series for the 10 levels 
     simids = [design.loc[design[sn] == li].simid.iloc[0] for li in levels]
-    paths = ['../intermediate/id/{:05d}/input.txt'.format(id) for id in simids]
+    paths = ['../intermediate/id/{:06d}/input.txt'.format(id) for id in simids]
     inputs0 = [pd.read_table(p, skiprows=1, header=0)[cn] for p in paths]
     inputs = [df.product(axis=1) for df in inputs0]  # converts to flux if necessary
     d = pd.concat(inputs, axis=1)  # put together sideways

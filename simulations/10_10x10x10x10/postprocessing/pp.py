@@ -14,10 +14,10 @@ bath.columns = ['zz', 'Az']
 lambdai = 5   # m-1
 lambdas = 15  # m-1
 
-n1 = 5
-n2 = 5
-n3 = 5
-n4 = 5
+n1 = 10
+n2 = 10
+n3 = 10
+n4 = 10
 nt = 2922
 nz = 18
 if nz == 18:
@@ -39,7 +39,7 @@ d = pd.read_csv('../intermediate/parameterdict.csv')
 for i, x1, x2, x3, x4, id in d.itertuples():
     if i % 100 == 0:
         print(i)
-    di = '../simulations/id/{:05d}'.format(id)
+    di = '../simulations/id/{:06d}'.format(id)
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         print(i, x1, x2, x3, x4, id)
         continue
@@ -137,7 +137,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 
 
 for i, x1, x2, x3, x4, id in d.itertuples():
-    di = '../simulations/id/{:05d}'.format(id)
+    di = '../simulations/id/{:06d}'.format(id)
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
@@ -145,8 +145,8 @@ a = ma.masked_array(a0, mask=m)
 
 
 ## contour preparation
-x = np.arange(5)
-y = np.arange(5)
+x = np.arange(10)
+y = np.arange(10)
 X, Y = np.meshgrid(x, y)
 
 
@@ -159,20 +159,20 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
         ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
-    ax.text(2.0, -0.9, label2nd, ha='center', va='center') ; 
-    ax.text(-0.6, 2.0, label1st, va='center', ha='right', rotation='vertical')
+    ax.text(4.5, -0.9, label2nd, ha='center', va='center') ; 
+    ax.text(-0.6, 4.5, label1st, va='center', ha='right', rotation='vertical')
 
 def plotrs6(rsi, nr, aa, colorcode, fmt, n) :
     '''returns 6 axes'''
     axes = [plt.subplot2grid((6, nr), (i, rsi)) for i in range(6)]
     mi = np.nanmin(aa)
     ma = np.nanmax(aa)
-    rs(axes[0], aa[:, :, 2, 2], colorcode, mi, ma, fmt, n[0], n[1])
-    rs(axes[1], aa[:, 2, :, 2], colorcode, mi, ma, fmt, n[0], n[2])
-    rs(axes[2], aa[:, 2, 2, :], colorcode, mi, ma, fmt, n[0], n[3]) 
-    rs(axes[3], aa[2, :, :, 2], colorcode, mi, ma, fmt, n[1], n[2])
-    rs(axes[4], aa[2, :, 2, :], colorcode, mi, ma, fmt, n[1], n[3])
-    rs(axes[5], aa[2, 2, :, :], colorcode, mi, ma, fmt, n[2], n[3])
+    rs(axes[0], aa[:, :, 4, 4], colorcode, mi, ma, fmt, n[0], n[1])
+    rs(axes[1], aa[:, 4, :, 4], colorcode, mi, ma, fmt, n[0], n[2])
+    rs(axes[2], aa[:, 4, 4, :], colorcode, mi, ma, fmt, n[0], n[3]) 
+    rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
+    rs(axes[4], aa[4, :, 4, :], colorcode, mi, ma, fmt, n[1], n[3])
+    rs(axes[5], aa[4, 4, :, :], colorcode, mi, ma, fmt, n[2], n[3])
     axes[5].text(-0.5, -1.8, mi, fontsize=10, ha='left', va='center')
     axes[5].text(-0.5, -2.4, ma, fontsize=10, ha='left', va='center')
     return axes
