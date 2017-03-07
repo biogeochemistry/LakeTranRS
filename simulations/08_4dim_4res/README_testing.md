@@ -55,30 +55,30 @@ None this time
 
 ## impact of **T**
 
-![](postprocessing/inputs/Air Temperature.png) 
-![](postprocessing/results_raw/Air Temperature.png) 
+![](postprocessing_testing/inputs/Air Temperature.png) 
+![](postprocessing_testing/results_raw/Air Temperature.png) 
 
 ## impact of **WS**
 
-![](postprocessing/inputs/Wind Speed.png) 
-![](postprocessing/results_raw/Wind Speed.png) 
+![](postprocessing_testing/inputs/Wind Speed.png) 
+![](postprocessing_testing/results_raw/Wind Speed.png) 
 
 ## impact of **TP**
 
-![](postprocessing/inputs/Total P.png) 
-![](postprocessing/results_raw/Total P.png) 
+![](postprocessing_testing/inputs/Total P.png) 
+![](postprocessing_testing/results_raw/Total P.png) 
 
 ## impact of **DOC**
 
-![](postprocessing/inputs/DOC.png) 
-![](postprocessing/results_raw/DOC.png) 
+![](postprocessing_testing/inputs/DOC.png) 
+![](postprocessing_testing/results_raw/DOC.png) 
 
 
 
 
 ## Response surfaces
 
-![](postprocessing/RSver2.png)
+![](postprocessing_testing/RSver2.png)
 
 # old TODO
 

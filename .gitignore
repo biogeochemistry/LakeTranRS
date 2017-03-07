@@ -1,14 +1,12 @@
 *.DS_Store
 
-simulations/08_4dim_4res/simulations/
 simulations/09_4dim_4res_not_global/
 
-simulations/08*/simulations/id/*/*.csv*
-
-simulations/08*/postprocessing/test*
 
 simulations/08*/simulations/id/*/*.csv*
+simulations/08*/simulations/idtest/*/*.csv*
 simulations/08*/postprocessing/test*
+
 simulations/09*/
 
 simulations/03*/postprocessing/timeseries.ipynb
@@ -29,7 +27,6 @@ O2*.csv
 
 simulations/.#README.md
 
-simulations/.#README.md
 
 simulations/08_4dim_4res/postprocessing/test.csv
 
@@ -37,6 +34,7 @@ simulations/09_4dim_4res_not_global/run_eight_years_for_301_310.m
 
 simulations/09_4dim_4res_not_global/run_eight_years_parfor_301_310.m
 
-simulations/09_4dim_4res_not_global/run_eight_years_parfor_301_310.m
 
 simulations/08_4dim_4res/.Rhistory
+/LakeTranRS.sublime-project
+/LakeTranRS.sublime-workspace
