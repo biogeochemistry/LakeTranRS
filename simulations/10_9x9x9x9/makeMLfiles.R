@@ -26,8 +26,6 @@ f1 <- function (d, level) {
     d[['AirTemperature']] <- d[['AirTemperature']] + 2.0
   } else if (level == 9) {
     d[['AirTemperature']] <- d[['AirTemperature']] + 3.0
-  } else if (level == 10) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 4.0
   }
   return (d)
 }
