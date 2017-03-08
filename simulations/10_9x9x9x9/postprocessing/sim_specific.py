@@ -213,7 +213,7 @@ def plotsim(simids, fname, stitle):
 
     o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[1e-1, 1e4], legend=False)
     o22.iloc[:, 1:].plot(ax=a5, linewidth=lw, legend=False)
-    a5s.plot([1e-1, 1e4], [1e-1, 1e4], color='lightgray', linewidth=lw, legend=False)
+    a5s.plot([1e-1, 1e4], [1e-1, 1e4], color='lightgray', linewidth=lw)
     for ci in range(1, o22s.shape[1]):
         a5s.plot(o22s.iloc[:, 0], o22s.iloc[:, ci])
     a5s.set_xlim([1e-1, 1e4])
@@ -227,7 +227,7 @@ def plotsim(simids, fname, stitle):
 
     o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[0, 1e4], legend=False)
     o23.iloc[:, 1:].plot(ax=a6, linewidth=lw, legend=False)
-    a6s.plot([1e-1, 1e4], [1e-1, 1e4], color='lightgray', linewidth=lw, legend=False)
+    a6s.plot([1e-1, 1e4], [1e-1, 1e4], color='lightgray', linewidth=lw)
     for ci in range(1, o23s.shape[1]):
         a6s.plot(o23s.iloc[:, 0], o23s.iloc[:, ci])
     a6s.set_xlim([1e-1, 1e4])
