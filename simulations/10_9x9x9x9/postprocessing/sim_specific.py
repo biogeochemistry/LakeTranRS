@@ -325,7 +325,7 @@ def plotsim(simids, fname, stitle):
     st.set_y(0.95)
 
     fig.savefig('{:s}.png'.format(fname), dpi=150, bbox_inches='tight')
-    fig.savefig('{:s}.pdf'.format(fname, dpi=150, bbox_inches='tight')
+    fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
     return(fig)
 
 
