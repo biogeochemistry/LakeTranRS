@@ -337,9 +337,9 @@ if not os.path.exists('sim_specific'):
 
     
 
-sns.set_palette('coolwarm', 2)
-plotsim([3277, 3285], 'results_raw/AT',
-        'impact of air temperature')
+# sns.set_palette('coolwarm', 2)
+# plotsim([3277, 3285], 'results_raw/AT',
+#         'impact of air temperature')
 
 # sns.set_palette('Reds_r', 2)
 # plotsim([3245, 3317], 'results_raw/WS', 
@@ -355,8 +355,8 @@ plotsim([3277, 3285], 'results_raw/AT',
 
 
 sns.set_palette('Oranges_d', 1)
-plotsim(3227, 'results_raw/AT colder', 
-        '"lower air temperature" compared to "base"')
+# plotsim(3227, 'results_raw/AT colder', 
+#         '"lower air temperature" compared to "base"')
 plotsim(3285, 'results_raw/AT warmer',
         '"higher air temperature" compared to "base"')
 # plotsim(3245, 'results_raw/WS calmer',
