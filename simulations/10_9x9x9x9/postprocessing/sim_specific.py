@@ -324,7 +324,8 @@ def plotsim(simids, fname, stitle):
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
 
-    fig.savefig(fname, dpi=150, bbox_inches='tight')
+    fig.savefig('{:s}.png'.format(fname), dpi=150, bbox_inches='tight')
+    fig.savefig('{:s}.pdf'.format(fname, dpi=150, bbox_inches='tight')
     return(fig)
 
 
@@ -337,41 +338,41 @@ if not os.path.exists('sim_specific'):
     
 
 sns.set_palette('coolwarm', 2)
-plotsim([3277, 3285], 'results_raw/AT.png',
+plotsim([3277, 3285], 'results_raw/AT',
         'impact of air temperature')
 
 sns.set_palette('Reds_r', 2)
-plotsim([3245, 3317], 'results_raw/WS.png', 
+plotsim([3245, 3317], 'results_raw/WS', 
         'impact of wind speed')
 
 sns.set_palette('Greens_r', 2)
-plotsim([2957, 3605], 'results_raw/TP.png',
+plotsim([2957, 3605], 'results_raw/TP',
         'impact of total P loading')
 
 sns.set_palette('Reds', 2)
-plotsim([365, 6197], 'results_raw/DOC.png',
+plotsim([365, 6197], 'results_raw/DOC',
              'impact of DOC loading')
 
 
 sns.set_palette('Oranges_d', 1)
-plotsim(3227, 'results_raw/AT colder.png', 
+plotsim(3227, 'results_raw/AT colder', 
         '"lower air temperature" compared to "base"')
-plotsim(3285, 'results_raw/AT warmer.png',
+plotsim(3285, 'results_raw/AT warmer',
         '"higher air temperature" compared to "base"')
-plotsim(3245, 'results_raw/WS calmer.png',
+plotsim(3245, 'results_raw/WS calmer',
         '"calmer wind compared" to "base"')
-plotsim(3317, 'results_raw/WS stronger.png',
+plotsim(3317, 'results_raw/WS stronger',
         '"stronger wind compared" to "base"')
-plotsim(2957, 'results_raw/TP lower.png', 
+plotsim(2957, 'results_raw/TP lower', 
         '"less TP loading compared" to "base"')
-plotsim(3605, 'results_raw/TP higher.png',
+plotsim(3605, 'results_raw/TP higher',
         '"greater TP loading compared" to "base"')
-plotsim(365, 'results_raw/DOC lower.png',
+plotsim(365, 'results_raw/DOC lower',
         '"less DOC loading compared" to "base"')
-plotsim(6197, 'results_raw/DOC higher.png',
+plotsim(6197, 'results_raw/DOC higher',
         '"greater DOC loading compared" to "base"')
 
-# plotsim(1, 'sim_specific/test001.png', '"low in everything" compared to "base"')
-# plotsim(505, 'sim_specific/test505.png', '"id505" compared to "base"')
+# plotsim(1, 'sim_specific/test001', '"low in everything" compared to "base"')
+# plotsim(505, 'sim_specific/test505', '"id505" compared to "base"')
 
 
