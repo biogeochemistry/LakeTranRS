@@ -38,8 +38,6 @@ for r = template
         p1 = ['intermediate/id/', listing(r).name];
         p2 = ['simulations/id/', listing(r).name]; % this folder made earlier
 
-
-
         m_start = m_start0;
         m_stop = m_stop0;
 
@@ -56,41 +54,13 @@ for r = template
         Bio_par(39) = 0.0001;
         Bio_par(40) = 4.4897;
         
-        
-        
-        
-        
-        %% will fake the four-year inputs (weather and inflow) to a century
-        %% long input
-        
-        % original 2010-01-01 to 2013-12-31, 1461 days including ends
-        % 21st century 2001-01-01 to 2100-12-31, 36524 days
-        % this is 25 times original MINUS 1 day
-        
         Wt = [Wt; Wt; Wt];
         Inflw = [Inflw; Inflw; Inflw];
-        % Wt0 = [Wt; Wt; Wt; Wt; Wt; ...
-        %        Wt; Wt; Wt; Wt; Wt; ...
-        %        Wt; Wt; Wt; Wt; Wt; ...
-        %        Wt; Wt; Wt; Wt; Wt; ...
-        %        Wt; Wt; Wt; Wt; Wt];
-        % Wt = Wt0(1:(end-1), :);
-        % Inflw0 = [Inflw; Inflw; Inflw; Inflw; Inflw; ...
-        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
-        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
-        %        Inflw; Inflw; Inflw; Inflw; Inflw; ...
-        %        Inflw; Inflw; Inflw; Inflw; Inflw];
-        % Inflw = Inflw0(1:(end-1), :);
         m_start = m_start1;
         m_stop = m_stop1;
         tt = datenum(m_start):datenum(m_stop);
    
-        
-        
-        
-        
         try 
-            
             [zz,Az,Vz,tt,Qst,Kzt,Tzt,Czt,Szt,Pzt,Chlzt,PPzt,DOPzt,DOCzt,DICzt,...
              CO2zt,O2zt,NO3zt,NH4zt,SO4zt,HSzt,H2Szt,Fe2zt,Ca2zt,pHzt,CH4zt,...
              Fe3zt,Al3zt,SiO4zt,SiO2zt,diatomzt,O2_sat_relt,O2_sat_abst,BODzt,...
@@ -115,37 +85,13 @@ for r = template
             csvwrite([p2, '/lambda.csv'], lambdazt')
             csvwrite([p2, '/His.csv'], His')
             csvwrite([p2, '/chl.csv'], Chlzt')  
-            csvwrite([p2, '/O2abs.csv'], O2_sat_abst')
-            % csvwrite([p2, '/O2rel.csv'], O2_sat_relt')
+            csvwrite([p2, '/O2zt.csv'], O2zt')
             csvwrite([p2, '/totp.csv'], (Czt + Pzt + Chlzt + PPzt + ...
                                                 DOPzt)')
             csvwrite([p2, '/Qst.csv'], Qst')  
-            
-            % csvwrite([p2, '/sedO2.csv'], sediment_data_basin1{1, 1}')
-            % csvwrite([p2, '/sedOM.csv'], sediment_data_basin1{9, 1}')
-            % csvwrite([p2, '/sedOMb.csv'], sediment_data_basin1{10, 1}')
-            % csvwrite([p2, '/sedOMS.csv'], sediment_data_basin1{11, 1}')
-            % csvwrite([p2, '/sedpH.csv'], sediment_data_basin1{31, 1}')
-            
-            % sf = sediment_data_basin1{41, 1};
-            % sf10 = [sf{1, 1} ; 
-            %         sf{2, 1} ;
-            %         sf{3, 1} ;
-            %         sf{4, 1} ;
-            %         sf{5, 1} ;
-            %         sf{6, 1} ;
-            %         sf{7, 1} ;
-            %         sf{8, 1} ;
-            %         sf{9, 1} ;
-            %         sf{10, 1}]; 
-            % csvwrite([p2, '/sedfluxes.csv'], sf10')
-            
-            
+
         catch me
             disp('model crashing; skipping')
-            
         end
-        
     end
-    
 end

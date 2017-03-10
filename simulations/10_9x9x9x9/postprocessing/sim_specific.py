@@ -10,8 +10,8 @@ sns.set_style('whitegrid')
 # bz2 = '.bz2'  
 bz2 = ''
 
-basedir = '../simulations/id/004445/'
-inbasedir = '../intermediate/id/004445/'
+basedir = '../simulations/id/003281/'  # 5,5,5,5
+inbasedir = '../intermediate/id/003281/'
 
 design = pd.read_csv('../intermediate/parameterdict.csv')
 bath = pd.read_csv('../bathymetry05.csv', header=None)
@@ -50,7 +50,7 @@ def plotsim(simids, fname, stitle):
                     .as_matrix().flatten().tolist() for id in simids]
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
-    colnames = ['T3W3P3C3 base'] + simnames
+    colnames = ['T5W5P5C5 base'] + simnames
     
     if len(simids) == 1:
         lw = 1.0
@@ -196,7 +196,7 @@ def plotsim(simids, fname, stitle):
     a4.set_ylabel('ice thickness')
 
     ## oxygen
-    o2 = [pd.read_csv(os.path.join(dir, 'O2abs.csv{:s}'.format(bz2)), header=None)
+    o2 = [pd.read_csv(os.path.join(dir, 'O2zt.csv{:s}'.format(bz2)), header=None)
           for dir in dirs]
     o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
     o22.columns = colnames
@@ -210,20 +210,41 @@ def plotsim(simids, fname, stitle):
     o23['doy'] = o23.index.day_of_year
     o23s = o23.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     o23 = o23.drop('doy', 1)
-    o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[0, 0.8], legend=False)
+
+    o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[1e0, 1e4], legend=False)
     o22.iloc[:, 1:].plot(ax=a5, linewidth=lw, legend=False)
-    a5s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=lw)
+    a5s.plot([1e0, 1e4], [1e0, 1e4], color='lightgray', linewidth=lw)
     for ci in range(1, o22s.shape[1]):
         a5s.plot(o22s.iloc[:, 0], o22s.iloc[:, ci])
-    a5s.set_xlim([0, 0.8])
-    a5s.set_ylim([0, 0.8])
-    o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[0, 0.8], legend=False)
+    a5s.set_xlim([1e0, 1e4])
+    a5s.set_ylim([1e0, 1e4])
+    a5.axhline(16, color='pink')
+    a5.axhline(3000, color='pink')
+    a5s.axhline(3000, color='pink', linewidth=lw)
+    a5s.axhline(16, color='pink', linewidth=lw)
+    a5s.axvline(3000, color='pink', linewidth=lw)
+    a5s.axvline(16, color='pink', linewidth=lw)
+
+    o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[1e0, 1e4], legend=False)
     o23.iloc[:, 1:].plot(ax=a6, linewidth=lw, legend=False)
-    a6s.plot([0, 0.8], [0, 0.8], color='lightgray', linewidth=lw)
+    a6s.plot([1e0, 1e4], [1e0, 1e4], color='lightgray', linewidth=lw)
     for ci in range(1, o23s.shape[1]):
         a6s.plot(o23s.iloc[:, 0], o23s.iloc[:, ci])
-    a6s.set_xlim([0, 0.8])
-    a6s.set_ylim([0, 0.8])
+    a6s.set_xlim([1e0, 1e4])
+    a6s.set_ylim([1e0, 1e4])
+    a6.axhline(16, color='pink')
+    a6.axhline(3000, color='pink')
+    a6s.axhline(3000, color='pink', linewidth=lw)
+    a6s.axhline(16, color='pink', linewidth=lw)
+    a6s.axvline(3000, color='pink', linewidth=lw)
+    a6s.axvline(16, color='pink', linewidth=lw)
+
+    a5.set_yscale('log')
+    a6.set_yscale('log')
+    a5s.set_xscale('log')
+    a6s.set_xscale('log')
+    a5s.set_yscale('log')
+    a6s.set_yscale('log')
     a5.set_ylabel('O2 concentration\nmiddle')
     a6.set_ylabel('O2 concentration\nbottom')
 
@@ -324,7 +345,8 @@ def plotsim(simids, fname, stitle):
     st = fig.suptitle(stitle, fontsize='x-large')
     st.set_y(0.95)
 
-    fig.savefig(fname, dpi=150, bbox_inches='tight')
+    fig.savefig('{:s}.png'.format(fname), dpi=150, bbox_inches='tight')
+    fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
     return(fig)
 
 
@@ -336,52 +358,42 @@ if not os.path.exists('sim_specific'):
 
     
 
-# sns.set_palette('coolwarm', 2)
-# plotsim([311, 315], 'results_raw/Air Temperature.png',
-#         'impact of air temperature')
+sns.set_palette('coolwarm', 2)
+plotsim([3277, 3285], 'results_raw/AT',
+        'impact of air temperature')
 
-# sns.set_palette('Reds_r', 2)
-# plotsim([303, 323], 'results_raw/Wind Speed.png', 
-#         'impact of wind speed')
+sns.set_palette('Reds_r', 2)
+plotsim([3245, 3317], 'results_raw/WS', 
+        'impact of wind speed')
 
-# sns.set_palette('Greens_r', 2)
-# plotsim([263, 363], 'results_raw/Total P.png',
-#         'impact of total P loading')
+sns.set_palette('Greens_r', 2)
+plotsim([2957, 3605], 'results_raw/TP',
+        'impact of total P loading')
 
-# sns.set_palette('Reds', 2)
-# plotsim([63, 563], 'results_raw/DOC.png',
-#              'impact of DOC loading')
+sns.set_palette('Reds', 2)
+plotsim([365, 6197], 'results_raw/DOC',
+             'impact of DOC loading')
 
 
-# sns.set_palette('Oranges_d', 1)
-# plotsim(311, 'results_raw/AT colder.png', 
-#         '"lower air temperature" compared to "base"')
-# plotsim(315, 'results_raw/AT warmer.png',
-#         '"higher air temperature" compared to "base"')
-# plotsim(303, 'results_raw/WS calmer.png',
-#         '"calmer wind compared" to "base"')
-# plotsim(323, 'results_raw/WS stronger.png',
-#         '"stronger wind compared" to "base"')
-# plotsim(263, 'results_raw/TP lower.png', 
-#         '"less TP loading compared" to "base"')
-# plotsim(363, 'results_raw/TP higher.png',
-#         '"greater TP loading compared" to "base"')
-# plotsim(63, 'results_raw/DOC lower.png',
-#         '"less DOC loading compared" to "base"')
-# plotsim(563, 'results_raw/DOC higher.png',
-#         '"greater DOC loading compared" to "base"')
+sns.set_palette('Oranges_d', 1)
+plotsim(3227, 'results_raw/AT colder', 
+        '"lower air temperature" compared to "base"')
+plotsim(3285, 'results_raw/AT warmer',
+        '"higher air temperature" compared to "base"')
+plotsim(3245, 'results_raw/WS calmer',
+        '"calmer wind compared" to "base"')
+plotsim(3317, 'results_raw/WS stronger',
+        '"stronger wind compared" to "base"')
+plotsim(2957, 'results_raw/TP lower', 
+        '"less TP loading compared" to "base"')
+plotsim(3605, 'results_raw/TP higher',
+        '"greater TP loading compared" to "base"')
+plotsim(365, 'results_raw/DOC lower',
+        '"less DOC loading compared" to "base"')
+plotsim(6197, 'results_raw/DOC higher',
+        '"greater DOC loading compared" to "base"')
 
-# plotsim(1, 'sim_specific/test001.png', '"low in everything" compared to "base"')
-# plotsim(505, 'sim_specific/test505.png', '"id505" compared to "base"')
-# plotsim(5, 'sim_specific/test005.png', '"id005" compared to "base"')
-# plotsim(105, 'sim_specific/test105.png', '"id105" compared to "base"')
-# plotsim(605, 'sim_specific/test605.png', '"id605" compared to "base"')
-# plotsim(101, 'sim_specific/test101.png', '"id101" compared to "base"')
-# plotsim(601, 'sim_specific/test601.png', '"id601" compared to "base"')
-# plotsim(501, 'sim_specific/test501.png', '"id501" compared to "base"')
-# plotsim(21, 'sim_specific/test021.png', '"id021" compared to "base"')
-# plotsim(121, 'sim_specific/test121.png', '"id121" compared to "base"')
-# plotsim(521, 'sim_specific/test521.png', '"id521" compared to "base"')
-# plotsim(621, 'sim_specific/test621.png', '"id621" compared to "base"')
+# plotsim(1, 'sim_specific/test001', '"low in everything" compared to "base"')
+# plotsim(505, 'sim_specific/test505', '"id505" compared to "base"')
 
 

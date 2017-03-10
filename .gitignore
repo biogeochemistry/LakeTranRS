@@ -2,6 +2,8 @@
 
 simulations/09_4dim_4res_not_global/
 
+simulations/10*/simulations/id/*/*.csv*
+simulations/*/NIVAserv*.m
 
 simulations/08*/simulations/id/*/*.csv*
 simulations/08*/simulations/idtest/*/*.csv*
