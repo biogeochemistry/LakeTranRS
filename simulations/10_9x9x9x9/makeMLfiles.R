@@ -52,6 +52,24 @@ for (s in 1:nrow(dict)) {
   L2 <- dict[s, 2]
   L3 <- dict[s, 3]
   L4 <- dict[s, 4]
+
+  flag <- 0
+  if (!(L1 %in% c(1, 2, 3, 4, 6, 7, 8, 9))) {
+    flag <- flag + 1
+  }
+  if (!(L2 %in% c(1, 2, 3, 4, 6, 7, 8, 9))) {
+    flag <- flag + 1
+  }
+  if (!(L3 %in% c(1, 2, 3, 4, 6, 7, 8, 9))) {
+    flag <- flag + 1
+  }
+  if (!(L4 %in% c(1, 2, 3, 4, 6, 7, 8, 9))) {
+    flag <- flag + 1
+  }
+  if (L1 + L2 + L3 + L4 > 2) {
+    next
+  }
+  
   simid <- dict[s, 5] ## should be same as s anyway
   data <- f4(f3(f2(f1(original, L1), L2), L3), L4)
   pathname <- sprintf('intermediate/id/%06d/input.txt', simid)
