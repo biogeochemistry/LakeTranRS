@@ -14,10 +14,12 @@ bath.columns = ['zz', 'Az']
 # lambdai = 5   m-1
 # lambdas = 15  m-1
 
-n1 = 9
-n2 = 9
-n3 = 9
-n4 = 9
+nn = 9
+skip = (1, 2, 3, 4, 6, 7, 8, 9)
+n1 = nn
+n2 = nn
+n3 = nn
+n4 = nn
 nt = 2922
 nz = 18
 if nz == 18:
@@ -44,7 +46,14 @@ for i, x1, x2, x3, x4, id in d.itertuples():
         print(i)
     di = '../simulations/id/{:06d}'.format(id)
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
-        print(i, x1, x2, x3, x4, id)
+        print('missing', i, x1, x2, x3, x4, id)
+        continue
+    skipcount = 0
+    skipcount += x1 in skip
+    skipcount += x2 in skip
+    skipcount += x3 in skip
+    skipcount += x4 in skip
+    if skipcount >= 3:
         continue
 
     # if id == 599:
