@@ -60,10 +60,10 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     o2.index = ser
     his = pd.read_csv(os.path.join(di, 'His.csv{:s}'.format(bz2)), header=None)
     his.index = ser
-    lam = pd.read_csv(os.path.join(di, 'lambda.csv{:s}'.format(bz2)), header=None)
-    lam.index = ser
-    qst = pd.read_csv(os.path.join(di, 'Qst.csv{:s}'.format(bz2)), header=None)
-    qst.index = ser ; qst.columns = ('sw', 'lw', 'sl')
+    # lam = pd.read_csv(os.path.join(di, 'lambda.csv{:s}'.format(bz2)), header=None)
+    # lam.index = ser
+    # qst = pd.read_csv(os.path.join(di, 'Qst.csv{:s}'.format(bz2)), header=None)
+    # qst.index = ser ; qst.columns = ('sw', 'lw', 'sl')
                       
 
     # number of anoxia (O2 < 0.05 at bottom) per year (last 4 years) def I
@@ -162,10 +162,10 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
         ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
-    ax.text(4.0, -0.9, label2nd, ha='center', va='center') ; 
+    ax.text(4.0, -1.2, label2nd, ha='center', va='center') ; 
     ax.text(-0.6, 4.0, label1st, va='center', ha='right', rotation='vertical')
 
-def plotrs6(rsi, nr, aa, colorcode, fmt, n) :
+def plotrs6(rsi, nr, aa, colorcode, fmt, fmt2, n) :
     '''returns 6 axes. rsi is the column in the RS plot'''
     axes = [plt.subplot2grid((6, nr), (i, rsi)) for i in range(6)]
     mi = np.nanmin(aa)
@@ -176,8 +176,10 @@ def plotrs6(rsi, nr, aa, colorcode, fmt, n) :
     rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
     rs(axes[4], aa[4, :, 4, :], colorcode, mi, ma, fmt, n[1], n[3])
     rs(axes[5], aa[4, 4, :, :], colorcode, mi, ma, fmt, n[2], n[3])
-    axes[5].text(-0.5, -1.8, mi, fontsize=10, ha='left', va='center')
-    axes[5].text(-0.5, -2.4, ma, fontsize=10, ha='left', va='center')
+    axes[5].text(-0.5, -1.8, 'min: ' + fmt3.format(mi), 
+                 fontsize=10, ha='left', va='center')
+    axes[5].text(-0.5, -2.4, 'max: ' + fmt3.format(ma), 
+                 fontsize=10, ha='left', va='center')
     return axes
 
 
@@ -186,17 +188,17 @@ fig = plt.figure()
 
 n = ['air temp', 'wind speed', 'total P', 'DOC']
 
-aa0 = plotrs6(0, nr, a[:, :, :, :, 0], 'Blues', '%.f', n)
-aa1 = plotrs6(1, nr, a[:, :, :, :, 1], 'Blues', '%.f', n)
-# aa2 = plotrs6(_, nr, a[:, :, :, :, 2], 'Blues', '%.f', n)
-# aa3 = plotrs6(_, nr, a[:, :, :, :, 3], 'Purples', '%.2f', n)
-# aa4 = plotrs6(_, nr, a[:, :, :, :, 4], 'Purples', '%.2f', n)
-aa5 = plotrs6(2, nr, a[:, :, :, :, 5], 'Greens', '%.f', n)
-aa6 = plotrs6(3, nr, a[:, :, :, :, 6], 'Greens', '%.f', n)
-aa7 = plotrs6(4, nr, a[:, :, :, :, 7], 'Reds', '%.f', n)
-# aa8 = plotrs6(_, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', n)
-# aa9 = plotrs6(_, nr, a[:, :, :, :, 9], 'Greys_r', '%.2f', n)
-aa10 = plotrs6(5, nr, a[:, :, :, :, 10], 'Oranges', '%.1f', n)
+aa0 = plotrs6(0, nr, a[:, :, :, :, 0], 'Reds', '%.f', '{:.1f}', n)
+aa1 = plotrs6(1, nr, a[:, :, :, :, 1], 'Reds', '%.f', '{:.1f}', n)
+# aa2 = plotrs6(_, nr, a[:, :, :, :, 2], 'Blues', '%.f', '{:.1f}',n)
+# aa3 = plotrs6(_, nr, a[:, :, :, :, 3], 'Purples', '%.2f', '{:.1f}',n)
+# aa4 = plotrs6(_, nr, a[:, :, :, :, 4], 'Purples', '%.2f', '{:.1f}',n)
+aa5 = plotrs6(2, nr, a[:, :, :, :, 5], 'Greens', '%.f', '{:.1f}',n)
+aa6 = plotrs6(3, nr, a[:, :, :, :, 6], 'Greens', '%.f', '{:.1f}',n)
+aa7 = plotrs6(4, nr, a[:, :, :, :, 7], 'Blues_r', '%.f', '{:.1f}',n)
+# aa8 = plotrs6(_, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', '{:.1f}',n)
+# aa9 = plotrs6(_, nr, a[:, :, :, :, 9], 'Greys_r', '%.2f', '{:.1f}',n)
+aa10 = plotrs6(5, nr, a[:, :, :, :, 10], 'Oranges', '%.1f', '{:.1f}',n)
 
 aa0[0].set_title('anoxia d y-1\nbottom')
 aa1[0].set_title('anoxia d y-1\nbottom alt')
@@ -215,7 +217,8 @@ for ax in fig.get_axes():
     ax.get_yaxis().set_visible(False)
     ax.set_axis_bgcolor('black')
 
-fig.set_figheight(10)
-fig.set_figwidth(18)
+fig.set_figheight(10.5)
+fig.set_figwidth(9)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
 fig.savefig('RSver3lowres.png', dpi=75, bbox_inches='tight')
+ 
