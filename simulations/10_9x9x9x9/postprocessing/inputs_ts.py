@@ -76,9 +76,9 @@ for vi in range(nvars):
     d.iloc[:, [0, 4, 8]].plot(ax=a0) # use only the extremes and middle
     a0.set_ylabel(yl)
     fig.savefig('inputs/{:s}.png'.format(ln), dpi=150)
+    plt.clf()
 
     aa = figall.add_subplot(2, 2, vi + 1)
-    # d.plot(ax=a0)
     d.iloc[:, [0, 4, 8]].plot(ax=aa) # use only the extremes and middle
     aa.set_ylabel(yl)
 
