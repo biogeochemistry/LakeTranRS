@@ -1,38 +1,40 @@
 # How to run this simulation
 
-1. Preparation. Review makeparameterdict.R and makeMLfiles.R and run
+1. Preparation. Review **makeparameterdict.R** and **makeMLfiles.R** and run
    them in that order. This will populate the input files and create
    directories for the outputs. 
-1. Run makebatch.py. This will create batch .m files.
+1. Run **makebatch.py**. This will create batch .m files.
 1. Run the batch files made in the previous steps. Use Raoul's
-   launch__24__batch.m if appropriate. 
+   **launch\_24\_batch.m** if appropriate. 
 1. Postprocessing files are in [postprocessing](postprocessing). Run
-   pp.py and sim_specific in the directory. 
+   **pp.py** and **sim_specific.py** in the
+   directory. **inputs_ts.py** creates time series graphs. 
 
 # What's new in Simulation 10
 
 * Uses Igor's late February versions, except:
   * `dz = 0.5`
   * Ice output `His` outputs
-* dimensions 9 by 9 by 9 by 9
-  * with the base reference to be at 5 by 5 by 5 by 5
-  * this base reference is not the original Langtjern weather, see
+* Dimensions 9 by 9 by 9 by 9
+  * With the base reference to be at level 5 for all 4 dimensions
+    (AT5 WS5 TP5 DOC5, see below)
+  * This base reference is not the original Langtjern weather, see
     table below
 
 # Design
 
 * Inputs taken from real Langtjern weather
-  * with base being modified
-  * all levels also modification of the original
+  * With base being modified
+  * All levels also modification of the original
   * 4 years (2010-2013)
 * Simulation lasts 8 years (2010-2017)
-  * repeats first 4 years twice
-  * use the last 4 years (2014-2017) for reporting purpose
-  * does that mean that water-sediment is in quasi steady state?
-    * water part seem fine (short residence time ? days)
-	* still don't know if the sediment is (and will ever be) in steady
+  * Repeats first 4 years twice
+  * Use the last 4 years (2014-2017) for reporting purpose
+  * Does that mean that water-sediment is in quasi steady state?
+    * Water part seem fine (short residence time ? days)
+	* Still don't know if the sediment is (and will ever be) in steady
       state with water
-	* basically not tested but beyond our scope this time...?
+	* Basically not tested but beyond our scope this time...?
 * The levels control the scale of the inputs, called **dimensions**
   * Air temperature **AT**
   * Wind speed **WS**
@@ -43,18 +45,11 @@
     interesting, and the model does not crash
   * At the base (5), the **responses** are about at the middle in
     scale
-	  * makes sure that when keeping 3 dimensions at the base level 5,
+	  * Makes sure that when keeping 3 dimensions at the base level 5,
         we can maximise the contrast (dynamic range) of the last
         dimension. For example, with levels AT1-AT9 but fixing WS5 TP5
         DOC5, none of the last three (WS5, TP5, DOC5) should not
         dominate how AT1-9 plays a role if any. 
-
-
-
-
-
-
-
 
 ## Levels
 
