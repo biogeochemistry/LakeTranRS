@@ -62,7 +62,7 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 --- | ------------ | ---------------- | ------------------- | -----------------
 1 | original - 3.0 | original * 0.250 | original * 0.316    | original * 0.0316 
 2 | original - 2.0 | original * 0.353 | original * 0.562    | original * 0.0562 
-3 | original - 1.0 | original * 0.500 | original * 1.00     | original * 0.100 
+3 | original - 1.0 | original * 0.500 | original         | original
 4 | original - 0.5 | original * 0.707 | original * 1.78     | original * 0.178 
 5 | **original**   | **original**     | **original * 3.16** | **original * 0.316** 
 6 | original + 0.5 | original * 1.414 | original * 5.62     | original * 0.562 
