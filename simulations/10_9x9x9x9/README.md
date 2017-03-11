@@ -87,7 +87,7 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 # Responses
 
 * no. hypoxia days per year (at 3000 micro g L-1) (d y-1)
-* no. anoxia days per year (at 3000 micro g L-1) (d y-1)
+* no. anoxia days per year (at 16 micro g L-1) (d y-1)
 * mean annual maximum chl concentration at surface (micro g L-1)
 * mean JJA chl concentration at surface (micro g L-1)
 * mean annual ice cover duration (d y-1)
