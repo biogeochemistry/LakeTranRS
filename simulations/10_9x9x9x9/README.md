@@ -107,7 +107,7 @@ None this time
 
 ## Other plots
 
-See [impacts\_of\_dimenions.md](impacts_of_dimenions.md) for the following:
+See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
 * AT1 WS5 TP5 DOC5 
 * AT9 WS5 TP5 DOC5 
 * AT5 WS1 TP5 DOC5 
