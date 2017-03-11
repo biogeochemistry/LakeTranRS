@@ -171,10 +171,10 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
         ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
-    ax.text(4.0, -1.2, label2nd, ha='center', va='center') ; 
+    ax.text(4.0, -1.4, label2nd, ha='center', va='center') ; 
     ax.text(-0.6, 4.0, label1st, va='center', ha='right', rotation='vertical')
 
-def plotrs6(rsi, nr, aa, colorcode, fmt, fmt2, n) :
+def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     '''returns 6 axes. rsi is the column in the RS plot'''
     axes = [plt.subplot2grid((6, nr), (i, rsi)) for i in range(6)]
     mi = np.nanmin(aa)
@@ -185,9 +185,9 @@ def plotrs6(rsi, nr, aa, colorcode, fmt, fmt2, n) :
     rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
     rs(axes[4], aa[4, :, 4, :], colorcode, mi, ma, fmt, n[1], n[3])
     rs(axes[5], aa[4, 4, :, :], colorcode, mi, ma, fmt, n[2], n[3])
-    axes[5].text(-0.5, -1.8, 'min: ' + fmt3.format(mi), 
+    axes[5].text(-0.5, -3.0, 'min: ' + fmt3.format(mi), 
                  fontsize=10, ha='left', va='center')
-    axes[5].text(-0.5, -2.4, 'max: ' + fmt3.format(ma), 
+    axes[5].text(-0.5, -4.5, 'max: ' + fmt3.format(ma), 
                  fontsize=10, ha='left', va='center')
     return axes
 
@@ -226,7 +226,7 @@ for ax in fig.get_axes():
     ax.get_yaxis().set_visible(False)
     ax.set_axis_bgcolor('black')
 
-fig.set_figheight(10.5)
+fig.set_figheight(9.5)
 fig.set_figwidth(9)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
 fig.savefig('RSver3lowres.png', dpi=75, bbox_inches='tight')
