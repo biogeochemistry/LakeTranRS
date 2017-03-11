@@ -58,13 +58,31 @@
 
 ## Levels
 
-TO COMPLETE IN THE NEXT COMMIT
+Level | Air Temp   | Wind Speed       | Total P             | DOC
+--- | ------------ | ---------------- | ------------------- | -----------------
+1 | original - 3.0 | original * 0.250 | original * 0.316    | original * 0.0316 
+2 | original - 2.0 | original * 0.353 | original * 0.562    | original * 0.0562 
+3 | original - 1.0 | original * 0.500 | original * 1.00     | original * 0.100 
+4 | original - 0.5 | original * 0.707 | original * 1.78     | original * 0.178 
+5 | **original**   | **original**     | **original * 3.16** | **original * 0.316** 
+6 | original - 3.0 | original * 1.414 | original * 5.62     | original * 0.562 
+7 | original - 3.0 | original * 2.000 | original * 10.0     | original * 1.00
+8 | original - 3.0 | original * 2.828 | original * 17.8     | original * 1.78 
+9 | original - 3.0 | original * 4.000 | original * 31.6     | original * 3.16 
 
-Level | Temperature | Wind speed | Total P | DOC
---- | --- | --- | --- | ---
-1 | original - 3.0 | original * 0.25 | original * 0.33 | original * 0.0316 
-3 | **original** | **original** | **original * 3.0** |  **original * 0.316** 
-
+```R
+> level <- 1:9
+> (2 ^ ((level - 5) / 2))
+[1] 0.2500000 0.3535534 0.5000000 0.7071068 1.0000000 1.4142136 2.0000000
+[8] 2.8284271 4.0000000
+> (10 ^ ((level - 3) / 4))
+[1]  0.3162278  0.5623413  1.0000000  1.7782794  3.1622777  5.6234133 10.0000000
+[8] 17.7827941 31.6227766
+> (10 ^ ((level - 7)/4))
+[1] 0.03162278 0.05623413 0.10000000 0.17782794 0.31622777 0.56234133 1.00000000
+[8] 1.77827941 3.16227766
+>
+```
 
 # Responses
 
