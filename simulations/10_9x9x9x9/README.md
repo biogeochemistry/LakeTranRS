@@ -65,10 +65,10 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 3 | original - 1.0 | original * 0.500 | original * 1.00     | original * 0.100 
 4 | original - 0.5 | original * 0.707 | original * 1.78     | original * 0.178 
 5 | **original**   | **original**     | **original * 3.16** | **original * 0.316** 
-6 | original - 3.0 | original * 1.414 | original * 5.62     | original * 0.562 
-7 | original - 3.0 | original * 2.000 | original * 10.0     | original * 1.00
-8 | original - 3.0 | original * 2.828 | original * 17.8     | original * 1.78 
-9 | original - 3.0 | original * 4.000 | original * 31.6     | original * 3.16 
+6 | original + 0.5 | original * 1.414 | original * 5.62     | original * 0.562 
+7 | original + 1.0 | original * 2.000 | original * 10.0     | original * 1.00
+8 | original + 2.0 | original * 2.828 | original * 17.8     | original * 1.78 
+9 | original + 3.0 | original * 4.000 | original * 31.6     | original * 3.16 
 
 ```R
 > level <- 1:9
