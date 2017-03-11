@@ -79,7 +79,7 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 >
 ```
 
-# Responses
+## Responses
 
 * no. hypoxia days per year (at 3000 micro g L-1) (d y-1)
 * no. anoxia days per year (at 16 micro g L-1) (d y-1)
@@ -88,19 +88,19 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 * mean annual ice cover duration (d y-1)
 * mean JJ mixing depth (m from the surface)
 
-## Model crashes
+# Model crashes
 
 None this time
 
-## Input time series (2010-2013)
+# Input time series (2010-2013)
 
 ![](postprocessing/inputs/allinputs.png)
 
-## Response surfaces 
+# Response surfaces 
 
 ![](postprocessing/RSver3.png)
 
-## Other plots
+# Other plots
 
 See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
 * **AT1** WS5 TP5 DOC5 
