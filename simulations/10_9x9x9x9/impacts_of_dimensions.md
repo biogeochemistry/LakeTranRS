@@ -1,5 +1,3 @@
-![](postprocessing/inputs/allinputs.png)
-
 ## impact of **AT**
 ![](postprocessing/results_raw/AT.png)
 
