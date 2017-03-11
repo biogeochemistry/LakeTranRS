@@ -5,7 +5,7 @@
 ![](postprocessing/results_raw/WS.png)
 
 ## impact of **TP**
-![](postprocessing/results_raw/TPpng)
+![](postprocessing/results_raw/TP.png)
 
 ## impact of **DOC**
 ![](postprocessing/results_raw/DOC.png)
