@@ -108,12 +108,12 @@ None this time
 ## Other plots
 
 See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
-* AT1 WS5 TP5 DOC5 
-* AT9 WS5 TP5 DOC5 
-* AT5 WS1 TP5 DOC5 
-* AT5 WS9 TP5 DOC5 
-* AT5 WS5 TP1 DOC5 
-* AT5 WS5 TP9 DOC5 
-* AT5 WS5 TP5 DOC1 
-* AT5 WS5 TP5 DOC9 
+* **AT1** WS5 TP5 DOC5 
+* **AT9** WS5 TP5 DOC5 
+* AT5 **WS1** TP5 DOC5 
+* AT5 **WS9** TP5 DOC5 
+* AT5 WS5 **TP1** DOC5 
+* AT5 WS5 **TP9** DOC5 
+* AT5 WS5 TP5 **DOC1** 
+* AT5 WS5 TP5 **DOC9** 
 
