@@ -101,32 +101,19 @@ None this time
 
 ![](postprocessing/inputs/allinputs.png)
 
-
-<!-- # Raw outputs -->
-
-<!-- ## impact of **T** -->
-
-<!-- ![](postprocessing/inputs/Air Temperature.png)  -->
-<!-- ![](postprocessing/results_raw/Air Temperature.png)  -->
-
-<!-- ## impact of **WS** -->
-
-<!-- ![](postprocessing/inputs/Wind Speed.png)  -->
-<!-- ![](postprocessing/results_raw/Wind Speed.png)  -->
-
-<!-- ## impact of **TP** -->
-
-<!-- ![](postprocessing/inputs/Total P.png)  -->
-<!-- ![](postprocessing/results_raw/Total P.png)  -->
-
-<!-- ## impact of **DOC** -->
-
-<!-- ![](postprocessing/inputs/DOC.png)  -->
-<!-- ![](postprocessing/results_raw/DOC.png)  -->
-
-
-
-
-## Response surfaces
+## Response surfaces 
 
 ![](postprocessing/RSver3.png)
+
+## Other plots
+
+See [impacts\_of\_dimenions.md] for the following:
+* AT1 WS5 TP5 DOC5 
+* AT9 WS5 TP5 DOC5 
+* AT5 WS1 TP5 DOC5 
+* AT5 WS9 TP5 DOC5 
+* AT5 WS5 TP1 DOC5 
+* AT5 WS5 TP9 DOC5 
+* AT5 WS5 TP5 DOC1 
+* AT5 WS5 TP5 DOC9 
+
