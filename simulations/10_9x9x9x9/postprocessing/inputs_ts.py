@@ -11,6 +11,7 @@ ser = pd.period_range('2010-01-01', periods=(365*4+1)*1)
 sns.set_style('whitegrid')
 nvars = 4
 nlevels = 9
+nlevelsplot = 3  # for palette
 shortnames = ['Var{:d}'.format(ci) for ci in range(1, 5)]
 palettes = ['coolwarm', 'Reds', 'Greens', 'cubehelix_r']
 longnames = ['Air Temperature', 
@@ -42,6 +43,8 @@ formats = ['{:.2f}', '{:.2f}', '{:.2f}', '{:.1f}']
 design = pd.read_csv('../intermediate/parameterdict.csv')
 levels = range(1, 1 + nlevels)
 
+figall = plt.figure(0)
+
 for vi in range(nvars):
     sn = shortnames[vi]
     ln = longnames[vi]
@@ -66,14 +69,20 @@ for vi in range(nvars):
                  for li in levels]  # rename
     d.index = ser
 
-    sns.set_palette(pl)
-    plt.clf()
-    fig = plt.figure(0)
+    sns.set_palette(pl, nlevelsplot)
+    fig = plt.figure(vi)
     a0 = fig.add_subplot(111)
-
     # d.plot(ax=a0)
     d.iloc[:, [0, 4, 8]].plot(ax=a0) # use only the extremes and middle
-
     a0.set_ylabel(yl)
     fig.savefig('inputs/{:s}.png'.format(ln), dpi=150)
+    plt.clf()
+
+    aa = figall.add_subplot(2, 2, vi + 1)
+    d.iloc[:, [0, 4, 8]].plot(ax=aa) # use only the extremes and middle
+    aa.set_ylabel(yl)
+
+figall.set_figheight(11)
+figall.set_figwidth(13)
+figall.savefig('inputs/allinputs.png', dpi=150, bbox_inches='tight')
 
