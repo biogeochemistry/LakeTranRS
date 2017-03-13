@@ -90,9 +90,9 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     # # mean O2 concentration at 2m (last 4 years)
     # mo22 = o2.iloc[:, zim].mean()
     
-    # mean annual maximum chl at surface (last 4 years)
-    amc = chl.iloc[:, 0].groupby(chl.index.year).max()
-    mamc = amc[amc.index >= 2014].mean()
+    # # mean annual maximum chl at surface (last 4 years)
+    # amc = chl.iloc[:, 0].groupby(chl.index.year).max()
+    # mamc = amc[amc.index >= 2014].mean()
 
     # mean JJA chl at surface (last 4 yers)
     chlJJA = chl[(chl.index.month > 5) & (chl.index.month < 9) & 
@@ -138,7 +138,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     # a0[x1-1, x2-1, x3-1, x4-1, 2] = anoxia3
     # a0[x1-1, x2-1, x3-1, x4-1, 3] = mo21
     # a0[x1-1, x2-1, x3-1, x4-1, 4] = mo22
-    a0[x1-1, x2-1, x3-1, x4-1, 5] = mamc * 1e3
+    # a0[x1-1, x2-1, x3-1, x4-1, 5] = mamc * 1e3
     a0[x1-1, x2-1, x3-1, x4-1, 6] = chlJJA * 1e3
     a0[x1-1, x2-1, x3-1, x4-1, 7] = ic
     # a0[x1-1, x2-1, x3-1, x4-1, 8] = ir1
@@ -202,19 +202,19 @@ aa1 = plotrs6(1, nr, a[:, :, :, :, 1], 'Reds', '%.f', '{:.1f}', n)
 # aa2 = plotrs6(_, nr, a[:, :, :, :, 2], 'Blues', '%.f', '{:.1f}',n)
 # aa3 = plotrs6(_, nr, a[:, :, :, :, 3], 'Purples', '%.2f', '{:.1f}',n)
 # aa4 = plotrs6(_, nr, a[:, :, :, :, 4], 'Purples', '%.2f', '{:.1f}',n)
-aa5 = plotrs6(2, nr, a[:, :, :, :, 5], 'Greens', '%.f', '{:.1f}',n)
-aa6 = plotrs6(3, nr, a[:, :, :, :, 6], 'Greens', '%.f', '{:.1f}',n)
-aa7 = plotrs6(4, nr, a[:, :, :, :, 7], 'Blues_r', '%.f', '{:.1f}',n)
+# aa5 = plotrs6(_, nr, a[:, :, :, :, 5], 'Greens', '%.f', '{:.1f}',n)
+aa6 = plotrs6(2, nr, a[:, :, :, :, 6], 'Greens', '%.f', '{:.1f}',n)
+aa7 = plotrs6(3, nr, a[:, :, :, :, 7], 'Blues_r', '%.f', '{:.1f}',n)
 # aa8 = plotrs6(_, nr, a[:, :, :, :, 8], 'Greys_r', '%.f', '{:.1f}',n)
 # aa9 = plotrs6(_, nr, a[:, :, :, :, 9], 'Greys_r', '%.2f', '{:.1f}',n)
-aa10 = plotrs6(5, nr, a[:, :, :, :, 10], 'Oranges', '%.1f', '{:.1f}',n)
+aa10 = plotrs6(4, nr, a[:, :, :, :, 10], 'Oranges', '%.1f', '{:.1f}',n)
 
 aa0[0].set_title('hypoxia d y-1\nhypolimnion')
 aa1[0].set_title('anoxia d y-1\nhypolimnion')
 # aa2[0].set_title('anoxia d y-1\nmiddle')
 # aa3[0].set_title('mean [O2]\nbottom')
 # aa4[0].set_title('mean [O2]\nmiddle')
-aa5[0].set_title('mean annual\nmax chl\nsurface')
+# aa5[0].set_title('mean annual\nmax chl\nsurface')
 aa6[0].set_title('mean JJA chl\nsurface')
 aa7[0].set_title('ice cover\ndays y-1')
 # aa8[0].set_title('mean MAM\nirradiance\nmiddle')
@@ -227,7 +227,7 @@ for ax in fig.get_axes():
     ax.set_axis_bgcolor('black')
 
 fig.set_figheight(9.5)
-fig.set_figwidth(9)
+fig.set_figwidth(7.5)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
 fig.savefig('RSver3lowres.png', dpi=75, bbox_inches='tight')
  
