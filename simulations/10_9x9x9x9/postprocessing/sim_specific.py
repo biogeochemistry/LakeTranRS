@@ -29,6 +29,9 @@ elif dz == 0.5:
     z2i = 17
     z2 = 8.5
 
+nl = 9
+nv = 11
+
 
 nb = bath.shape[0] # number of rows, depth gradient slices
 dres = bath.zz[1] - bath.zz[0]
@@ -37,8 +40,11 @@ volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0
 volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, bath.shape[0]))
 
 
-def plotsim(simids, fname, stitle):
+def plotsim(simids, fname, stitle, writedata=False):
     '''plots various outputs against the original simulation'''
+
+    ni = length(simids)
+    loopd = np.zeros((nv, 365, ni)) * np.nan
 
     if type(simids) is not list:
         simids = [simids]
@@ -52,7 +58,7 @@ def plotsim(simids, fname, stitle):
                 for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T5W5P5C5 base'] + simnames
     
-    if len(simids) == 1:
+    if ni == 1:
         lw = 1.0
     else:
         lw = 0.5
@@ -61,28 +67,28 @@ def plotsim(simids, fname, stitle):
     fig = plt.figure(0)
     fig.set_figheight(20)
     fig.set_figwidth(9)
-    a9 = plt.subplot2grid((11, 4), (0, 0), colspan = 3)
-    a9s = plt.subplot2grid((11, 4), (0, 3)) 
-    a1 = plt.subplot2grid((11, 4), (1, 0), colspan = 3)
-    a1s = plt.subplot2grid((11, 4), (1, 3))
-    a2 = plt.subplot2grid((11, 4), (2, 0), colspan = 3)
-    a2s = plt.subplot2grid((11, 4), (2, 3))
-    a3 = plt.subplot2grid((11, 4), (3, 0), colspan = 3)
-    a3s = plt.subplot2grid((11, 4), (3, 3)) 
-    a4 = plt.subplot2grid((11, 4), (4, 0), colspan = 3)
-    a4s = plt.subplot2grid((11, 4), (4, 3)) 
-    a5 = plt.subplot2grid((11, 4), (5, 0), colspan = 3)
-    a5s = plt.subplot2grid((11, 4), (5, 3)) 
-    a6 = plt.subplot2grid((11, 4), (6, 0), colspan = 3)
-    a6s = plt.subplot2grid((11, 4), (6, 3)) 
-    a7 = plt.subplot2grid((11, 4), (7, 0), colspan = 3)
-    a7s = plt.subplot2grid((11, 4), (7, 3)) 
-    a8 = plt.subplot2grid((11, 4), (8, 0), colspan = 3)
-    a8s = plt.subplot2grid((11, 4), (8, 3)) 
-    a10 = plt.subplot2grid((11, 4), (9, 0), colspan = 3)
-    a10s = plt.subplot2grid((11, 4), (9, 3)) 
-    a11 = plt.subplot2grid((11, 4), (10, 0), colspan = 3)
-    a11s = plt.subplot2grid((11, 4), (10, 3)) 
+    a9 = plt.subplot2grid((nv, 4), (0, 0), colspan = 3)
+    a9s = plt.subplot2grid((nv, 4), (0, 3)) 
+    a1 = plt.subplot2grid((nv, 4), (1, 0), colspan = 3)
+    a1s = plt.subplot2grid((nv, 4), (1, 3))
+    a2 = plt.subplot2grid((nv, 4), (2, 0), colspan = 3)
+    a2s = plt.subplot2grid((nv, 4), (2, 3))
+    a3 = plt.subplot2grid((nv, 4), (3, 0), colspan = 3)
+    a3s = plt.subplot2grid((nv, 4), (3, 3)) 
+    a4 = plt.subplot2grid((nv, 4), (4, 0), colspan = 3)
+    a4s = plt.subplot2grid((nv, 4), (4, 3)) 
+    a5 = plt.subplot2grid((nv, 4), (5, 0), colspan = 3)
+    a5s = plt.subplot2grid((nv, 4), (5, 3)) 
+    a6 = plt.subplot2grid((nv, 4), (6, 0), colspan = 3)
+    a6s = plt.subplot2grid((nv, 4), (6, 3)) 
+    a7 = plt.subplot2grid((nv, 4), (7, 0), colspan = 3)
+    a7s = plt.subplot2grid((nv, 4), (7, 3)) 
+    a8 = plt.subplot2grid((nv, 4), (8, 0), colspan = 3)
+    a8s = plt.subplot2grid((nv, 4), (8, 3)) 
+    a10 = plt.subplot2grid((nv, 4), (9, 0), colspan = 3)
+    a10s = plt.subplot2grid((nv, 4), (9, 3)) 
+    a11 = plt.subplot2grid((nv, 4), (10, 0), colspan = 3)
+    a11s = plt.subplot2grid((nv, 4), (10, 3)) 
 
     
     ## light related matters
@@ -334,7 +340,6 @@ def plotsim(simids, fname, stitle):
     a9s.text(8, 8, 'only JJ months')
     a9.set_ylabel('mixing depth, m\ntentative def')
 
-
     a9.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
               ncol=4, mode="expand", borderaxespad=0.)
 
@@ -347,6 +352,21 @@ def plotsim(simids, fname, stitle):
 
     fig.savefig('{:s}.png'.format(fname), dpi=150, bbox_inches='tight')
     fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
+
+    loopd.iloc[0, :, :] = t0s
+    loopd.iloc[1, :, :] = t1s
+    loopd.iloc[2, :, :] = t2s
+    loopd.iloc[3, :, :] = ices
+    loopd.iloc[4, :, :] = o22s
+    loopd.iloc[5, :, :] = o23s
+    loopd.iloc[6, :, :] = chlps
+    loopd.iloc[7, :, :] = tpps
+    loopd.iloc[8, :, :] = mdeps
+    loopd.iloc[9, :, :] = ir1s
+    loopd.iloc[10, :, :] = ir2s
+
+    np.save('{:s}.npy'.format(fname))
+
     return(fig)
 
 
