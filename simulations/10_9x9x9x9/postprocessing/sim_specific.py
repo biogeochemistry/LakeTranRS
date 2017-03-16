@@ -31,6 +31,7 @@ elif dz == 0.5:
 
 nl = 9
 nv = 11
+nvmarch = 5
 
 
 nb = bath.shape[0] # number of rows, depth gradient slices
@@ -40,11 +41,14 @@ volume1d = 0.1 * (bath.Az + np.array(bath.Az[1:].tolist() + [0])) / 2.0
 volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, bath.shape[0]))
 
 
-def plotsim(simids, fname, stitle, writedata=False):
+def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     '''plots various outputs against the original simulation'''
 
     ni = length(simids)
-    loopd = np.zeros((nv, 365, ni)) * np.nan
+    if marchversion:
+        loopd = np.zeros((nvmarch, 365, ni)) * np.nan
+    else:
+        loopd = np.zeros((nv, 365, ni)) * np.nan
 
     if type(simids) is not list:
         simids = [simids]
@@ -64,76 +68,111 @@ def plotsim(simids, fname, stitle, writedata=False):
         lw = 0.5
     
     plt.clf()
-    fig = plt.figure(0)
-    fig.set_figheight(20)
-    fig.set_figwidth(9)
-    a9 = plt.subplot2grid((nv, 4), (0, 0), colspan = 3)
-    a9s = plt.subplot2grid((nv, 4), (0, 3)) 
-    a1 = plt.subplot2grid((nv, 4), (1, 0), colspan = 3)
-    a1s = plt.subplot2grid((nv, 4), (1, 3))
-    a2 = plt.subplot2grid((nv, 4), (2, 0), colspan = 3)
-    a2s = plt.subplot2grid((nv, 4), (2, 3))
-    a3 = plt.subplot2grid((nv, 4), (3, 0), colspan = 3)
-    a3s = plt.subplot2grid((nv, 4), (3, 3)) 
-    a4 = plt.subplot2grid((nv, 4), (4, 0), colspan = 3)
-    a4s = plt.subplot2grid((nv, 4), (4, 3)) 
-    a5 = plt.subplot2grid((nv, 4), (5, 0), colspan = 3)
-    a5s = plt.subplot2grid((nv, 4), (5, 3)) 
-    a6 = plt.subplot2grid((nv, 4), (6, 0), colspan = 3)
-    a6s = plt.subplot2grid((nv, 4), (6, 3)) 
-    a7 = plt.subplot2grid((nv, 4), (7, 0), colspan = 3)
-    a7s = plt.subplot2grid((nv, 4), (7, 3)) 
-    a8 = plt.subplot2grid((nv, 4), (8, 0), colspan = 3)
-    a8s = plt.subplot2grid((nv, 4), (8, 3)) 
-    a10 = plt.subplot2grid((nv, 4), (9, 0), colspan = 3)
-    a10s = plt.subplot2grid((nv, 4), (9, 3)) 
-    a11 = plt.subplot2grid((nv, 4), (10, 0), colspan = 3)
-    a11s = plt.subplot2grid((nv, 4), (10, 3)) 
 
-    
-    ## light related matters
-    qst = [pd.read_csv(os.path.join(dir, 'Qst.csv{:s}'.format(bz2)), header=None)
-           for dir in dirs] # ('sw', 'lw', 'sl')
-    sw = pd.concat([d.iloc[:, 0] for d in qst], axis=1)
-    sw.columns = colnames
-    sw.index = ser
-    lam = [pd.read_csv(os.path.join(dir, 'lambda.csv{:s}'.format(bz2)), header=None)
-           for dir in dirs]
+    if marchversion:
+        fig = plt.figure(0)
+        fig.set_figheight(10)
+        fig.set_figwdith(9)
+        a9 = plt.subplot2grid((nv, 4), (0, 0), colspan = 3)
+        a9s = plt.subplot2grid((nv, 4), (0, 3)) 
+        a1 = plt.subplot2grid((nv, 4), (1, 0), colspan = 3)
+        a1s = plt.subplot2grid((nv, 4), (1, 3))
+        a4 = plt.subplot2grid((nv, 4), (4, 0), colspan = 3)
+        a4s = plt.subplot2grid((nv, 4), (4, 3)) 
+        a6 = plt.subplot2grid((nv, 4), (6, 0), colspan = 3)
+        a6s = plt.subplot2grid((nv, 4), (6, 3)) 
+        a8 = plt.subplot2grid((nv, 4), (8, 0), colspan = 3)
+        a8s = plt.subplot2grid((nv, 4), (8, 3)) 
+    else:
+        fig = plt.figure(0)
+        fig.set_figheight(20)
+        fig.set_figwidth(9)
+        a9 = plt.subplot2grid((nv, 4), (0, 0), colspan = 3)
+        a9s = plt.subplot2grid((nv, 4), (0, 3)) 
+        a1 = plt.subplot2grid((nv, 4), (1, 0), colspan = 3)
+        a1s = plt.subplot2grid((nv, 4), (1, 3))
+        a2 = plt.subplot2grid((nv, 4), (2, 0), colspan = 3)
+        a2s = plt.subplot2grid((nv, 4), (2, 3))
+        a3 = plt.subplot2grid((nv, 4), (3, 0), colspan = 3)
+        a3s = plt.subplot2grid((nv, 4), (3, 3)) 
+        a4 = plt.subplot2grid((nv, 4), (4, 0), colspan = 3)
+        a4s = plt.subplot2grid((nv, 4), (4, 3)) 
+        a5 = plt.subplot2grid((nv, 4), (5, 0), colspan = 3)
+        a5s = plt.subplot2grid((nv, 4), (5, 3)) 
+        a6 = plt.subplot2grid((nv, 4), (6, 0), colspan = 3)
+        a6s = plt.subplot2grid((nv, 4), (6, 3)) 
+        a7 = plt.subplot2grid((nv, 4), (7, 0), colspan = 3)
+        a7s = plt.subplot2grid((nv, 4), (7, 3)) 
+        a8 = plt.subplot2grid((nv, 4), (8, 0), colspan = 3)
+        a8s = plt.subplot2grid((nv, 4), (8, 3)) 
+        a10 = plt.subplot2grid((nv, 4), (9, 0), colspan = 3)
+        a10s = plt.subplot2grid((nv, 4), (9, 3)) 
+        a11 = plt.subplot2grid((nv, 4), (10, 0), colspan = 3)
+        a11s = plt.subplot2grid((nv, 4), (10, 3)) 
+        
+    if not marchversion:
+        ## light related matters
+        qst = [pd.read_csv(os.path.join(dir, 'Qst.csv{:s}'.format(bz2)), header=None)
+               for dir in dirs] # ('sw', 'lw', 'sl')
+        sw = pd.concat([d.iloc[:, 0] for d in qst], axis=1)
+        sw.columns = colnames
+        sw.index = ser
+        lam = [pd.read_csv(os.path.join(dir, 'lambda.csv{:s}'.format(bz2)), header=None)
+               for dir in dirs]
 
-    # lambda to irradiance at depth1
-    lam1 = pd.concat([d.iloc[:, z1i] for d in lam], axis=1)
-    lam1.columns = colnames
-    lam1.index = ser
-    ir1 = sw * np.exp(-z1 * lam1)
-    ir1['doy'] = ir1.index.day_of_year
-    ir1s = ir1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    ir1 = ir1.drop('doy', 1)
-    ir1.iloc[:, 0].plot(color='lightgray', ax=a10, ylim=[0, 40], legend=False)
-    ir1.iloc[:, 1:].plot(ax=a10, linewidth=lw, legend=False)
-    a10s.plot([0, 40], [0, 40], color='lightgray', linewidth=lw)
-    for ci in range(1, ir1s.shape[1]):
-        a10s.plot(ir1s.iloc[:, 0], ir1s.iloc[:, ci])
-    a10s.set_xlim([0, 40])
-    a10s.set_ylim([0, 40])    
+        # lambda to irradiance at depth1
+        lam1 = pd.concat([d.iloc[:, z1i] for d in lam], axis=1)
+        lam1.columns = colnames
+        lam1.index = ser
+        ir1 = sw * np.exp(-z1 * lam1)
+        ir1['doy'] = ir1.index.day_of_year
+        ir1s = ir1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        ir1 = ir1.drop('doy', 1)
+        ir1.iloc[:, 0].plot(color='lightgray', ax=a10, ylim=[0, 40], legend=False)
+        ir1.iloc[:, 1:].plot(ax=a10, linewidth=lw, legend=False)
+        a10s.plot([0, 40], [0, 40], color='lightgray', linewidth=lw)
+        for ci in range(1, ir1s.shape[1]):
+            a10s.plot(ir1s.iloc[:, 0], ir1s.iloc[:, ci])
+        a10s.set_xlim([0, 40])
+        a10s.set_ylim([0, 40])    
 
-    # lambda to irradiance at depth2
-    lam2 = pd.concat([d.iloc[:, z2i] for d in lam], axis=1)
-    lam2.columns = colnames
-    lam2.index = ser
-    ir2 = sw * np.exp(-z2 * lam2)
-    ir2['doy'] = ir1.index.day_of_year
-    ir2s = ir2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    ir2 = ir2.drop('doy', 1)
-    ir2.iloc[:, 0].plot(color='lightgray', ax=a11, ylim=[0, 0.08], legend=False)
-    ir2.iloc[:, 1:].plot(ax=a11, linewidth=lw, legend=False)
-    a11s.plot([0, 0.08], [0, 0.08], color='lightgray', linewidth=lw)
-    for ci in range(1, ir2s.shape[1]):
-        a11s.plot(ir2s.iloc[:, 0], ir2s.iloc[:, ci])
-    a11s.set_xlim([0, 0.08])
-    a11s.set_ylim([0, 0.08])    
+        # lambda to irradiance at depth2
+        lam2 = pd.concat([d.iloc[:, z2i] for d in lam], axis=1)
+        lam2.columns = colnames
+        lam2.index = ser
+        ir2 = sw * np.exp(-z2 * lam2)
+        ir2['doy'] = ir1.index.day_of_year
+        ir2s = ir2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        ir2 = ir2.drop('doy', 1)
+        ir2.iloc[:, 0].plot(color='lightgray', ax=a11, ylim=[0, 0.08], legend=False)
+        ir2.iloc[:, 1:].plot(ax=a11, linewidth=lw, legend=False)
+        a11s.plot([0, 0.08], [0, 0.08], color='lightgray', linewidth=lw)
+        for ci in range(1, ir2s.shape[1]):
+            a11s.plot(ir2s.iloc[:, 0], ir2s.iloc[:, ci])
+        a11s.set_xlim([0, 0.08])
+        a11s.set_ylim([0, 0.08])    
 
-    a10.set_ylabel('irradiance\nmiddle')
-    a11.set_ylabel('irradiance\nbottom')
+        a10.set_ylabel('irradiance\nmiddle')
+        a11.set_ylabel('irradiance\nbottom')
+
+        ## tp (grams per whole lake)
+        tp = [pd.read_csv(os.path.join(dir, 'totp.csv{:s}'.format(bz2)), header=None)
+              for dir in dirs]
+        tpp = pd.concat([np.sum(d * volume2d, axis=1) / 1e3 for d in tp], axis=1)
+        tpp.columns = colnames
+        tpp.index = ser
+        tpp['doy'] = tpp.index.day_of_year
+        tpps = tpp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        tpp = tpp.drop('doy', 1)    
+        tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[0, 20e0], legend=False)
+        tpp.iloc[:, 1:].plot(ax=a8, linewidth=lw, legend=False)
+        a8s.plot([0e0, 20e0], [0e0, 20e0], color='lightgray', linewidth=lw)
+        for ci in range(1, tpps.shape[1]):
+            a8s.plot(tpps.iloc[:, 0], tpps.iloc[:, ci])
+        a8s.set_xlim([0, 20e0])
+        a8s.set_ylim([0, 20e0])
+        a8.set_ylabel('total P pool\nentire lake')
+
 
 
 
@@ -146,18 +185,6 @@ def plotsim(simids, fname, stitle, writedata=False):
     t0['doy'] = t0.index.day_of_year
     t0s = t0.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     t0 = t0.drop('doy', 1)
-    t1 = pd.concat([d.iloc[:, z1i] for d in t], axis=1)
-    t1.columns = colnames
-    t1.index = ser
-    t1['doy'] = t1.index.day_of_year
-    t1s = t1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    t1 = t1.drop('doy', 1)
-    t2 = pd.concat([d.iloc[:, z2i] for d in t], axis=1)
-    t2.columns = colnames
-    t2.index = ser
-    t2['doy'] = t2.index.day_of_year
-    t2s = t2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    t2 = t2.drop('doy', 1)
     t0.iloc[:, 0].plot(color='lightgray', ax=a1, ylim=[0, 25], legend=False)
     t0.iloc[:, 1:].plot(ax=a1, linewidth=lw, legend=False)
     a1s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
@@ -165,23 +192,38 @@ def plotsim(simids, fname, stitle, writedata=False):
         a1s.plot(t0s.iloc[:, 0], t0s.iloc[:, ci])
     a1s.set_xlim([0, 25])
     a1s.set_ylim([0, 25])
-    t1.iloc[:, 0].plot(color='lightgray', ax=a2, ylim=[0, 25], legend=False)
-    t1.iloc[:, 1:].plot(ax=a2, linewidth=lw, legend=False)
-    a2s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
-    for ci in range(1, t1s.shape[1]):
-        a2s.plot(t1s.iloc[:, 0], t1s.iloc[:, ci])
-    a2s.set_xlim([0, 25])
-    a2s.set_ylim([0, 25])
-    t2.iloc[:, 0].plot(color='lightgray', ax=a3, ylim=[0, 25], legend=False)
-    t2.iloc[:, 1:].plot(ax=a3, linewidth=lw, legend=False)
-    a3s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
-    for ci in range(1, t2s.shape[1]):
-        a3s.plot(t2s.iloc[:, 0], t2s.iloc[:, ci])
-    a3s.set_xlim([0, 25])
-    a3s.set_ylim([0, 25])
     a1.set_ylabel('water temperature\nsurface')
-    a2.set_ylabel('water temperature\nmiddle')
-    a3.set_ylabel('water temperature\nbottom')
+
+    if not merchversion:
+        t1 = pd.concat([d.iloc[:, z1i] for d in t], axis=1)
+        t1.columns = colnames
+        t1.index = ser
+        t1['doy'] = t1.index.day_of_year
+        t1s = t1.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        t1 = t1.drop('doy', 1)
+        t1.iloc[:, 0].plot(color='lightgray', ax=a2, ylim=[0, 25], legend=False)
+        t1.iloc[:, 1:].plot(ax=a2, linewidth=lw, legend=False)
+        a2s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
+        for ci in range(1, t1s.shape[1]):
+            a2s.plot(t1s.iloc[:, 0], t1s.iloc[:, ci])
+        a2s.set_xlim([0, 25])
+        a2s.set_ylim([0, 25])
+        a2.set_ylabel('water temperature\nmiddle')
+
+        t2 = pd.concat([d.iloc[:, z2i] for d in t], axis=1)
+        t2.columns = colnames
+        t2.index = ser
+        t2['doy'] = t2.index.day_of_year
+        t2s = t2.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        t2 = t2.drop('doy', 1)
+        t2.iloc[:, 0].plot(color='lightgray', ax=a3, ylim=[0, 25], legend=False)
+        t2.iloc[:, 1:].plot(ax=a3, linewidth=lw, legend=False)
+        a3s.plot([0, 25], [0, 25], color='lightgray', linewidth=lw)
+        for ci in range(1, t2s.shape[1]):
+            a3s.plot(t2s.iloc[:, 0], t2s.iloc[:, ci])
+        a3s.set_xlim([0, 25])
+        a3s.set_ylim([0, 25])
+        a3.set_ylabel('water temperature\nbottom')
 
     ## ice
     his = [pd.read_csv(os.path.join(dir, 'His.csv{:s}'.format(bz2)), header=None)
@@ -202,35 +244,40 @@ def plotsim(simids, fname, stitle, writedata=False):
     a4.set_ylabel('ice thickness')
 
     ## oxygen
-    o2 = [pd.read_csv(os.path.join(dir, 'O2zt.csv{:s}'.format(bz2)), header=None)
-          for dir in dirs]
-    o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
-    o22.columns = colnames
-    o22.index = ser
-    o22['doy'] = o22.index.day_of_year
-    o22s = o22.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    o22 = o22.drop('doy', 1)
+    if not marchversion:
+        o2 = [pd.read_csv(os.path.join(dir, 'O2zt.csv{:s}'.format(bz2)), header=None)
+              for dir in dirs]
+        o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
+        o22.columns = colnames
+        o22.index = ser
+        o22['doy'] = o22.index.day_of_year
+        o22s = o22.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
+        o22 = o22.drop('doy', 1)
+        o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[1e0, 1e4], legend=False)
+        o22.iloc[:, 1:].plot(ax=a5, linewidth=lw, legend=False)
+        a5s.plot([1e0, 1e4], [1e0, 1e4], color='lightgray', linewidth=lw)
+        for ci in range(1, o22s.shape[1]):
+            a5s.plot(o22s.iloc[:, 0], o22s.iloc[:, ci])
+        a5s.set_xlim([1e0, 1e4])
+        a5s.set_ylim([1e0, 1e4])
+        a5.axhline(16, color='pink')
+        a5.axhline(3000, color='pink')
+        a5s.axhline(3000, color='pink', linewidth=lw)
+        a5s.axhline(16, color='pink', linewidth=lw)
+        a5s.axvline(3000, color='pink', linewidth=lw)
+        a5s.axvline(16, color='pink', linewidth=lw)
+        a5.set_yscale('log')
+        a5s.set_xscale('log')
+        a5s.set_yscale('log')
+        a5.set_ylabel('O2 concentration\nmiddle')
+
+
     o23 = pd.concat([d.iloc[:, z2i] for d in o2], axis=1)
     o23.columns = colnames
     o23.index = ser
     o23['doy'] = o23.index.day_of_year
     o23s = o23.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
     o23 = o23.drop('doy', 1)
-
-    o22.iloc[:, 0].plot(color='lightgray', ax=a5, ylim=[1e0, 1e4], legend=False)
-    o22.iloc[:, 1:].plot(ax=a5, linewidth=lw, legend=False)
-    a5s.plot([1e0, 1e4], [1e0, 1e4], color='lightgray', linewidth=lw)
-    for ci in range(1, o22s.shape[1]):
-        a5s.plot(o22s.iloc[:, 0], o22s.iloc[:, ci])
-    a5s.set_xlim([1e0, 1e4])
-    a5s.set_ylim([1e0, 1e4])
-    a5.axhline(16, color='pink')
-    a5.axhline(3000, color='pink')
-    a5s.axhline(3000, color='pink', linewidth=lw)
-    a5s.axhline(16, color='pink', linewidth=lw)
-    a5s.axvline(3000, color='pink', linewidth=lw)
-    a5s.axvline(16, color='pink', linewidth=lw)
-
     o23.iloc[:, 0].plot(color='lightgray', ax=a6, ylim=[1e0, 1e4], legend=False)
     o23.iloc[:, 1:].plot(ax=a6, linewidth=lw, legend=False)
     a6s.plot([1e0, 1e4], [1e0, 1e4], color='lightgray', linewidth=lw)
@@ -244,15 +291,11 @@ def plotsim(simids, fname, stitle, writedata=False):
     a6s.axhline(16, color='pink', linewidth=lw)
     a6s.axvline(3000, color='pink', linewidth=lw)
     a6s.axvline(16, color='pink', linewidth=lw)
-
-    a5.set_yscale('log')
     a6.set_yscale('log')
-    a5s.set_xscale('log')
     a6s.set_xscale('log')
-    a5s.set_yscale('log')
     a6s.set_yscale('log')
-    a5.set_ylabel('O2 concentration\nmiddle')
     a6.set_ylabel('O2 concentration\nbottom')
+
 
     ## chl (grams per whole lake)
     chl = [pd.read_csv(os.path.join(dir, 'chl.csv{:s}'.format(bz2)), header=None)
@@ -271,24 +314,6 @@ def plotsim(simids, fname, stitle, writedata=False):
     a7s.set_xlim([0, 5e0])
     a7s.set_ylim([0, 5e0])
     a7.set_ylabel('chl pool\nentire lake')
-
-    ## tp (grams per whole lake)
-    tp = [pd.read_csv(os.path.join(dir, 'totp.csv{:s}'.format(bz2)), header=None)
-          for dir in dirs]
-    tpp = pd.concat([np.sum(d * volume2d, axis=1) / 1e3 for d in tp], axis=1)
-    tpp.columns = colnames
-    tpp.index = ser
-    tpp['doy'] = tpp.index.day_of_year
-    tpps = tpp.iloc[(365*4+1):, :].groupby('doy').mean().iloc[:365, :]
-    tpp = tpp.drop('doy', 1)    
-    tpp.iloc[:, 0].plot(color='lightgray', ax=a8, ylim=[0, 20e0], legend=False)
-    tpp.iloc[:, 1:].plot(ax=a8, linewidth=lw, legend=False)
-    a8s.plot([0e0, 20e0], [0e0, 20e0], color='lightgray', linewidth=lw)
-    for ci in range(1, tpps.shape[1]):
-        a8s.plot(tpps.iloc[:, 0], tpps.iloc[:, ci])
-    a8s.set_xlim([0, 20e0])
-    a8s.set_ylim([0, 20e0])
-    a8.set_ylabel('total P pool\nentire lake')
 
 
     ## mixing depth, as in MyLake, 
@@ -353,19 +378,26 @@ def plotsim(simids, fname, stitle, writedata=False):
     fig.savefig('{:s}.png'.format(fname), dpi=150, bbox_inches='tight')
     fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
 
-    loopd.iloc[0, :, :] = t0s
-    loopd.iloc[1, :, :] = t1s
-    loopd.iloc[2, :, :] = t2s
-    loopd.iloc[3, :, :] = ices
-    loopd.iloc[4, :, :] = o22s
-    loopd.iloc[5, :, :] = o23s
-    loopd.iloc[6, :, :] = chlps
-    loopd.iloc[7, :, :] = tpps
-    loopd.iloc[8, :, :] = mdeps
-    loopd.iloc[9, :, :] = ir1s
-    loopd.iloc[10, :, :] = ir2s
-
-    np.save('{:s}.npy'.format(fname))
+    if marchversion:
+        loopd.iloc[0, :, :] = mdeps
+        loopd.iloc[1, :, :] = t0s
+        loopd.iloc[2, :, :] = ices
+        loopd.iloc[3, :, :] = o23s
+        loopd.iloc[4, :, :] = chlps
+    else:
+        loopd.iloc[0, :, :] = t0s
+        loopd.iloc[1, :, :] = t1s
+        loopd.iloc[2, :, :] = t2s
+        loopd.iloc[3, :, :] = ices
+        loopd.iloc[4, :, :] = o22s
+        loopd.iloc[5, :, :] = o23s
+        loopd.iloc[6, :, :] = chlps
+        loopd.iloc[7, :, :] = tpps
+        loopd.iloc[8, :, :] = mdeps
+        loopd.iloc[9, :, :] = ir1s
+        loopd.iloc[10, :, :] = ir2s
+        
+    np.save('{:s}.npy'.format(fname), loopd)
 
     return(fig)
 
