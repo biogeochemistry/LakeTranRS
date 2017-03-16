@@ -379,23 +379,23 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
 
     if marchversion:
-        loopd.iloc[0, :, :] = mdeps
-        loopd.iloc[1, :, :] = t0s
-        loopd.iloc[2, :, :] = ices
-        loopd.iloc[3, :, :] = o23s
-        loopd.iloc[4, :, :] = chlps
+        loopd[0, :, :] = mdeps
+        loopd[1, :, :] = t0s
+        loopd[2, :, :] = ices
+        loopd[3, :, :] = o23s
+        loopd[4, :, :] = chlps
     else:
-        loopd.iloc[0, :, :] = t0s
-        loopd.iloc[1, :, :] = t1s
-        loopd.iloc[2, :, :] = t2s
-        loopd.iloc[3, :, :] = ices
-        loopd.iloc[4, :, :] = o22s
-        loopd.iloc[5, :, :] = o23s
-        loopd.iloc[6, :, :] = chlps
-        loopd.iloc[7, :, :] = tpps
-        loopd.iloc[8, :, :] = mdeps
-        loopd.iloc[9, :, :] = ir1s
-        loopd.iloc[10, :, :] = ir2s
+        loopd[0, :, :] = t0s
+        loopd[1, :, :] = t1s
+        loopd[2, :, :] = t2s
+        loopd[3, :, :] = ices
+        loopd[4, :, :] = o22s
+        loopd[5, :, :] = o23s
+        loopd[6, :, :] = chlps
+        loopd[7, :, :] = tpps
+        loopd[8, :, :] = mdeps
+        loopd[9, :, :] = ir1s
+        loopd[10, :, :] = ir2s
         
     np.save('{:s}.npy'.format(fname), loopd)
 
