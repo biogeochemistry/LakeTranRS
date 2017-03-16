@@ -406,7 +406,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
 if not os.path.exists('results_raw'):
     os.makedirs('results_raw')
 if not os.path.exists('results_raw2'):
-    os.makedirs('results_raw')
+    os.makedirs('results_raw2')
 if not os.path.exists('sim_specific'):
     os.makedirs('sim_specific')
 
