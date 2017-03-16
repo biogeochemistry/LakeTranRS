@@ -194,7 +194,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     a1s.set_ylim([0, 25])
     a1.set_ylabel('water temperature\nsurface')
 
-    if not merchversion:
+    if not marchversion:
         t1 = pd.concat([d.iloc[:, z1i] for d in t], axis=1)
         t1.columns = colnames
         t1.index = ser
