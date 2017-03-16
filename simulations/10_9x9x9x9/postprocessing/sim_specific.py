@@ -44,7 +44,7 @@ volume2d = np.ones(((365*4+1)*2, 1)) * volume1d.reshape((1, bath.shape[0]))
 def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     '''plots various outputs against the original simulation'''
 
-    ni = length(simids)
+    ni = len(simids)
     if marchversion:
         loopd = np.zeros((nvmarch, 365, ni)) * np.nan
     else:
