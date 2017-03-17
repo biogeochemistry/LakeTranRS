@@ -247,9 +247,9 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     a4.set_ylabel('ice thickness')
 
     ## oxygen
+    o2 = [pd.read_csv(os.path.join(dir, 'O2zt.csv{:s}'.format(bz2)), header=None)
+    
     if not marchversion:
-        o2 = [pd.read_csv(os.path.join(dir, 'O2zt.csv{:s}'.format(bz2)), header=None)
-              for dir in dirs]
         o22 = pd.concat([d.iloc[:, z1i] for d in o2], axis=1)
         o22.columns = colnames
         o22.index = ser
