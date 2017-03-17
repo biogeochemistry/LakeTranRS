@@ -46,9 +46,9 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
 
     ni = len(simids)
     if marchversion:
-        loopd = np.zeros((nvmarch, 365, ni)) * np.nan
+        loopd = np.zeros((nvmarch, 365, (ni+1))) * np.nan
     else:
-        loopd = np.zeros((nv, 365, ni)) * np.nan
+        loopd = np.zeros((nv, 365, (ni+1))) * np.nan
 
     if type(simids) is not list:
         simids = [simids]
@@ -61,9 +61,6 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T5W5P5C5 base'] + simnames
-
-    print(dirs)
-
     
     if ni == 1:
         lw = 1.0
@@ -182,9 +179,6 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     ## water temperature
     t = [pd.read_csv(os.path.join(dir, 't.csv{:s}'.format(bz2)), header=None)
          for dir in dirs]
-
-    print([arr.shape for arr in t])
-
     t0 = pd.concat([d.iloc[:, 0] for d in t], axis=1)
     t0.columns = colnames
     t0.index = ser
