@@ -84,8 +84,8 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
         a4s = plt.subplot2grid((nv, 4), (4, 3)) 
         a6 = plt.subplot2grid((nv, 4), (6, 0), colspan = 3)
         a6s = plt.subplot2grid((nv, 4), (6, 3)) 
-        a8 = plt.subplot2grid((nv, 4), (8, 0), colspan = 3)
-        a8s = plt.subplot2grid((nv, 4), (8, 3)) 
+        a7 = plt.subplot2grid((nv, 4), (7, 0), colspan = 3)
+        a7s = plt.subplot2grid((nv, 4), (7, 3)) 
     else:
         fig = plt.figure(0)
         fig.set_figheight(20)
