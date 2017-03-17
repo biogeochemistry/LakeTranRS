@@ -112,15 +112,16 @@ def plotloops(savefname, arrow=False):
                 
     # legends at the top
     for ci in range(4):
-        gs([0, ci]).legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
-                           ncol=3, mode='expand', borderaxespad=0.)
+        plt.subplot(gs([0, ci])).legend(
+            bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+            ncol=3, mode='expand', borderaxespad=0.)
 
     # left labels
-    gs([0, 0]).set_ylabel('mixing depth, m')
-    gs([1, 0]).set_ylabel('water temperature\nsurface')
-    gs([2, 0]).set_ylabel('ice thickness')
-    gs([3, 0]).set_ylabel('O2 concentration\nbottom')
-    gs([4, 0]).set_ylabel('chl pool\nentire lake')
+    plt.subplot(gs([0, 0])).set_ylabel('mixing depth, m')
+    plt.subplot(gs([1, 0])).set_ylabel('water temperature\nsurface')
+    plt.subplot(gs([2, 0])).set_ylabel('ice thickness')
+    plt.subplot(gs([3, 0])).set_ylabel('O2 concentration\nbottom')
+    plt.subplot(gs([4, 0])).set_ylabel('chl pool\nentire lake')
 
     fig = plt.gcf()
     fig.set_figheight(10)
