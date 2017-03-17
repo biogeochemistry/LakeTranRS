@@ -355,7 +355,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     mdep.columns = colnames
     mdep['doy'] = mdep.index.day_of_year
     mdepJJ = mdep[(mdep.index.month > 5) & (mdep.index.month < 8)]
-    mdepALLYEARs = mdep.iloc[((30+31)*4):, :].groupby('doy').mean()
+    mdepALLYEARs = mdep.iloc[((30+31)*4):, :].groupby('doy').mean().iloc[:365, :]
     mdeps = mdepJJ.iloc[((30+31)*4):, :].groupby('doy').mean()
     mdep = mdep.drop('doy', 1)    
 
