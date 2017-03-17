@@ -75,7 +75,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     if marchversion:
         fig = plt.figure(0)
         fig.set_figheight(10)
-        fig.set_figwdith(9)
+        fig.set_figwidth(9)
         a9 = plt.subplot2grid((nv, 4), (0, 0), colspan = 3)
         a9s = plt.subplot2grid((nv, 4), (0, 3)) 
         a1 = plt.subplot2grid((nv, 4), (1, 0), colspan = 3)
