@@ -261,23 +261,6 @@ addlabel(aa10[3], 'e4')
 addlabel(aa10[4], 'e5')
 addlabel(aa10[5], 'e6')
 
-
-
-aa0[0].text(-0.1, -0.1, 'a1', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[0].transAxes)
-aa0[1].text(-0.1, -0.1, 'a2', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[1].transAxes)
-aa0[2].text(-0.1, -0.1, 'a3', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[2].transAxes)
-aa0[3].text(-0.1, -0.1, 'a4', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[3].transAxes)
-aa0[4].text(-0.1, -0.1, 'a5', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[4].transAxes)
-aa0[5].text(-0.1, -0.1, 'a6', ha='center', va='center', weight='bold', size=10, 
-            transform=aa0[5].transAxes)
-
-
-
 fig.set_figheight(9.5)
 fig.set_figwidth(9)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
