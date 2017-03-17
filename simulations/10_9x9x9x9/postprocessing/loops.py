@@ -79,8 +79,8 @@ gs = gridspec.GridSpec(5, 4)
 def plotloops(savefname, arrow=False):
     plt.clf()
     for ci in range(4):     
-        col0 = ('blue', 'darkorange',  'darkgreen',  'brown')[ci]
-        col1 = ( 'red',       'pink', 'lightgreen', 'pink')[ci]
+        col0 = ('blue', 'pink',  'lightgreen',  'pink')[ci]
+        col1 = ( 'red',       'darkorange', 'darkgreen', 'brown')[ci]
         dname = ('AT', 'WS', 'TP', 'DOC')[ci]
         for ri in range(5):
             lim0 = (8,  0,   0, 1e0, 0.01)[ri]
@@ -105,10 +105,10 @@ def plotloops(savefname, arrow=False):
                 plt.subplot(gs[ri, ci]).set_yscale('log')
             L0 = plt.subplot(gs[ri, ci]).plot(d[:, 0], d[:, 1], 
                                               color=col0, 
-                                              label='high {:s}'.format(dname))[0]
+                                              label='low {:s}'.format(dname))[0]
             L1 = plt.subplot(gs[ri, ci]).plot(d[:, 0], d[:, 2],
                                               color=col1,
-                                              label='low {:s}'.format(dname))[0]
+                                              label='high {:s}'.format(dname))[0]
             plt.subplot(gs[ri, ci]).set_xlim([lim0, lim1])
             plt.subplot(gs[ri, ci]).set_ylim([lim0, lim1])
             if arrow:
@@ -142,5 +142,5 @@ def plotloops(savefname, arrow=False):
     fig.savefig('{:s}.png'.format(savefname), dpi=150, bbox_inches='tight')
     fig.savefig('{:s}.pdf'.format(savefname), dpi=150, bbox_inches='tight')
 
-# plotloops('loops')
+plotloops('loops')
 plotloops('loops arrows', arrow=True)
