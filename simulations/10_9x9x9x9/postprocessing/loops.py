@@ -134,7 +134,7 @@ def plotloops(savefname, arrow=False):
             ncol=1, mode='expand', borderaxespad=0.)
 
     # left labels
-    plt.subplot(gs[0, 0]).set_ylabel('mixing depth, m')
+    plt.subplot(gs[0, 0]).set_ylabel('JJ mixing depth, m')
     plt.subplot(gs[1, 0]).set_ylabel('water temperature\nsurface')
     plt.subplot(gs[2, 0]).set_ylabel('ice thickness')
     plt.subplot(gs[3, 0]).set_ylabel('O2 concentration\nbottom')
