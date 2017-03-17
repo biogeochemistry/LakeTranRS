@@ -2,13 +2,13 @@
 
 1. Preparation. Review **makeparameterdict.R** and **makeMLfiles.R** and run
    them in that order. This will populate the input files and create
-   directories for the outputs. 
+   directories for the outputs.
 1. Run **makebatch.py**. This will create batch .m files.
 1. Run the batch files made in the previous steps. Use Raoul's
-   **launch\_24\_batch.m** if appropriate. 
+   **launch\_24\_batch.m** if appropriate.
 1. Postprocessing files are in [postprocessing](postprocessing). Run
    **pp.py** and **sim_specific.py** in the
-   directory. **inputs_ts.py** creates time series graphs. 
+   directory. **inputs_ts.py** creates time series graphs.
 
 # What's new in Simulation 10
 
@@ -49,21 +49,21 @@
         we can maximise the contrast (dynamic range) of the last
         dimension. For example, with levels AT1-AT9 but fixing WS5 TP5
         DOC5, none of the last three (WS5, TP5, DOC5) should not
-        dominate how AT1-9 plays a role if any. 
+        dominate how AT1-9 plays a role if any.
 
 ## Levels
 
 Level | Air Temp   | Wind Speed       | Total P             | DOC
 --- | ------------ | ---------------- | ------------------- | -----------------
-1 | original - 3.0 | original * 0.250 | original * 0.316    | original * 0.0316 
-2 | original - 2.0 | original * 0.353 | original * 0.562    | original * 0.0562 
+1 | original - 3.0 | original * 0.250 | original * 0.316    | original * 0.0316
+2 | original - 2.0 | original * 0.353 | original * 0.562    | original * 0.0562
 3 | original - 1.0 | original * 0.500 | original         | original
-4 | original - 0.5 | original * 0.707 | original * 1.78     | original * 0.178 
-5 | **original**   | **original**     | **original * 3.16** | **original * 0.316** 
-6 | original + 0.5 | original * 1.414 | original * 5.62     | original * 0.562 
+4 | original - 0.5 | original * 0.707 | original * 1.78     | original * 0.178
+5 | **original**   | **original**     | **original * 3.16** | **original * 0.316**
+6 | original + 0.5 | original * 1.414 | original * 5.62     | original * 0.562
 7 | original + 1.0 | original * 2.000 | original * 10.0     | original * 1.00
-8 | original + 2.0 | original * 2.828 | original * 17.8     | original * 1.78 
-9 | original + 3.0 | original * 4.000 | original * 31.6     | original * 3.16 
+8 | original + 2.0 | original * 2.828 | original * 17.8     | original * 1.78
+9 | original + 3.0 | original * 4.000 | original * 31.6     | original * 3.16
 
 ```R
 > level <- 1:9
@@ -96,19 +96,22 @@ None this time
 
 ![](postprocessing/inputs/allinputs.png)
 
-# Response surfaces 
+# Impacts of the input dimensions (through seasons, mean DOY based)
+
+![](postprocessing/loops.png)
+
+# Response surfaces
 
 ![](postprocessing/RSver3.png)
 
 # Other plots
 
 See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
-* **AT1** WS5 TP5 DOC5 
-* **AT9** WS5 TP5 DOC5 
-* AT5 **WS1** TP5 DOC5 
-* AT5 **WS9** TP5 DOC5 
-* AT5 WS5 **TP1** DOC5 
-* AT5 WS5 **TP9** DOC5 
-* AT5 WS5 TP5 **DOC1** 
-* AT5 WS5 TP5 **DOC9** 
-
+* **AT1** WS5 TP5 DOC5
+* **AT9** WS5 TP5 DOC5
+* AT5 **WS1** TP5 DOC5
+* AT5 **WS9** TP5 DOC5
+* AT5 WS5 **TP1** DOC5
+* AT5 WS5 **TP9** DOC5
+* AT5 WS5 TP5 **DOC1**
+* AT5 WS5 TP5 **DOC9**
