@@ -85,6 +85,11 @@ def plotloops(savefname, arrow=False):
         for ri in range(5):
             lim0 = (8,  0,   0, 1e0, 0.01)[ri]
             lim1 = (0, 21, 0.7, 1e4, 10)[ri]
+            if (ri == 0) and (not ci == 1):
+                lim0 = 3.2 ; lim1 = 1.8
+            if (ri == 4) and (not ci == 2):
+                lim0 = 0.08; lim1 = 1
+
             plt.subplot(gs[ri, ci], aspect='equal')
             d = da[ci, ri, :, :]  # doy x sim
             if ri == 0: # mixing depth only wants JJ months
@@ -143,4 +148,4 @@ def plotloops(savefname, arrow=False):
     fig.savefig('{:s}.pdf'.format(savefname), dpi=150, bbox_inches='tight')
 
 plotloops('loops')
-plotloops('loops arrows', arrow=True)
+# plotloops('loops arrows', arrow=True)
