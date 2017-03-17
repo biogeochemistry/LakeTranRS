@@ -359,6 +359,8 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     mdeps = mdepJJ.iloc[((30+31)*4):, :].groupby('doy').mean()
     mdep = mdep.drop('doy', 1)    
 
+    print(mdepALLYEARs.shape)
+
     mdep.iloc[:, 0].plot(color='lightgray', ax=a9, ylim=[9, 0], legend=False)
     mdep.iloc[:, 1:].plot(ax=a9, linewidth=lw, legend=False)
     a9s.plot([0, 9], [0, 9], color='lightgray', linewidth=lw)
