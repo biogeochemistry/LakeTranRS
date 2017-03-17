@@ -62,7 +62,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
                 for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T5W5P5C5 base'] + simnames
 
-    print(simdir)
+    print(dirs)
 
     
     if ni == 1:
@@ -182,6 +182,9 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     ## water temperature
     t = [pd.read_csv(os.path.join(dir, 't.csv{:s}'.format(bz2)), header=None)
          for dir in dirs]
+
+    print(t)
+
     t0 = pd.concat([d.iloc[:, 0] for d in t], axis=1)
     t0.columns = colnames
     t0.index = ser
