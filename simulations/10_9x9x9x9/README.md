@@ -93,14 +93,17 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 None this time
 
 # Input time series (2010-2013)
+Caption: Low, mid and high levels (levels 1, 5 and 9, respectively) of air temperature, wind speed, total phosphorus (TP) and dissolved organic carbon (DOC) time series imposed to the lake model to generate the response surfaces. 
 
 ![](postprocessing/inputs/allinputs.png)
 
 # Impacts of the input dimensions (through seasons, mean DOY based)
+Caption: Response of the indicators (mixing depth (m), water surface temperature (oC), ice thickness (m), oxygen concentration in the hypolimnion (mg m3) and chlorophyll-a pool in the whole lake (units?)) to the simulations with low, mid (1:1 line) and high level of inputs through one year (data averaged for each simulated julian day). 
 
 ![](postprocessing/loops.png)
 
 # Response surfaces
+Caption: Response surfaces to 9 levels of inputs along the four dimensions (air temperature, wind speed, total phosphorus (TP) and dissolved organic carbon (DOC)). Indicator chosen, from left to right, are i) number of hypoxic days in the hypolimnion where dissolved oxygen (DO) is under 23 mg L-1, ii) number of anoxic days in the hypolimnion where DO is under 16 ug L-1, iii) mean surface chlorophyll-a (Chl) concentration, iv) number of days with an ice cover, and v) the mean mixing depth during the months of June and July. Curves indicate the indicator boundaries- darker colors indicate higher indicator values. 
 
 ![](postprocessing/RSver3.png)
 
