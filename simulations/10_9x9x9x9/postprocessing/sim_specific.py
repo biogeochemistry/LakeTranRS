@@ -62,8 +62,9 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
                 for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T5W5P5C5 base'] + simnames
 
+    print('creating plots for {:s} variables'.format(5 if marchversion else 11))
     for thisname in colnames:
-        print('using simulation ' + thisname)
+        print('...using simulation ' + thisname)
     
     if ni == 1:
         lw = 1.0
