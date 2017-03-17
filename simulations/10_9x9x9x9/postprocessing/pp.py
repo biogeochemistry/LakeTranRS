@@ -227,7 +227,7 @@ for ax in fig.get_axes():
     ax.set_axis_bgcolor('black')
 
 fig.set_figheight(9.5)
-fig.set_figwidth(7.5)
+fig.set_figwidth(8.5)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
 fig.savefig('RSver3lowres.png', dpi=75, bbox_inches='tight')
  
