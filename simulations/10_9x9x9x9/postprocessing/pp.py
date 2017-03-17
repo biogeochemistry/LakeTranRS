@@ -228,7 +228,7 @@ for ax in fig.get_axes():
 
 ## adds plot labels
 def addlabel(aaa, label):
-    aaa.text(-0.1, -0.1, label, ha='center', va='center', weight='bold',
+    aaa.text(-0.06, -0.1, label, ha='center', va='center', weight='bold',
              size=10, transform=aaa.transAxes)
 addlabel(aa0[0], 'a1')
 addlabel(aa0[1], 'a2')
