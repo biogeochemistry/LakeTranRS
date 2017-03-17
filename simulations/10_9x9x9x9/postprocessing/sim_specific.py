@@ -61,6 +61,9 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     simnames = ['T{:d}W{:d}P{:d}C{:d}'.format(v1, v2, v3, v4) 
                 for v1, v2, v3, v4, _ in designlevels]
     colnames = ['T5W5P5C5 base'] + simnames
+
+    print(simdir)
+
     
     if ni == 1:
         lw = 1.0
