@@ -352,6 +352,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     mdep.columns = colnames
     mdep['doy'] = mdep.index.day_of_year
     mdepJJ = mdep[(mdep.index.month > 5) & (mdep.index.month < 8)]
+    mdepALLYEARs = mdep.iloc[((30+31)*4):, :].groupby('doy').mean()
     mdeps = mdepJJ.iloc[((30+31)*4):, :].groupby('doy').mean()
     mdep = mdep.drop('doy', 1)    
 
@@ -379,7 +380,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     fig.savefig('{:s}.pdf'.format(fname), dpi=150, bbox_inches='tight')
 
     if marchversion:
-        loopd[0, :, :] = mdeps
+        loopd[0, :, :] = mdepALLYEARs
         loopd[1, :, :] = t0s
         loopd[2, :, :] = ices
         loopd[3, :, :] = o23s
@@ -393,7 +394,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
         loopd[5, :, :] = o23s
         loopd[6, :, :] = chlps
         loopd[7, :, :] = tpps
-        loopd[8, :, :] = mdeps
+        loopd[8, :, :] = mdepALLYEARs
         loopd[9, :, :] = ir1s
         loopd[10, :, :] = ir2s
         
