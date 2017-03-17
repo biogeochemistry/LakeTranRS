@@ -183,7 +183,7 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
     t = [pd.read_csv(os.path.join(dir, 't.csv{:s}'.format(bz2)), header=None)
          for dir in dirs]
 
-    print(t)
+    print([arr.shape for arr in t])
 
     t0 = pd.concat([d.iloc[:, 0] for d in t], axis=1)
     t0.columns = colnames
