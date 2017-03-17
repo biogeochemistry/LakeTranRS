@@ -226,6 +226,58 @@ for ax in fig.get_axes():
     ax.get_yaxis().set_visible(False)
     ax.set_axis_bgcolor('black')
 
+## adds plot labels
+def addlabel(aaa, label):
+    aaa.text(-0.1, -0.1, label, ha='center', va='center', weight='bold',
+             size=10, transform=aaa.transAxes)
+addlabel(aa0[0], 'a1')
+addlabel(aa0[1], 'a2')
+addlabel(aa0[2], 'a3')
+addlabel(aa0[3], 'a4')
+addlabel(aa0[4], 'a5')
+addlabel(aa0[5], 'a6')
+addlabel(aa1[0], 'b1')
+addlabel(aa1[1], 'b2')
+addlabel(aa1[2], 'b3')
+addlabel(aa1[3], 'b4')
+addlabel(aa1[4], 'b5')
+addlabel(aa1[5], 'b6')
+addlabel(aa6[0], 'c1')
+addlabel(aa6[1], 'c2')
+addlabel(aa6[2], 'c3')
+addlabel(aa6[3], 'c4')
+addlabel(aa6[4], 'c5')
+addlabel(aa6[5], 'c6')
+addlabel(aa7[0], 'd1')
+addlabel(aa7[1], 'd2')
+addlabel(aa7[2], 'd3')
+addlabel(aa7[3], 'd4')
+addlabel(aa7[4], 'd5')
+addlabel(aa7[5], 'd6')
+addlabel(aa10[0], 'e1')
+addlabel(aa10[1], 'e2')
+addlabel(aa10[2], 'e3')
+addlabel(aa10[3], 'e4')
+addlabel(aa10[4], 'e5')
+addlabel(aa10[5], 'e6')
+
+
+
+aa0[0].text(-0.1, -0.1, 'a1', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[0].transAxes)
+aa0[1].text(-0.1, -0.1, 'a2', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[1].transAxes)
+aa0[2].text(-0.1, -0.1, 'a3', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[2].transAxes)
+aa0[3].text(-0.1, -0.1, 'a4', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[3].transAxes)
+aa0[4].text(-0.1, -0.1, 'a5', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[4].transAxes)
+aa0[5].text(-0.1, -0.1, 'a6', ha='center', va='center', weight='bold', size=10, 
+            transform=aa0[5].transAxes)
+
+
+
 fig.set_figheight(9.5)
 fig.set_figwidth(9)
 fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
