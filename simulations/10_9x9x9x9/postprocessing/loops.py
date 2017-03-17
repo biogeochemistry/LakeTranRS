@@ -96,8 +96,8 @@ def plotloops(savefname, arrow=False):
             if ri == 4: # chl
                 ax.set_xscale('log')
                 ax.set_yscale('log')
-            L0 = ax.plot(d[:, 0], d[:, 1], col=col0, label='high {:s}'.format(dname))
-            L1 = ax.plot(d[:, 0], d[:, 2], col=col1, label='low {:s}'.format(dname))
+            L0 = ax.plot(d[:, 0], d[:, 1], color=col0, label='high {:s}'.format(dname))
+            L1 = ax.plot(d[:, 0], d[:, 2], color=col1, label='low {:s}'.format(dname))
             ax.set_xlim([lim0, lim1])
             ax.set_ylim([lim0, lim1])
             if arrow:
