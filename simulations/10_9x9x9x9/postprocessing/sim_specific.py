@@ -87,6 +87,11 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
         a6s = plt.subplot2grid((nvmarch, 4), (3, 3)) 
         a7 = plt.subplot2grid((nvmarch, 4), (4, 0), colspan = 3)
         a7s = plt.subplot2grid((nvmarch, 4), (4, 3)) 
+        a1s.set_aspect('equal')
+        a4s.set_aspect('equal')
+        a6s.set_aspect('equal')
+        a7s.set_aspect('equal')
+        a9s.set_aspect('equal')
     else:
         fig = plt.figure(0)
         fig.set_figheight(20)
@@ -113,6 +118,17 @@ def plotsim(simids, fname, stitle, writedata=False, marchversion=False):
         a10s = plt.subplot2grid((nv, 4), (9, 3)) 
         a11 = plt.subplot2grid((nv, 4), (10, 0), colspan = 3)
         a11s = plt.subplot2grid((nv, 4), (10, 3)) 
+        a1s.set_aspect('equal')
+        a2s.set_aspect('equal')
+        a3s.set_aspect('equal')
+        a4s.set_aspect('equal')
+        a5s.set_aspect('equal')
+        a6s.set_aspect('equal')
+        a7s.set_aspect('equal')
+        a8s.set_aspect('equal')
+        a9s.set_aspect('equal')
+        a10s.set_aspect('equal')
+        a11s.set_aspect('equal')
         
     if not marchversion:
         ## light related matters
