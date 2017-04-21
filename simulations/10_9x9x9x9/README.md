@@ -118,3 +118,11 @@ See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
 * AT5 WS5 **TP9** DOC5
 * AT5 WS5 TP5 **DOC1**
 * AT5 WS5 TP5 **DOC9**
+
+# Conversation with Tom 21 April 2017
+
+There were a lot of interesting things but I make note here that we will look into increased resolution on **AT** and **WS** so that we might find some dual stability (in which different processes might dominate/explain the system dynamics). The last figure panel **b1** shows a rather complex response surface -- we may find a sweet spot or resonance frequency that is native/inherent to the lake physical and biological specs. 
+
+Tom had a good line to explain our straggle in finding a good steady state (here in this repository our straggle when we tried to run the model over a century, etc.) -- how the line reads, I slipped my mind out of it but I'll leave note about it. 
+
+The increased resolution on the two dimensions -- I try to finish by early June, in case something interesting comes out. 
