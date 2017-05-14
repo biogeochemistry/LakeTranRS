@@ -81,6 +81,10 @@ for vi in range(nvars):
     aa = figall.add_subplot(2, 2, vi + 1)
     d.iloc[:, [0, 4, 8]].plot(ax=aa) # use only the extremes and middle
     aa.set_ylabel(yl)
+    aa.text(0.05, 0.92, 
+            ('a', 'b', 'c', 'd')[vi],
+            ha='center', va='center', weight='bold', size=10, 
+            transform=aa.transAxes)
 
 figall.set_figheight(11)
 figall.set_figwidth(13)
