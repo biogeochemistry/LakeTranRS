@@ -8,34 +8,17 @@ original <- read.table('../input/LAE_input.txt', sep='\t', skip=1, header=TRUE)
 dict <- read.csv('intermediate/parameterdict.csv')
 
 f1 <- function (d, level) {
-  if (level == 1) {
-    d[['AirTemperature']] <- d[['AirTemperature']] - 3.0
-  } else if (level == 2) {
-    d[['AirTemperature']] <- d[['AirTemperature']] - 2.0
-  } else if (level == 3) {
-    d[['AirTemperature']] <- d[['AirTemperature']] - 1.0
-  } else if (level == 4) {
-    d[['AirTemperature']] <- d[['AirTemperature']] - 0.5
-  } else if (level == 5) {
-    d[['AirTemperature']] <- d[['AirTemperature']]
-  } else if (level == 6) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 0.5
-  } else if (level == 7) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 1.0
-  } else if (level == 8) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 2.0
-  } else if (level == 9) {
-    d[['AirTemperature']] <- d[['AirTemperature']] + 3.0
-  }
-  return (d)
+  d[['AirTemperature']] <- d[['AirTemperature']] + (level - 26) * 0.12
+  return(d)
 }
 
 f2 <- function (d, level) {
-  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ ((level - 5) / 2))
+  d[['WindSpeed']] <- d[['WindSpeed']] * (2 ^ ((level - 26) * 0.08))
   return(d)
 }
 
 f3 <- function (d, level) {
+  level <- 5 # hardcode level 5 out of 9 as the only level
   d[['InflowTP']] <- d[['InflowTP']] * (10 ^ ((level - 3) / 4))
   d[['InflowDOP']] <- d[['InflowDOP']] * (10 ^ ((level - 3) / 4))
   d[['InflowChla']] <- d[['InflowChla']] * (10 ^ ((level - 3) / 4))
@@ -43,6 +26,7 @@ f3 <- function (d, level) {
 }
 
 f4 <- function (d, level) {
+  level <- 5 # hardcode level 5 out of 9 as the only level
   d[['InflowDOC']] <- d[['InflowDOC']] * (10 ^ ((level - 7)/4))
   return (d)
 }
