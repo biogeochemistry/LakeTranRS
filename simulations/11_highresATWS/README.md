@@ -19,7 +19,7 @@
 
 # Design
 
-* See [What's new in Simualation 10](../10_9x9x9x9/REASME.md)
+* See [What's new in Simualation 10](../10_9x9x9x9/README.md)
 * **AT** and **WS** 51 levels, **TP** and **DOC** 1 level
 
 ## Levels
@@ -32,7 +32,7 @@ AT = original + (level - 26) * 0.12
 
 ### **WS**
 
-WS = original ^ ((level - 26) * 0.08)
+WS = original * (2 ^ ((level - 26) * 0.08))
 
 Level | Air Temp   | Wind Speed       | Total P             | DOC
 --- | ------------ | ---------------- | ------------------- | -----------------
