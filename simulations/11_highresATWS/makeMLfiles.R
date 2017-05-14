@@ -51,7 +51,7 @@ for (s in 1:nrow(dict)) {
   if (file.exists(pathname)) { file.remove(pathname) }
   ## delete existing, because we want to append later
   f <- file(pathname)
-  writeLines(sprintf('Simulation_AT%02d_WS%02d_TP%02d_DOC%02d', L1, L2, L3, L4), f)
+  writeLines(sprintf('Simulation11_51x51x1x1__AT%03d_WS%03d_TP%02d_DOC%02d', L1, L2, L3, L4), f)
   close(f)
   write.table(data, file=pathname, append=TRUE, sep='\t', eol='\r\n', na='NaN',
               quote=FALSE, row.names=FALSE)
