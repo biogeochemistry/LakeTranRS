@@ -93,14 +93,17 @@ Level | Air Temp   | Wind Speed       | Total P             | DOC
 None this time
 
 # Input time series (2010-2013)
+Caption: Low, mid and high levels (levels 1, 5 and 9, respectively) of air temperature, wind speed, total phosphorus (TP) and dissolved organic carbon (DOC) time series imposed to the lake model to generate the response surfaces. 
 
 ![](postprocessing/inputs/allinputs.png)
 
 # Impacts of the input dimensions (through seasons, mean DOY based)
+Caption: Response of the indicators (mixing depth (m), water surface temperature (oC), ice thickness (m), oxygen concentration in the hypolimnion (mg m3) and chlorophyll-a pool in the whole lake (units?)) to the simulations with low, mid (1:1 line) and high level of inputs through one year (data averaged for each simulated julian day). 
 
 ![](postprocessing/loops.png)
 
 # Response surfaces
+Caption: Response surfaces to 9 levels of inputs along the four dimensions (air temperature, wind speed, total phosphorus (TP) and dissolved organic carbon (DOC)). Indicator chosen, from left to right, are i) number of hypoxic days in the hypolimnion where dissolved oxygen (DO) is under 23 mg L-1, ii) number of anoxic days in the hypolimnion where DO is under 16 ug L-1, iii) mean surface chlorophyll-a (Chl) concentration, iv) number of days with an ice cover, and v) the mean mixing depth during the months of June and July. Curves indicate the indicator boundaries- darker colors indicate higher indicator values. 
 
 ![](postprocessing/RSver3.png)
 
@@ -115,3 +118,11 @@ See [impacts\_of\_dimensions.md](impacts_of_dimensions.md) for the following:
 * AT5 WS5 **TP9** DOC5
 * AT5 WS5 TP5 **DOC1**
 * AT5 WS5 TP5 **DOC9**
+
+# Conversation with Tom 21 April 2017
+
+There were a lot of interesting things but I make note here that we will look into increased resolution on **AT** and **WS** so that we might find some dual stability (in which different processes might dominate/explain the system dynamics). The last figure panel **b1** shows a rather complex response surface -- we may find a sweet spot or resonance frequency that is native/inherent to the lake physical and biological specs. 
+
+Tom had a good line to explain our straggle in finding a good steady state (here in this repository our straggle when we tried to run the model over a century, etc.) -- how the line reads, I slipped my mind out of it but I'll leave note about it. 
+
+The increased resolution on the two dimensions -- I try to finish by early June, in case something interesting comes out. 

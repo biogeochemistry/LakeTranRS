@@ -76,7 +76,7 @@ for ii in range(4):
 gs = gridspec.GridSpec(5, 4)
 
 
-def plotloops(savefname, arrow=False):
+def plotloops(savefname, arrow=False, panels=True):
     plt.clf()
     for ci in range(4):     
         col0 = ('blue', 'pink',  'lightgreen',  'pink')[ci]
@@ -85,6 +85,11 @@ def plotloops(savefname, arrow=False):
         for ri in range(5):
             lim0 = (8,  0,   0, 1e0, 0.01)[ri]
             lim1 = (0, 21, 0.7, 1e4, 10)[ri]
+            if (ri == 0) and (not ci == 1):
+                lim0 = 3.2 ; lim1 = 1.8
+            if (ri == 4) and (not ci == 2):
+                lim0 = 0.08; lim1 = 1
+
             plt.subplot(gs[ri, ci], aspect='equal')
             d = da[ci, ri, :, :]  # doy x sim
             if ri == 0: # mixing depth only wants JJ months
@@ -129,11 +134,74 @@ def plotloops(savefname, arrow=False):
             ncol=1, mode='expand', borderaxespad=0.)
 
     # left labels
-    plt.subplot(gs[0, 0]).set_ylabel('mixing depth, m')
+    plt.subplot(gs[0, 0]).set_ylabel('JJ mixing depth, m')
     plt.subplot(gs[1, 0]).set_ylabel('water temperature\nsurface')
     plt.subplot(gs[2, 0]).set_ylabel('ice thickness')
     plt.subplot(gs[3, 0]).set_ylabel('O2 concentration\nbottom')
     plt.subplot(gs[4, 0]).set_ylabel('chl pool\nentire lake')
+
+    # panel labels
+    plt.subplot(gs[0, 0]).text(0.1, 0.9, 'a', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[0, 0]).transAxes)
+    plt.subplot(gs[1, 0]).text(0.1, 0.9, 'b', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[1, 0]).transAxes)
+    plt.subplot(gs[2, 0]).text(0.1, 0.9, 'c', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[2, 0]).transAxes)
+    plt.subplot(gs[3, 0]).text(0.1, 0.9, 'd', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[3, 0]).transAxes)
+    plt.subplot(gs[4, 0]).text(0.1, 0.9, 'e', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[4, 0]).transAxes)
+    plt.subplot(gs[0, 1]).text(0.1, 0.9, 'f', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[0, 1]).transAxes)
+    plt.subplot(gs[1, 1]).text(0.1, 0.9, 'g', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[1, 1]).transAxes)
+    plt.subplot(gs[2, 1]).text(0.1, 0.9, 'h', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[2, 1]).transAxes)
+    plt.subplot(gs[3, 1]).text(0.1, 0.9, 'i', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[3, 1]).transAxes)
+    plt.subplot(gs[4, 1]).text(0.1, 0.9, 'j', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[4, 1]).transAxes)
+    plt.subplot(gs[0, 2]).text(0.1, 0.9, 'k', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[0, 2]).transAxes)
+    plt.subplot(gs[1, 2]).text(0.1, 0.9, 'l', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[1, 2]).transAxes)
+    plt.subplot(gs[2, 2]).text(0.1, 0.9, 'm', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[2, 2]).transAxes)
+    plt.subplot(gs[3, 2]).text(0.1, 0.9, 'n', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[3, 2]).transAxes)
+    plt.subplot(gs[4, 2]).text(0.1, 0.9, 'o', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[4, 2]).transAxes)
+    plt.subplot(gs[0, 3]).text(0.1, 0.9, 'p', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[0, 3]).transAxes)
+    plt.subplot(gs[1, 3]).text(0.1, 0.9, 'q', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[1, 3]).transAxes)
+    plt.subplot(gs[2, 3]).text(0.1, 0.9, 'r', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[2, 3]).transAxes)
+    plt.subplot(gs[3, 3]).text(0.1, 0.9, 's', ha='center', va='center',
+                               weight='bold', size=10, 
+                               transform=plt.subplot(gs[3, 3]).transAxes)
+    plt.subplot(gs[4, 3]).text(0.1, 0.9, 't', ha='center', va='center',
+                               weight='bold', size=10,
+                               transform=plt.subplot(gs[4, 3]).transAxes)
+
 
     fig = plt.gcf()
     fig.set_figheight(10)
@@ -142,5 +210,5 @@ def plotloops(savefname, arrow=False):
     fig.savefig('{:s}.png'.format(savefname), dpi=150, bbox_inches='tight')
     fig.savefig('{:s}.pdf'.format(savefname), dpi=150, bbox_inches='tight')
 
-plotloops('loops')
-plotloops('loops arrows', arrow=True)
+plotloops('loops', False, True)
+# plotloops('loops arrows', arrow=True)
