@@ -2,7 +2,7 @@ import os
 import math
 
 ncore = 24
-n = 9 * 9 * 9 * 9
+n = 51 * 51 * 1 * 1
 
 with open('run_eight_years_template.m', 'rU') as f:
     template = f.read()
