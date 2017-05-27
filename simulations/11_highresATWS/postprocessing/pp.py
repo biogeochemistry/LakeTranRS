@@ -14,12 +14,12 @@ bath.columns = ['zz', 'Az']
 # lambdai = 5   m-1
 # lambdas = 15  m-1
 
-nn = 9
+# nn = 9
 skip = (1, 2, 3, 4, 6, 7, 8, 9)
-n1 = nn
-n2 = nn
-n3 = nn
-n4 = nn
+n1 = 51
+n2 = 51
+n3 = 1
+n4 = 1
 nt = 2922
 nz = 18
 if nz == 18:
@@ -180,15 +180,15 @@ def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     mi = np.nanmin(aa)
     ma = np.nanmax(aa)
     rs(axes[0], aa[:, :, 4, 4], colorcode, mi, ma, fmt, n[0], n[1])
-    rs(axes[1], aa[:, 4, :, 4], colorcode, mi, ma, fmt, n[0], n[2])
-    rs(axes[2], aa[:, 4, 4, :], colorcode, mi, ma, fmt, n[0], n[3]) 
-    rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
-    rs(axes[4], aa[4, :, 4, :], colorcode, mi, ma, fmt, n[1], n[3])
-    rs(axes[5], aa[4, 4, :, :], colorcode, mi, ma, fmt, n[2], n[3])
-    axes[5].text(-0.5, -3.0, 'min: ' + fmt3.format(mi), 
-                 fontsize=10, ha='left', va='center')
-    axes[5].text(-0.5, -4.5, 'max: ' + fmt3.format(ma), 
-                 fontsize=10, ha='left', va='center')
+    # rs(axes[1], aa[:, 4, :, 4], colorcode, mi, ma, fmt, n[0], n[2])
+    # rs(axes[2], aa[:, 4, 4, :], colorcode, mi, ma, fmt, n[0], n[3]) 
+    # rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
+    # rs(axes[4], aa[4, :, 4, :], colorcode, mi, ma, fmt, n[1], n[3])
+    # rs(axes[5], aa[4, 4, :, :], colorcode, mi, ma, fmt, n[2], n[3])
+    # axes[5].text(-0.5, -3.0, 'min: ' + fmt3.format(mi), 
+    #              fontsize=10, ha='left', va='center')
+    # axes[5].text(-0.5, -4.5, 'max: ' + fmt3.format(ma), 
+    #              fontsize=10, ha='left', va='center')
     return axes
 
 
@@ -236,33 +236,33 @@ addlabel(aa0[2], 'a3')
 addlabel(aa0[3], 'a4')
 addlabel(aa0[4], 'a5')
 addlabel(aa0[5], 'a6')
-addlabel(aa1[0], 'b1')
-addlabel(aa1[1], 'b2')
-addlabel(aa1[2], 'b3')
-addlabel(aa1[3], 'b4')
-addlabel(aa1[4], 'b5')
-addlabel(aa1[5], 'b6')
-addlabel(aa6[0], 'c1')
-addlabel(aa6[1], 'c2')
-addlabel(aa6[2], 'c3')
-addlabel(aa6[3], 'c4')
-addlabel(aa6[4], 'c5')
-addlabel(aa6[5], 'c6')
-addlabel(aa7[0], 'd1')
-addlabel(aa7[1], 'd2')
-addlabel(aa7[2], 'd3')
-addlabel(aa7[3], 'd4')
-addlabel(aa7[4], 'd5')
-addlabel(aa7[5], 'd6')
-addlabel(aa10[0], 'e1')
-addlabel(aa10[1], 'e2')
-addlabel(aa10[2], 'e3')
-addlabel(aa10[3], 'e4')
-addlabel(aa10[4], 'e5')
-addlabel(aa10[5], 'e6')
+# addlabel(aa1[0], 'b1')
+# addlabel(aa1[1], 'b2')
+# addlabel(aa1[2], 'b3')
+# addlabel(aa1[3], 'b4')
+# addlabel(aa1[4], 'b5')
+# addlabel(aa1[5], 'b6')
+# addlabel(aa6[0], 'c1')
+# addlabel(aa6[1], 'c2')
+# addlabel(aa6[2], 'c3')
+# addlabel(aa6[3], 'c4')
+# addlabel(aa6[4], 'c5')
+# addlabel(aa6[5], 'c6')
+# addlabel(aa7[0], 'd1')
+# addlabel(aa7[1], 'd2')
+# addlabel(aa7[2], 'd3')
+# addlabel(aa7[3], 'd4')
+# addlabel(aa7[4], 'd5')
+# addlabel(aa7[5], 'd6')
+# addlabel(aa10[0], 'e1')
+# addlabel(aa10[1], 'e2')
+# addlabel(aa10[2], 'e3')
+# addlabel(aa10[3], 'e4')
+# addlabel(aa10[4], 'e5')
+# addlabel(aa10[5], 'e6')
 
 fig.set_figheight(9.5)
 fig.set_figwidth(9)
-fig.savefig('RSver3.png', dpi=150, bbox_inches='tight')
-fig.savefig('RSver3lowres.png', dpi=75, bbox_inches='tight')
+fig.savefig('RSver4.png', dpi=150, bbox_inches='tight')
+fig.savefig('RSver4lowres.png', dpi=75, bbox_inches='tight')
  
