@@ -154,7 +154,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 #         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
 # a = ma.masked_array(a0, mask=m)
-
+a = a0
 
 ## contour preparation
 x = np.arange(n1)
