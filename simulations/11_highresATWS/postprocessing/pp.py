@@ -179,7 +179,7 @@ def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     axes = [plt.subplot2grid((6, nr), (i, rsi)) for i in range(6)]
     mi = np.nanmin(aa)
     ma = np.nanmax(aa)
-    rs(axes[0], aa[:, :, 1, 1], colorcode, mi, ma, fmt, n[0], n[1])
+    rs(axes[0], aa[:, :, 0, 0], colorcode, mi, ma, fmt, n[0], n[1])
     # rs(axes[1], aa[:, 4, :, 4], colorcode, mi, ma, fmt, n[0], n[2])
     # rs(axes[2], aa[:, 4, 4, :], colorcode, mi, ma, fmt, n[0], n[3]) 
     # rs(axes[3], aa[4, :, :, 4], colorcode, mi, ma, fmt, n[1], n[2])
