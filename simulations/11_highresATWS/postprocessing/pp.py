@@ -176,7 +176,7 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
 
 def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     '''returns 6 axes. rsi is the column in the RS plot'''
-    axes = [plt.subplot2grid((1, nr), (i, rsi)) for i in range(6)]
+    axes = [plt.subplot2grid((1, nr), (i, rsi)) for i in range(1)]
     mi = np.nanmin(aa)
     ma = np.nanmax(aa)
     rs(axes[0], aa[:, :, 0, 0], colorcode, mi, ma, fmt, n[0], n[1])
