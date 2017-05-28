@@ -15,7 +15,7 @@ bath.columns = ['zz', 'Az']
 # lambdas = 15  m-1
 
 # nn = 9
-skip = (1, 2, 3, 4, 6, 7, 8, 9)
+skip = range(1, 52)
 n1 = 51
 n2 = 51
 n3 = 1
