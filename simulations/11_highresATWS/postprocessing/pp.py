@@ -15,7 +15,7 @@ bath.columns = ['zz', 'Az']
 # lambdas = 15  m-1
 
 # nn = 9
-skip = range(1, 52)
+# skip = range(1, 52)
 n1 = 51
 n2 = 51
 n3 = 1
@@ -154,7 +154,7 @@ for i, x1, x2, x3, x4, id in d.itertuples():
 #         m[x1-1, x2-1, x3-1, x4-1, :] = True
 
 # a = ma.masked_array(a0, mask=m)
-
+a = a0
 
 ## contour preparation
 x = np.arange(n1)
@@ -172,11 +172,11 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
     ax.text(25.0, -5.4, label2nd, ha='center', va='center') ; 
-    ax.text(-2.6, 25.0, label1st, va='center', ha='right', rotation='vertical')
+    ax.text(-1.6, 25.0, label1st, va='center', ha='right', rotation='vertical')
 
 def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     '''returns 6 axes. rsi is the column in the RS plot'''
-    axes = [plt.subplot2grid((6, nr), (i, rsi)) for i in range(6)]
+    axes = [plt.subplot2grid((1, nr), (i, rsi)) for i in range(1)]
     mi = np.nanmin(aa)
     ma = np.nanmax(aa)
     rs(axes[0], aa[:, :, 0, 0], colorcode, mi, ma, fmt, n[0], n[1])
@@ -261,7 +261,7 @@ addlabel(aa10[0], 'e1')
 # addlabel(aa10[4], 'e5')
 # addlabel(aa10[5], 'e6')
 
-fig.set_figheight(9.5)
+fig.set_figheight(4)
 fig.set_figwidth(9)
 fig.savefig('RSver4.png', dpi=150, bbox_inches='tight')
 fig.savefig('RSver4lowres.png', dpi=75, bbox_inches='tight')
