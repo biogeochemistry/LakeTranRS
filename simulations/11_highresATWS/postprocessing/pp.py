@@ -15,7 +15,7 @@ bath.columns = ['zz', 'Az']
 # lambdas = 15  m-1
 
 # nn = 9
-skip = (1, 2, 3, 4, 6, 7, 8, 9)
+skip = range(1, 52)
 n1 = 51
 n2 = 51
 n3 = 1
@@ -48,13 +48,13 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         print('missing', i, x1, x2, x3, x4, id)
         continue
-    skipcount = 0
-    skipcount += x1 in skip
-    skipcount += x2 in skip
-    skipcount += x3 in skip
-    skipcount += x4 in skip
-    if skipcount >= 3:
-        continue
+    # skipcount = 0
+    # skipcount += x1 in skip
+    # skipcount += x2 in skip
+    # skipcount += x3 in skip
+    # skipcount += x4 in skip
+    # if skipcount >= 3:
+    #     continue
 
     # if id == 599:
     #     continue
@@ -166,13 +166,13 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
     img = ax.imshow(thisa, cmap=plt.get_cmap(cmapname), 
                     norm=matplotlib.colors.Normalize(thismin, thismax, True), 
                     origin='lower', interpolation='none')
-    if not (thisa.min() == thisa.max()):
-        cont = ax.contour(X, Y, thisa, colors='black')
-        ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
+    # if not (thisa.min() == thisa.max()):
+    #     cont = ax.contour(X, Y, thisa, colors='black')
+    #     ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
-    ax.text(4.0, -1.4, label2nd, ha='center', va='center') ; 
-    ax.text(-0.6, 4.0, label1st, va='center', ha='right', rotation='vertical')
+    ax.text(25.0, -5.4, label2nd, ha='center', va='center') ; 
+    ax.text(-2.6, 25.0, label1st, va='center', ha='right', rotation='vertical')
 
 def plotrs6(rsi, nr, aa, colorcode, fmt, fmt3, n) :
     '''returns 6 axes. rsi is the column in the RS plot'''
@@ -231,30 +231,30 @@ def addlabel(aaa, label):
     aaa.text(-0.06, -0.1, label, ha='center', va='center', weight='bold',
              size=10, transform=aaa.transAxes)
 addlabel(aa0[0], 'a1')
-addlabel(aa0[1], 'a2')
-addlabel(aa0[2], 'a3')
-addlabel(aa0[3], 'a4')
-addlabel(aa0[4], 'a5')
-addlabel(aa0[5], 'a6')
-# addlabel(aa1[0], 'b1')
+# addlabel(aa0[1], 'a2')
+# addlabel(aa0[2], 'a3')
+# addlabel(aa0[3], 'a4')
+# addlabel(aa0[4], 'a5')
+# addlabel(aa0[5], 'a6')
+addlabel(aa1[0], 'b1')
 # addlabel(aa1[1], 'b2')
 # addlabel(aa1[2], 'b3')
 # addlabel(aa1[3], 'b4')
 # addlabel(aa1[4], 'b5')
 # addlabel(aa1[5], 'b6')
-# addlabel(aa6[0], 'c1')
+addlabel(aa6[0], 'c1')
 # addlabel(aa6[1], 'c2')
 # addlabel(aa6[2], 'c3')
 # addlabel(aa6[3], 'c4')
 # addlabel(aa6[4], 'c5')
 # addlabel(aa6[5], 'c6')
-# addlabel(aa7[0], 'd1')
+addlabel(aa7[0], 'd1')
 # addlabel(aa7[1], 'd2')
 # addlabel(aa7[2], 'd3')
 # addlabel(aa7[3], 'd4')
 # addlabel(aa7[4], 'd5')
 # addlabel(aa7[5], 'd6')
-# addlabel(aa10[0], 'e1')
+addlabel(aa10[0], 'e1')
 # addlabel(aa10[1], 'e2')
 # addlabel(aa10[2], 'e3')
 # addlabel(aa10[3], 'e4')
