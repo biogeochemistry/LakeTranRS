@@ -48,13 +48,13 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
         print('missing', i, x1, x2, x3, x4, id)
         continue
-    skipcount = 0
-    skipcount += x1 in skip
-    skipcount += x2 in skip
-    skipcount += x3 in skip
-    skipcount += x4 in skip
-    if skipcount >= 3:
-        continue
+    # skipcount = 0
+    # skipcount += x1 in skip
+    # skipcount += x2 in skip
+    # skipcount += x3 in skip
+    # skipcount += x4 in skip
+    # if skipcount >= 3:
+    #     continue
 
     # if id == 599:
     #     continue
