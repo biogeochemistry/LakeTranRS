@@ -148,12 +148,12 @@ for i, x1, x2, x3, x4, id in d.itertuples():
     
 
 
-# for i, x1, x2, x3, x4, id in d.itertuples():
-#     di = '../simulations/id/{:06d}'.format(id)
-#     if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
-#         m[x1-1, x2-1, x3-1, x4-1, :] = True
+for i, x1, x2, x3, x4, id in d.itertuples():
+    di = '../simulations/id/{:06d}'.format(id)
+    if not os.path.exists(os.path.join(di, 't.csv{:s}'.format(bz2))):
+        m[x1-1, x2-1, x3-1, x4-1, :] = True
 
-# a = ma.masked_array(a0, mask=m)
+a = ma.masked_array(a0, mask=m)
 
 
 ## contour preparation
@@ -166,9 +166,9 @@ def rs(ax, thisa, cmapname, thismin, thismax, thisfmt, label1st, label2nd):
     img = ax.imshow(thisa, cmap=plt.get_cmap(cmapname), 
                     norm=matplotlib.colors.Normalize(thismin, thismax, True), 
                     origin='lower', interpolation='none')
-    if not (thisa.min() == thisa.max()):
-        cont = ax.contour(X, Y, thisa, colors='black')
-        ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
+    # if not (thisa.min() == thisa.max()):
+    #     cont = ax.contour(X, Y, thisa, colors='black')
+    #     ax.clabel(cont, infline=1, fontsize=8, colors='black', fmt=thisfmt)
     # ax.set_xlabel(label2nd)
     # ax.set_ylabel(label1st)
     ax.text(4.0, -1.4, label2nd, ha='center', va='center') ; 
