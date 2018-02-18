@@ -1,6 +1,7 @@
 *.DS_Store
 simulations/11*/simulations/id/*/*.csv*
 
+simulations/11*/simulations/id/
 
 simulations/09_4dim_4res_not_global/
 
